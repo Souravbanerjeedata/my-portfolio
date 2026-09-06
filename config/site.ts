@@ -42,15 +42,15 @@ export const site = {
   bannerImage: "/images/cover.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack & React Native Developer",
+  role: "Full Stack Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Self-taught full-stack & React Native developer building scalable web and mobile applications. Open to internships and junior roles.",
+    "Self-taught full-stack developer building scalable web and mobile applications. Open to internships and junior roles.",
   about: [
-    "Hey, I'm Sourav — a self-taught Full Stack and React Native developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
+    "Hey, I'm Sourav — a self-taught Full Stack developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
     "I focus on clean, practical applications with MERN / PERN stack and modern frontend architecture.",
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
@@ -64,7 +64,7 @@ export const site = {
     available: true,
     availableText: "open to opportunities",
     nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack & React Native projects",
+    nowBuilding: "Full-stack projects",
     nowListening: "focus playlists",
   },
   socials: {
@@ -79,10 +79,10 @@ export const site = {
   experience: [
     {
       company: "Independent / Self-taught",
-      role: "Full Stack & React Native Developer",
-      period: "2022 – Present",
+      role: "Full Stack Developer",
+      period: "2023 – Present",
       blurb:
-        "Transitioned into software development through consistent self-learning and project building. Developed multiple frontend and full-stack applications using MERN/PERN stack, JavaScript/TypeScript, CSS/SCSS and modern tooling. Currently focused on production-ready patterns, DSA.",
+        "Transitioned into software development through consistent self-learning and project building. Developed multiple frontend and full-stack applications using MERN/PERN stack, JavaScript/TypeScript, CSS/SCSS and modern tooling. Currently focused on production-ready patterns & DSA.",
       url: "https://github.com/Souravbanerjeedata",
     },
     {
@@ -111,7 +111,7 @@ export const site = {
       categories: ["Frontend", "Fullstack"],
     },
     {
-      title: "Movie App RN",
+      title: "Movie Search App",
       blurb:
         "Netflix-style movie & TV discovery app with auth, search, detail pages, continue-watching, and live TMDB data — built in React Native + Expo + TypeScript.",
       story:
@@ -126,7 +126,7 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "Apple Invites Animation",
+      title: "Apple Invites Carousel Animation",
       blurb:
         "High-fidelity recreation of Apple Invites card animations — gesture-driven reveal, drag-to-dismiss, spring physics, and blur — in React Native.",
       story:
