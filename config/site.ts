@@ -96,75 +96,94 @@ export const site = {
   ] as Job[],
   projects: [
     {
-      title: "Bankist Payment App",
+      title: "To-Do App",
       blurb:
-        "A modern banking UI demo featuring transfers, loan requests, account closing and real-time balance updates. Built with vanilla JavaScript and a focus on clean DOM manipulation and user flows.",
-      stack: ["JavaScript", "HTML", "CSS"],
-      year: "2024",
+        "A modern cross-platform to-do app with real-time sync, dark/light themes, and clean task management — built with React Native, Expo, and Convex.",
+      story:
+        "Backend lives entirely on Convex: typed mutations and queries power add, edit, complete, and delete flows with live updates across devices. Expo Router drives tab navigation (Home + Settings). Theme state is managed through a custom hook so light and dark modes stay consistent. UI uses linear gradients and polished micro-interactions while keeping the component tree simple and readable.",
+      stack: ["React Native", "Expo", "TypeScript", "Convex", "Expo Router"],
+      year: "2026",
       links: {
-        source: "https://github.com/Souravbanerjeedata/Bankist-payment-app",
+        source: "https://github.com/Souravbanerjeedata/to-do-app",
       },
       featured: true,
+      image: "/project-images/todo-app.png",
+      categories: ["Frontend", "Fullstack"],
+    },
+    {
+      title: "Movie App RN",
+      blurb:
+        "Netflix-style movie & TV discovery app with auth, search, detail pages, continue-watching, and live TMDB data — built in React Native + Expo + TypeScript.",
+      story:
+        "File-based routing via Expo Router organizes Home, Movies, Series, Search, and Profile screens. TMDB is integrated through Axios with a custom useFetch hook for loading and error states. Reanimated smooths poster loads and transitions. Auth screens (login/signup) sit in front of the main experience. Detail views surface overview, genres, and similar titles for a full streaming-app feel.",
+      stack: ["React Native", "Expo", "TypeScript", "TMDB API", "Axios", "Reanimated"],
+      year: "2026",
+      links: {
+        source: "https://github.com/Souravbanerjeedata/movie-app-rn",
+      },
+      featured: true,
+      image: "/project-images/movie-app-rn.png",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Apple Invites Animation",
+      blurb:
+        "High-fidelity recreation of Apple Invites card animations — gesture-driven reveal, drag-to-dismiss, spring physics, and blur — in React Native.",
+      story:
+        "Built with Reanimated 3 and Gesture Handler for buttery 60fps interactions. Invitation cards scale, rotate, and dismiss with spring physics that mirror Apple's design language. Background blur and micro-interactions keep the experience premium. NativeWind (Tailwind) handles styling while Expo Router scaffolds the screen structure. Focus was on matching timing curves and gesture thresholds as closely as possible.",
+      stack: ["React Native", "Expo", "TypeScript", "Reanimated 3", "Gesture Handler", "NativeWind"],
+      year: "2026",
+      links: {
+        source: "https://github.com/Souravbanerjeedata/apple-invites-animation-rn",
+      },
+      featured: true,
+      image: "/project-images/apple-invites.png",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Cocktail Website",
+      blurb:
+        "Scroll-driven GSAP cocktail landing page with SplitText reveals, parallax, pinned sections, scroll-synced video, and a custom animated carousel.",
+      story:
+        "GSAP ScrollTrigger orchestrates multi-section timelines: pinned hero sequences, SplitText intro reveals, parallax layers, and image-mask transitions. Video playback is locked to scroll progress for a cinematic feel. A custom carousel and responsive Tailwind layout keep the experience polished on every viewport. Vite powers a fast React + Tailwind toolchain optimized for animation-heavy pages.",
+      stack: ["React", "GSAP", "ScrollTrigger", "Tailwind CSS", "Vite"],
+      year: "2025",
+      links: {
+        live: "https://cocktail-website-ivory.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/cocktail-website",
+      },
+      featured: true,
+      image: "/project-images/cocktail-website.png",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Food Recipe App",
+      blurb:
+        "React Native recipe browser with searchable collections, detail screens for ingredients & steps, and favorites powered by Context.",
+      story:
+        "React Navigation (stack) moves between browse, collection, and recipe detail screens. Recipe data is structured in local models; favorites persist via React Context. Screens emphasize photography-first cards and clear ingredient/step layouts. Built as a focused mobile cooking companion with clean StyleSheet UI and reusable list components.",
+      stack: ["React Native", "Expo", "React Navigation", "React Context", "JavaScript"],
+      year: "2026",
+      links: {
+        source: "https://github.com/Souravbanerjeedata/food-recipe-app-reactnative",
+      },
+      featured: false,
+      image: "/project-images/food-recipe-rn.png",
       categories: ["Frontend"],
     },
     {
       title: "Food Order App",
       blurb:
-        "Interactive food ordering interface with cart management, quantity controls and order summary. Demonstrates component thinking and state handling in a practical e-commerce style flow.",
-      stack: ["JavaScript", "React", "CSS"],
-      year: "2024",
+        "Food ordering UI with delivery/pickup modes, restaurant listings, product detail, customizations, and cart-style order flow — React + Vite.",
+      story:
+        "Home screen supports delivery, pickup, and dine-in modes with filterable restaurant cards. Product pages show image carousels, ratings, tags, and add-ons (extra toppings, special requests). Cart and order summary close the loop. Frontend is component-driven React with Vite; a companion backend folder supports API-shaped data for a full order experience.",
+      stack: ["React", "JavaScript", "Vite", "CSS"],
+      year: "2025",
       links: {
         source: "https://github.com/Souravbanerjeedata/food-order-app",
       },
-      featured: true,
-      categories: ["Frontend"],
-    },
-    {
-      title: "MovieLand — React Movie App",
-      blurb:
-        "Movie discovery app that fetches and displays films with search functionality. Clean UI focused on browsing and finding titles quickly.",
-      stack: ["React", "CSS", "JavaScript"],
-      year: "2024",
-      links: {
-        source: "https://github.com/Souravbanerjeedata/movieland--react-movie-app",
-      },
       featured: false,
-      categories: ["Frontend"],
-    },
-    {
-      title: "Natours — Touring Landing Page",
-      blurb:
-        "Responsive, high-fidelity landing page for a fictional touring company. Built with advanced SCSS architecture, animations and modern layout techniques.",
-      stack: ["HTML", "SCSS", "CSS"],
-      year: "2023",
-      links: {
-        source: "https://github.com/Souravbanerjeedata/Natour--Touring-Landing-Page",
-      },
-      featured: false,
-      categories: ["Frontend"],
-    },
-    {
-      title: "Project Management App",
-      blurb:
-        "Simple project management tool built with React. Supports task organization and basic project tracking workflows.",
-      stack: ["React", "JavaScript"],
-      year: "2024",
-      links: {
-        source: "https://github.com/Souravbanerjeedata/simple-project-management-app-with-react",
-      },
-      featured: false,
-      categories: ["Frontend"],
-    },
-    {
-      title: "Tic-Tac-Toe with React",
-      blurb:
-        "Classic Tic-Tac-Toe game implemented in React with clean component structure and win/draw logic.",
-      stack: ["React", "JavaScript"],
-      year: "2023",
-      links: {
-        source: "https://github.com/Souravbanerjeedata/tic-tac-toe-with-react",
-      },
-      featured: false,
+      image: "/project-images/food-order-app.png",
       categories: ["Frontend"],
     },
   ] as Project[],
