@@ -1,178 +1,44 @@
-# Sourav Banerjee — Portfolio
+# Anurag Jha — Portfolio
 
-**Self-taught Full Stack & React Native Developer** building scalable web and mobile applications.
-
-[![Live Site](https://img.shields.io/badge/Live-souravbanerjee.dev-blue?style=flat-square)](https://souravbanerjee.dev)
-[![GitHub](https://img.shields.io/badge/GitHub-Souravbanerjeedata-181717?style=flat-square&logo=github)](https://github.com/Souravbanerjeedata)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/sourav-banerjee-code)
-[![X](https://img.shields.io/badge/X-@souravdotcode-000000?style=flat-square&logo=x)](https://x.com/souravdotcode)
-
-> Open to internships and junior developer roles.
-
----
-
-## About
-
-Hey, I'm **Sourav** — a self-taught Full Stack and React Native developer based in Kolkata, India. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.
-
-I focus on clean, practical applications with the **MERN / PERN** stack and modern frontend architecture. Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.
-
-**Quick snapshot**
-- Career switcher from TCS → developer
-- Self-taught for 3.5+ years
-- Building web & mobile apps
-- Open to internships & junior roles
-
----
-
-## Features
-
-- Modern, responsive single-page portfolio
-- Dark/light theme support
-- Smooth animations (Framer Motion + GSAP)
-- Typing effect hero with multiple roles
-- Interactive profile image switcher with glitch effects
-- Project showcase with expandable details
-- Skills filter by category
-- GitHub contribution graph
-- Command palette
-- Live clock & status pills
-- Vercel Analytics
-- Deployed on Vercel
-
----
+A high-performance, responsive, and aesthetically premium personal portfolio built with React, Vite, Tailwind CSS, and TypeScript. Inspired by minimalist retro terminal grids and modern typographic grids.
 
 ## Tech Stack
 
-| Category     | Technologies                                      |
-|--------------|---------------------------------------------------|
-| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS          |
-| **Animation**| Framer Motion, GSAP                               |
-| **Icons**    | Lucide React, Iconify                             |
-| **Routing**  | React Router                                      |
-| **Deploy**   | Vercel                                            |
+- **Core & Routing:** [React 18](https://react.dev/) & [React Router v6](https://reactrouter.com/)
+- **Build Tool:** [Vite 6](https://vite.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with custom premium fonts (`Amiamie` & `Instrument Serif`)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) for fluid page transitions, interactive hover events, and layout entries
+- **Analytics:** [@vercel/analytics](https://vercel.com/docs/analytics) for real-time web traffic insights
+- **Icons:** [@iconify/react](https://iconify.design/) (official brand SVG assets) & [lucide-react](https://lucide.dev/)
 
-**Skills highlighted on the site**  
-TypeScript · JavaScript · Python · React · React Native · Next.js · Node.js · Express · MongoDB · PostgreSQL · Tailwind · Redux · Git · and more.
+## Features
 
----
-
-## Projects Featured
-
-| Project                    | Stack                  | Description |
-|---------------------------|------------------------|-------------|
-| **Bankist Payment App**   | JS, HTML, CSS          | Modern banking UI with transfers, loans & real-time balance |
-| **Food Order App**        | React, JS, CSS         | Interactive food ordering with cart & order summary |
-| **MovieLand**             | React, JS, CSS         | Movie discovery app with search |
-| **Natours**               | HTML, SCSS             | High-fidelity touring company landing page |
-| **Project Management App**| React, JS              | Simple task & project tracking tool |
-| **Tic-Tac-Toe**           | React, JS              | Classic game with clean component structure |
-
-More projects are available in the full archive on the live site.
-
----
+- **Typographic & CRT Grid Design:** Sleek retro layout system using dashed alignment columns, custom serif layouts, scanline overlays, and grayscale images.
+- **Switchable Profile Avatar:** Rotate through different custom profile images by clicking the avatar frame directly or the quick rotate trigger icon.
+- **Search Command Palette (`⌘K` / `Ctrl+K`):** Dynamic keyboard-accessible command menu with shortcuts to jump directly to page sections, external socials, or toggle themes.
+- **Interactive GitHub Contributions Matrix:** Asynchronous heatmap fetching live contribution levels directly from the GitHub API using a custom React hook, displayed in a responsive 7-row calendar grid.
+- **Fading Quotes Rotator:** An interactive inspiration panel in the footer cycling through selected quotes (Steve Jobs, Elon Musk, Luffy, Naruto, Zuckerberg) with custom fading transitions.
+- **Pixel Cat Cursor Follower:** Interactive classic `oneko.js` pixel cat that follows the user's cursor across the screen, complete with automatic cleanup and nested route loading support.
+- **Konami Code Easter Egg:** Listening for classic trigger keys ("anurag", "jha", or the classic Konami sequence) to activate interactive falling confetti achievements.
+- **Writing / Blog Integration:** Centered grid writing section displaying technical essays and system architecture reviews synced directly to Medium.
 
 ## Getting Started
 
-### Prerequisites
-- Node.js 18+ (recommended 20+)
-- npm
-
-### Installation
+First, install dependencies:
 
 ```bash
-# Clone the repository
-git clone https://github.com/Souravbanerjeedata/my-portfolio.git
-cd my-portfolio
-
-# Install dependencies
 npm install
+```
 
-# Start development server
+Then, run the local development server:
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### Available Scripts
-
-| Command          | Description                          |
-|------------------|--------------------------------------|
-| `npm run dev`    | Start Vite development server        |
-| `npm run build`  | Type-check + production build        |
-| `npm run preview`| Preview the production build locally |
-| `npm run lint`   | Run TypeScript check (`tsc --noEmit`)|
-
----
-
-## Project Structure
-
-```
-my-portfolio/
-├── components/          # UI components (hero, projects, skills, etc.)
-├── public/              # Static assets (images, profile pics)
-├── src/
-│   ├── components/      # Additional components
-│   ├── config/
-│   │   └── site.ts      # Central site content & configuration
-│   ├── context/         # React context (theme, etc.)
-│   ├── hooks/           # Custom hooks
-│   ├── pages/           # Page components
-│   ├── sections/        # Page sections
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
-├── index.html
-├── package.json
-├── tailwind.config.ts
-├── vite.config.ts
-├── tsconfig.json
-└── vercel.json
-```
-
-Most content (name, about text, projects, skills, social links, status) lives in **`src/config/site.ts`**. Edit that file to customize the portfolio.
-
----
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
 ## Customization
 
-1. **Personal info & content** → edit `src/config/site.ts`
-2. **Profile / banner images** → place files in `public/` and update paths in `site.ts`
-3. **Theme / colors** → adjust Tailwind config and CSS variables in `src/index.css`
-4. **Resume link** → update the `resume` field under `socials` in `site.ts`
-
----
-
-## Deployment
-
-The project is configured for **Vercel**:
-
-```bash
-npm run build
-```
-
-`vercel.json` already sets the correct framework, build command, and SPA rewrites.
-
-You can also deploy the `dist/` folder to any static host (Netlify, GitHub Pages, Cloudflare Pages, etc.).
-
----
-
-## Contact
-
-- **Email**: [sourav.banerjeejobs@gmail.com](mailto:sourav.banerjeejobs@gmail.com)
-- **Portfolio**: [souravbanerjee.dev](https://souravbanerjee.dev)
-- **GitHub**: [Souravbanerjeedata](https://github.com/Souravbanerjeedata)
-- **LinkedIn**: [sourav-banerjee-code](https://www.linkedin.com/in/sourav-banerjee-code)
-- **X / Twitter**: [@souravdotcode](https://x.com/souravdotcode)
-- **Resume**: [View Resume](https://drive.google.com/file/d/1_lJHna9_EGCsCR4g7tU8n7F2irpO5GNl/view)
-
----
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE) (add a LICENSE file if you want formal terms).
-
----
-
-Built with ❤️ while learning and shipping — **Sourav Banerjee**  
-Kolkata, India · Asia/Kolkata
+To customize the content of the portfolio (such as titles, biography details, social URLs, or technical blog posts), modify the central configuration file:
+* [src/config/site.ts](file:///d:/D%20drive/1/videos/movie/1.dev/Cohort%203.0/WEB%20DEV/cohort-3%20codes/projects/my-portfolio-github/my-portfolio/src/config/site.ts)

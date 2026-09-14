@@ -42,15 +42,15 @@ export const site = {
   bannerImage: "/images/cover.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack Developer",
+  role: "Full Stack & React Native Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Self-taught full-stack developer building scalable web and mobile applications. Open to internships and junior roles.",
+    "Self-taught full-stack & React Native developer building scalable web and mobile applications. Open to internships and junior roles.",
   about: [
-    "Hey, I'm Sourav — a self-taught Full Stack developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
+    "Hey, I'm Sourav — a self-taught Full Stack and React Native developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
     "I focus on clean, practical applications with MERN / PERN stack and modern frontend architecture.",
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
@@ -64,7 +64,7 @@ export const site = {
     available: true,
     availableText: "open to opportunities",
     nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack projects",
+    nowBuilding: "Full-stack & React Native projects",
     nowListening: "focus playlists",
   },
   socials: {
@@ -79,10 +79,10 @@ export const site = {
   experience: [
     {
       company: "Independent / Self-taught",
-      role: "Full Stack Developer",
+      role: "Full Stack & React Native Developer",
       period: "2023 – Present",
       blurb:
-        "Transitioned into software development through consistent self-learning and project building. Developed multiple frontend and full-stack applications using MERN/PERN stack, JavaScript/TypeScript, CSS/SCSS and modern tooling. Currently focused on production-ready patterns & DSA.",
+        "Transitioned into software development through consistent self-learning and project building. Developed multiple frontend and full-stack applications using MERN/PERN stack, JavaScript/TypeScript, CSS/SCSS and modern tooling. Currently focused on production-ready patterns, DSA.",
       url: "https://github.com/Souravbanerjeedata",
     },
     {
@@ -111,7 +111,7 @@ export const site = {
       categories: ["Frontend", "Fullstack"],
     },
     {
-      title: "Movie Search App",
+      title: "Movie Surfing App",
       blurb:
         "Netflix-style movie & TV discovery app with auth, search, detail pages, continue-watching, and live TMDB data — built in React Native + Expo + TypeScript.",
       story:
@@ -126,7 +126,7 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "Apple Invites Carousel Animation",
+      title: "Apple Invites Animation",
       blurb:
         "High-fidelity recreation of Apple Invites card animations — gesture-driven reveal, drag-to-dismiss, spring physics, and blur — in React Native.",
       story:
@@ -172,18 +172,19 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "Food Order App",
+      title: "Point & Shoot Game",
       blurb:
-        "Food ordering UI with delivery/pickup modes, restaurant listings, product detail, customizations, and cart-style order flow — React + Vite.",
+        "Browser-based point-and-shoot game — pick an enemy and a scene, then click or tap flying targets before they escape. Lives, scoring, speed ramp, and explosion effects.",
       story:
-        "Home screen supports delivery, pickup, and dine-in modes with filterable restaurant cards. Product pages show image carousels, ratings, tags, and add-ons (extra toppings, special requests). Cart and order summary close the loop. Frontend is component-driven React with Vite; a companion backend folder supports API-shaped data for a full order experience.",
-      stack: ["React", "JavaScript", "Vite", "CSS"],
+        "Built with vanilla JavaScript and the HTML5 Canvas API. Six selectable enemies and five cartoon backgrounds. Game loop handles spawn timing, collision via click/tap hit-testing, gradual speed increase every 10 kills, and a 5-life system. Explosion sprites and sound feedback on hits. Fully responsive for desktop mouse and mobile touch. No frameworks — pure JS, CSS, and canvas for a lightweight playable experience.",
+      stack: ["JavaScript", "HTML5 Canvas", "CSS"],
       year: "2025",
       links: {
-        source: "https://github.com/Souravbanerjeedata/food-order-app",
+        live: "https://souravbanerjeedata.github.io/point-and-shoot-game/",
+        source: "https://github.com/Souravbanerjeedata/point-and-shoot-game",
       },
       featured: false,
-      image: "/project-images/food-order-app.png",
+      image: "/project-images/point-and-shoot.png",
       categories: ["Frontend"],
     },
   ] as Project[],
