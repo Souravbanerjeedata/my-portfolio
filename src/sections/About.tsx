@@ -14,7 +14,7 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="flex gap-2 text-[14.5px] leading-relaxed text-[var(--muted)]"
+            className="flex gap-3 text-[15px] leading-relaxed text-[var(--muted)]"
           >
             <span className="text-[var(--soft)] font-mono">•</span>
             <p>{para}</p>
@@ -27,7 +27,7 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="mt-6 rounded-xl border border-[var(--line)] bg-[var(--card)] p-5"
+          className="mt-6 rounded-2xl border border-[var(--line)] bg-[var(--card)] p-5 shadow-[var(--glow)]"
         >
           <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--fg)] font-semibold mb-3">
             Developer Snapshot
@@ -35,7 +35,7 @@ export function About() {
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[13px] font-mono text-[var(--muted)]">
             {site.tldr.map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-none" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] flex-none" />
                 <span>{item}</span>
               </li>
             ))}

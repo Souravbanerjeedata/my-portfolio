@@ -17,7 +17,7 @@ export function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.45, delay: i * 0.05 }}
-            className={`px-6 py-6 transition-colors duration-200 hover:bg-[var(--hover)] sm:px-8 ${
+            className={`relative px-6 py-7 transition-colors duration-200 hover:bg-[var(--hover)] sm:px-8 border-l-2 border-l-transparent hover:border-l-[var(--accent)] ${
               i > 0 ? "border-t border-[var(--line)]" : ""
             }`}
           >

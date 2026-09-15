@@ -15,6 +15,7 @@ import { GithubActivity } from "@/sections/GithubActivity";
 import { CommandPalette } from "@/components/command-palette";
 import { Konami } from "@/components/konami";
 import { Analytics } from "@vercel/analytics/react";
+import { TerminalCursor } from "@/components/TerminalCursor";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -62,22 +63,6 @@ export function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Dynamically load the cursor-following pixel cat (oneko.js)
-  useEffect(() => {
-    if (document.getElementById("oneko-script")) return;
-
-    const script = document.createElement("script");
-    script.id = "oneko-script";
-    script.src = "/oneko.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-      const neko = document.getElementById("oneko");
-      if (neko) neko.remove();
-    };
-  }, []);
 
   return (
     <ThemeProvider>
@@ -86,6 +71,7 @@ export function App() {
           <Analytics />
           <ScrollToTop />
           <Konami />
+          <TerminalCursor />
           <div className="min-h-screen bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-colors duration-300 relative">
             <Nav onOpenPalette={() => setPaletteOpen(true)} />
             <SideIndex />

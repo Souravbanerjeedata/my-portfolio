@@ -18,7 +18,8 @@ export function WritingPage() {
             Writing & Thoughts
           </h1>
           <p className="mt-3 text-[var(--muted)] text-lg max-w-2xl leading-relaxed">
-            Technical write-ups, architecture breakdowns, system design insights, and lessons learned while engineering software.
+            Technical write-ups, architecture breakdowns, system design
+            insights, and lessons learned while engineering software.
           </p>
         </Reveal>
       </Shell>
@@ -30,9 +31,13 @@ export function WritingPage() {
           <Reveal delay={0.1}>
             <div className="rounded-2xl border border-[var(--line)] bg-[var(--card)] p-8 text-center">
               <BookOpen size={32} className="text-[var(--soft)] mx-auto mb-3" />
-              <h3 className="font-serif text-2xl text-[var(--fg)]">Articles Coming Soon</h3>
+              <h3 className="font-serif text-2xl text-[var(--fg)]">
+                Articles Coming Soon
+              </h3>
               <p className="mt-2 text-[var(--muted)] text-sm max-w-md mx-auto">
-                Currently drafting deep-dive articles on WebSocket state engines, local-first browser IDE architectures, and PostgreSQL performance tuning.
+                Currently drafting deep-dive articles on WebSocket state
+                engines, local-first browser IDE architectures, and PostgreSQL
+                performance tuning.
               </p>
             </div>
           </Reveal>
@@ -48,8 +53,12 @@ export function WritingPage() {
                 <MediumIcon className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="font-semibold text-[var(--fg)] text-lg">Follow on Medium</h3>
-                <p className="text-sm text-[var(--muted)]">Read longer-form engineering essays and technical guides.</p>
+                <h3 className="font-semibold text-[var(--fg)] text-lg">
+                  Follow on Medium
+                </h3>
+                <p className="text-sm text-[var(--muted)]">
+                  Read longer-form engineering essays and technical guides.
+                </p>
               </div>
             </div>
 

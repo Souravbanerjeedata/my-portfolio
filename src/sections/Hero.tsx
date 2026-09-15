@@ -5,10 +5,7 @@ import { site } from "@/config/site";
 import { MapPin, Search, RotateCw, Eye } from "lucide-react";
 import { useVisitor } from "@/context/VisitorContext";
 
-const HEADLINE_TITLES = [
-  "Full Stack Developer",
-  "App Developer",
-];
+const HEADLINE_TITLES = ["Full Stack Developer", "App Developer"];
 
 export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
   const [headlineIndex, setHeadlineIndex] = useState(0);
@@ -18,7 +15,9 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
   const handleNextImage = () => {
     const nextIndex = (imgIndex + 1) % site.profileImages.length;
     setImgIndex(nextIndex);
-    window.dispatchEvent(new CustomEvent("profileImageChanged", { detail: nextIndex }));
+    window.dispatchEvent(
+      new CustomEvent("profileImageChanged", { detail: nextIndex })
+    );
   };
 
   useEffect(() => {
@@ -30,102 +29,80 @@ export function Hero({ onOpenPalette }: { onOpenPalette?: () => void }) {
 
   return (
     <>
-      {/* Cover Banner */}
-      <Shell className="px-2 pt-2 sm:px-3 sm:pt-3">
-        <div className="relative h-36 overflow-hidden rounded-xl bg-neutral-950 sm:h-44 border border-[var(--line)]">
-          <img
-            src={site.bannerImage}
-            alt="Steve Jobs at desk"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover object-center opacity-65 grayscale"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/40 to-transparent" />
-          <div className="absolute inset-0 opacity-20 [background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.05)_0,rgba(255,255,255,0.05)_1px,transparent_1px,transparent_5px)]" />
-          <div className="absolute inset-0 [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.12)_0,rgba(0,0,0,0.12)_1px,transparent_1px,transparent_28px)] opacity-30" />
-        </div>
-      </Shell>
-
-      {/* Profile Avatar & Identity */}
-      <Shell className="px-6 py-6 sm:px-8">
+      {/* Identity */}
+      <Shell className="px-6 pb-7 pt-8 sm:px-8 sm:pt-10">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left gap-6 justify-between"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:items-center sm:text-left"
         >
-          <div className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left gap-5">
-            <div 
+          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:text-left">
+            <div
               onClick={handleNextImage}
-              className="relative grid size-20 shrink-0 place-items-center overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--chip)] shadow-md group cursor-pointer select-none animate-fade-up"
+              className="group relative grid size-[88px] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--chip)] shadow-lg select-none ring-2 ring-[var(--accent)]/20"
               title="Click to change profile image"
             >
-              {/* Main Avatar Image */}
               <img
                 src={site.profileImages[imgIndex]}
                 alt={site.name}
                 loading="eager"
                 decoding="async"
-                className="h-full w-full object-cover pointer-events-none"
+                className="pointer-events-none h-full w-full object-cover"
               />
-
-              {/* CRT scanline overlay */}
-              <div className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden opacity-[0.18] group-hover:opacity-30 transition-opacity bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px]">
-                <div className="absolute inset-0 h-1 bg-white/20 blur-[1px] animate-scanline" />
-              </div>
-
-              {/* Switch image icon */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-60" />
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleNextImage();
                 }}
-                className="absolute right-1 top-1 rounded-full border border-[var(--line)] bg-[var(--chip)] p-1 text-[var(--muted)] transition-all hover:text-[var(--fg)] hover:scale-110 sm:opacity-100 opacity-0 group-hover:opacity-100 z-20 cursor-pointer shadow-sm"
+                className="absolute right-1.5 top-1.5 z-20 cursor-pointer rounded-full border border-[var(--line)] bg-[var(--card)]/90 p-1 text-[var(--muted)] shadow-sm transition-all hover:scale-110 hover:text-[var(--fg)] sm:opacity-0 sm:group-hover:opacity-100"
                 aria-label="Switch profile image"
               >
-                <RotateCw size={10} strokeWidth={2} />
+                <RotateCw size={11} strokeWidth={2} />
               </button>
             </div>
+
             <div>
-              <h1 className="font-serif text-3xl sm:text-[38px] leading-none tracking-tight text-[var(--fg)] text-glitch">
+              <h1 className="text-display text-[2rem] text-[var(--fg)] sm:text-[2.65rem]">
                 {site.name}
               </h1>
-              <div className="h-[20px] overflow-hidden mt-1">
+              <div className="mt-1.5 h-[22px] overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={headlineIndex}
-                    initial={{ y: 12, opacity: 0 }}
+                    initial={{ y: 14, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -12, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="font-mono text-[13px] text-[var(--muted)]"
+                    exit={{ y: -14, opacity: 0 }}
+                    transition={{ duration: 0.28 }}
+                    className="font-medium text-[15px] text-[var(--accent)]"
                   >
                     {HEADLINE_TITLES[headlineIndex]}
                   </motion.p>
                 </AnimatePresence>
               </div>
-              <p className="mt-1 flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 font-mono text-[11px] text-[var(--soft)]">
-                <span className="flex items-center gap-1">
-                  <MapPin size={12} className="shrink-0" /> {site.location}
+              <div className="mt-2.5 flex flex-wrap items-center justify-center gap-3 text-[12.5px] text-[var(--muted)] sm:justify-start">
+                <span className="inline-flex items-center gap-1">
+                  <MapPin size={12} className="text-[var(--soft)]" />
+                  {site.location}
                 </span>
-                <span>·</span>
-                <span className="flex items-center gap-1">
-                  <Eye size={12} className="shrink-0" />
-                  <span>{isLoading ? "..." : count?.toLocaleString()} views</span>
+                <span className="text-[var(--line)]">·</span>
+                <span className="inline-flex items-center gap-1">
+                  <Eye size={12} className="text-[var(--soft)]" />
+                  {isLoading ? "…" : `${count?.toLocaleString() ?? "—"} views`}
                 </span>
-              </p>
+              </div>
             </div>
           </div>
 
-          {/* Quick Command Palette Keyboard Badge */}
           {onOpenPalette && (
             <button
+              type="button"
               onClick={onOpenPalette}
-              className="flex items-center gap-2 rounded-lg border border-[var(--line)] bg-[var(--chip)] px-3 py-1.5 font-mono text-[11px] text-[var(--muted)] hover:text-[var(--fg)] hover:border-[var(--soft)] transition-colors shadow-sm cursor-pointer"
-              title="Open Command Palette (Ctrl+K)"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--chip)] px-3.5 py-2 text-[12px] text-[var(--muted)] transition-all hover:border-[var(--accent-border)] hover:text-[var(--fg)]"
             >
-              <Search size={14} />
-              <span>⌘K</span>
+              <Search size={13} />
+              <span className="font-mono text-[11px]">⌘K</span>
             </button>
           )}
         </motion.div>

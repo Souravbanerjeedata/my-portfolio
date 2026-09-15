@@ -20,34 +20,31 @@ export function Nav({ onOpenPalette }: { onOpenPalette?: () => void }) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/85 backdrop-blur-md">
-      <Shell className="flex items-center justify-between px-6 py-3 sm:px-8">
-        <Link 
-          to="/" 
+    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/75 backdrop-blur-xl">
+      <Shell className="flex items-center justify-between px-6 py-3.5 sm:px-8">
+        <Link
+          to="/"
           onClick={() => setMobileMenuOpen(false)}
-          className="font-serif text-xl tracking-wide text-[var(--fg)] hover:opacity-80 transition-opacity"
+          className="text-display text-[1.15rem] tracking-tight text-[var(--fg)] transition-opacity hover:opacity-80"
         >
           {site.firstName}
+          <span className="text-[var(--accent)]">.</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden sm:flex items-center gap-5 text-[13px] text-[var(--muted)]">
+        <nav className="hidden items-center gap-1 text-[13px] sm:flex">
           {navLinks.map(({ label, path }) => {
             const isActive = location.pathname === path;
             return (
               <Link
                 key={path}
                 to={path}
-                className={`group relative transition-colors hover:text-[var(--fg)] ${
-                  isActive ? "text-[var(--fg)] font-semibold" : ""
+                className={`relative rounded-full px-3.5 py-1.5 transition-colors ${
+                  isActive
+                    ? "bg-[var(--accent-soft)] font-semibold text-[var(--accent)]"
+                    : "text-[var(--muted)] hover:text-[var(--fg)]"
                 }`}
               >
                 {label}
-                <span
-                  className={`absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300 group-hover:origin-left group-hover:scale-x-100 ${
-                    isActive ? "scale-x-100 origin-left" : ""
-                  }`}
-                />
               </Link>
             );
           })}
@@ -57,9 +54,9 @@ export function Nav({ onOpenPalette }: { onOpenPalette?: () => void }) {
               type="button"
               onClick={onOpenPalette}
               aria-label="Search Command Palette"
-              className="grid size-7 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition-all duration-300 hover:text-[var(--fg)] cursor-pointer"
+              className="ml-1 grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition-all hover:border-[var(--accent-border)] hover:text-[var(--fg)]"
             >
-              <Search className="size-3.5" />
+              <Search size={14} />
             </button>
           )}
 
@@ -67,73 +64,67 @@ export function Nav({ onOpenPalette }: { onOpenPalette?: () => void }) {
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="grid size-7 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition-all duration-300 hover:rotate-45 hover:text-[var(--fg)] cursor-pointer"
+            className="grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition-all hover:border-[var(--accent-border)] hover:text-[var(--fg)]"
           >
-            {dark ? <Sun className="size-3.5" /> : <Moon className="size-3.5" />}
+            {dark ? <Sun size={14} /> : <Moon size={14} />}
           </button>
         </nav>
 
-        {/* Mobile Navigation Trigger Button */}
-        <div className="flex sm:hidden items-center gap-3">
-          {onOpenPalette && (
-            <button
-              type="button"
-              onClick={onOpenPalette}
-              aria-label="Search Command Palette"
-              className="grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] hover:text-[var(--fg)] cursor-pointer"
-            >
-              <Search className="size-4" />
-            </button>
-          )}
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] hover:text-[var(--fg)] cursor-pointer"
-          >
-            {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen((o) => !o)}
-            aria-label="Toggle Mobile Menu"
-            className="grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] hover:text-[var(--fg)] cursor-pointer"
-          >
-            {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-          </button>
-        </div>
+        <button
+          type="button"
+          className="grid size-9 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] sm:hidden"
+          onClick={() => setMobileMenuOpen((o) => !o)}
+          aria-label="Menu"
+        >
+          {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+        </button>
       </Shell>
 
-      {/* Mobile Drawer Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="sm:hidden absolute top-full left-0 w-full bg-[var(--bg)] border-b border-[var(--line)] overflow-hidden shadow-lg z-50 bg-stripes"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-[var(--line)] sm:hidden"
           >
-            <div className="px-6 py-6 space-y-4 flex flex-col font-serif text-lg bg-[var(--bg)]">
-              {navLinks.map(({ label, path }) => {
-                const isActive = location.pathname === path;
-                return (
-                  <Link
-                    key={path}
-                    to={path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-2 border-b border-dashed border-[var(--line)]/50 pb-2.5 transition-colors ${
-                      isActive ? "text-[var(--fg)] font-semibold" : "text-[var(--muted)]"
-                    }`}
+            <Shell className="flex flex-col gap-1 px-6 py-4">
+              {navLinks.map(({ label, path }) => (
+                <Link
+                  key={path}
+                  to={path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`rounded-xl px-3 py-2.5 text-[14px] ${
+                    location.pathname === path
+                      ? "bg-[var(--accent-soft)] font-semibold text-[var(--accent)]"
+                      : "text-[var(--muted)]"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+              <div className="mt-2 flex gap-2">
+                {onOpenPalette && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenPalette();
+                    }}
+                    className="flex-1 rounded-xl border border-[var(--line)] py-2 text-[13px] text-[var(--muted)]"
                   >
-                    <span className={`size-1.5 rounded-full bg-[var(--fg)] ${isActive ? "opacity-100" : "opacity-0"}`} />
-                    {label}
-                  </Link>
-                );
-              })}
-            </div>
+                    Search ⌘K
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="rounded-xl border border-[var(--line)] px-4 py-2 text-[var(--muted)]"
+                >
+                  {dark ? <Sun size={14} /> : <Moon size={14} />}
+                </button>
+              </div>
+            </Shell>
           </motion.div>
         )}
       </AnimatePresence>

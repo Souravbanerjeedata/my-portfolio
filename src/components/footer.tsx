@@ -6,24 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const QUOTES = [
   {
-    text: "When something is important enough, you do it even if the odds are not in your favor.",
-    author: "Elon Musk",
+    text: "Code is like humor. When you have to explain it, it's bad.",
+    author: "Cory House",
   },
   {
-    text: "The biggest risk is not taking any risk.",
-    author: "Mark Zuckerberg",
+    text: "First, solve the problem. Then, write the code.",
+    author: "John Johnson",
   },
   {
-    text: "The people who are crazy enough to think they can change the world are the ones who do.",
-    author: "Steve Jobs",
+    text: "Simplicity is the soul of efficiency.",
+    author: "Austin Freeman",
   },
   {
-    text: "I’ve decided to become the Pirate King. If I die trying, then at least I die fighting for my dream.",
-    author: "Monkey D. Luffy",
-  },
-  {
-    text: "If you don't like your destiny, don't accept it.",
-    author: "Naruto Uzumaki",
+    text: "Make it work, make it right, make it fast.",
+    author: "Kent Beck",
   },
 ];
 
@@ -88,8 +84,8 @@ export function Footer() {
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="flex flex-col items-center"
               >
-                <span className="font-serif text-4xl text-[var(--soft)] leading-none">&ldquo;</span>
-                <p className="font-serif mx-auto -mt-2 max-w-md text-[20px] sm:text-[22px] italic leading-snug text-[var(--fg)]">
+                <span className="text-display text-4xl text-[var(--soft)] leading-none">&ldquo;</span>
+                <p className="text-display mx-auto -mt-2 max-w-md text-[20px] sm:text-[22px] italic leading-snug text-[var(--fg)]">
                   {QUOTES[quoteIndex].text}
                 </p>
                 <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--soft)] font-bold">
