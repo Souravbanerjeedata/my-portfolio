@@ -53,7 +53,7 @@ export const site = {
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
   tldr: [
-    "Career switcher from TCS → developer",
+    "Career switcher from HR Analyst → developer",
     "Self-taught for 3.5+ years",
     "Building web & mobile apps",
     "Open to internships & junior roles",
