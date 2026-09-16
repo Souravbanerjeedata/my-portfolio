@@ -1,6 +1,6 @@
 # Sourav Banerjee — Portfolio
 
-Personal portfolio of **Sourav Banerjee** — self-taught Full Stack & React Native developer based in Kolkata.
+My personal portfolio — self-taught Full Stack & React Native developer based in Kolkata.
 
 **Live:** [sourav-dev-portfolio.vercel.app](https://sourav-dev-portfolio.vercel.app/)
 
@@ -8,15 +8,15 @@ Personal portfolio of **Sourav Banerjee** — self-taught Full Stack & React Nat
 
 ## Tech stack
 
-| Layer | Tools |
-|--------|--------|
-| UI | React 18, TypeScript |
-| Build | Vite 6 |
-| Styling | Tailwind CSS, CSS variables (dark / light) |
-| Motion | Framer Motion |
-| Routing | React Router |
-| Icons | Lucide React, Iconify |
-| Analytics | Vercel Analytics |
+| Layer     | Tools                                      |
+| --------- | ------------------------------------------ |
+| UI        | React 18, TypeScript                       |
+| Build     | Vite 6                                     |
+| Styling   | Tailwind CSS, CSS variables (dark / light) |
+| Motion    | Framer Motion                              |
+| Routing   | React Router                               |
+| Icons     | Lucide React, Iconify                      |
+| Analytics | Vercel Analytics                           |
 
 ---
 
@@ -113,8 +113,8 @@ public/
 
 Configured for **Vercel** (`vercel.json` included).
 
-1. Push to GitHub  
-2. Import the repo in [Vercel](https://vercel.com)  
+1. Push to GitHub
+2. Import the repo in [Vercel](https://vercel.com)
 3. Deploy (build command: `npm run build`, output: `dist`)
 
 ---
