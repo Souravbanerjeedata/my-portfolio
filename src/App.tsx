@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VisitorProvider } from "@/context/VisitorContext";
@@ -15,6 +15,7 @@ import { SectionDivider, PageShell } from "@/components/Layout";
 import { Konami } from "@/components/konami";
 import { Analytics } from "@vercel/analytics/react";
 import { motion } from "framer-motion";
+import { Loader } from "@/components/Loader";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -81,14 +82,21 @@ function MainLayout() {
 }
 
 export function App() {
+  const [ready, setReady] = useState(false);
+
   return (
     <ThemeProvider>
       <VisitorProvider>
+        {!ready && <Loader onDone={() => setReady(true)} />}
         <BrowserRouter>
           <Analytics />
           <ScrollToTop />
           <Konami />
-          <div className="relative flex min-h-screen flex-col bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-colors duration-300">
+          <div
+            className={`relative flex min-h-screen flex-col bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-opacity duration-500 ${
+              ready ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <Nav />
             <main className="relative z-10 flex-1">
               <Routes>

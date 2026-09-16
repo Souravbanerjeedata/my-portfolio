@@ -40,7 +40,7 @@ export const site = {
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack & React Native Developer",
+  role: "Full Stack Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
@@ -62,7 +62,7 @@ export const site = {
     available: true,
     availableText: "open to opportunities",
     nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack & React Native projects",
+    nowBuilding: "Full-stack   projects",
     nowListening: "focus playlists",
   },
   socials: {
