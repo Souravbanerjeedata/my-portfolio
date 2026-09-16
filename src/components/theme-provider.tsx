@@ -13,9 +13,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme") as Theme;
+      const stored = localStorage.getItem("theme") as Theme | null;
       if (stored === "dark" || stored === "light") return stored;
-      return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      // Primary mode is dark
+      return "dark";
     }
     return "dark";
   });

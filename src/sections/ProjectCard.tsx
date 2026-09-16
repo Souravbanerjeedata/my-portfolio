@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { type Project } from "@/config/site";
-import { Globe, ChevronDown, ChevronUp } from "lucide-react";
-import { GitHubIcon } from "@/components/icons";
+import { Globe, ChevronDown, ChevronUp, Github } from "lucide-react";
 
 export function ProjectCard({
   project: p,
@@ -15,22 +14,26 @@ export function ProjectCard({
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="card-lift group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)]">
-      {/* Image */}
+    <motion.article
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 320, damping: 24 }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)] shadow-[0_0_0_1px_transparent] transition-[border-color,box-shadow] duration-300 hover:border-[var(--accent-border)] hover:shadow-[0_0_32px_rgba(167,139,250,0.12)]"
+    >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--chip)]">
         {p.image && !imgError ? (
           <img
             src={p.image}
             alt={`${p.title} preview`}
-            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             onError={() => setImgError(true)}
+            loading="lazy"
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-[var(--chip)] to-[var(--bg)] px-6">
-            <span className="text-display text-2xl text-[var(--muted)]">{p.title}</span>
+            <span className="text-display text-xl text-[var(--muted)]">{p.title}</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--card)] via-transparent to-transparent opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--card)] via-transparent to-transparent opacity-90" />
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           {p.links.live ? (
@@ -54,10 +57,9 @@ export function ProjectCard({
         </div>
       </div>
 
-      {/* Body */}
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-[17px] font-semibold tracking-tight text-[var(--fg)]">
+          <h3 className="text-[16.5px] font-semibold tracking-tight text-[var(--fg)]">
             {p.title}
           </h3>
           <span className="shrink-0 font-mono text-[11px] text-[var(--soft)]">
@@ -85,10 +87,10 @@ export function ProjectCard({
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.22 }}
+                  transition={{ duration: 0.25 }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-2.5 space-y-1.5 rounded-xl border border-[var(--line)] bg-[var(--chip)]/70 p-3.5 text-[12.5px] leading-relaxed text-[var(--muted)]">
+                  <div className="mt-2.5 space-y-1.5 rounded-xl border border-[var(--line)] bg-[var(--chip)]/80 p-3.5 text-[12.5px] leading-relaxed text-[var(--muted)]">
                     {p.story.split("\n\n").map((para, idx) => (
                       <p key={idx}>{para}</p>
                     ))}
@@ -101,13 +103,13 @@ export function ProjectCard({
 
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--line)] pt-4">
           <div className="flex flex-wrap gap-1.5">
-            {p.stack.slice(0, 5).map((t) => (
+            {p.stack.slice(0, 4).map((t) => (
               <span key={t} className="chip">
                 {t}
               </span>
             ))}
-            {p.stack.length > 5 && (
-              <span className="chip">+{p.stack.length - 5}</span>
+            {p.stack.length > 4 && (
+              <span className="chip">+{p.stack.length - 4}</span>
             )}
           </div>
           <div className="flex shrink-0 items-center gap-2.5 text-[var(--soft)]">
@@ -116,8 +118,8 @@ export function ProjectCard({
                 href={p.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${p.title} live site`}
-                className="transition-colors hover:text-[var(--accent)]"
+                aria-label={`${p.title} live`}
+                className="rounded-full p-1 transition-colors hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
               >
                 <Globe className="size-4" />
               </a>
@@ -127,15 +129,15 @@ export function ProjectCard({
                 href={p.links.source}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${p.title} repository`}
-                className="transition-colors hover:text-[var(--accent)]"
+                aria-label={`${p.title} repo`}
+                className="rounded-full p-1 transition-colors hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
               >
-                <GitHubIcon className="size-4" />
+                <Github className="size-4" />
               </a>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </motion.article>
   );
 }
