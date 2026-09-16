@@ -40,7 +40,7 @@ export const site = {
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack Developer",
+  role: "Full Stack & React Native Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
@@ -53,7 +53,7 @@ export const site = {
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
   tldr: [
-    "Career switcher from HR Analyst → developer",
+    "Career switcher from TCS → developer",
     "Self-taught for 3.5+ years",
     "Building web & mobile apps",
     "Open to internships & junior roles",
@@ -62,7 +62,7 @@ export const site = {
     available: true,
     availableText: "open to opportunities",
     nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack   projects",
+    nowBuilding: "Full-stack & React Native projects",
     nowListening: "focus playlists",
   },
   socials: {

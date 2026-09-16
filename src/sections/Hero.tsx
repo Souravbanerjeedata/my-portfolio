@@ -135,8 +135,8 @@ export function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-1 flex-col items-center gap-8 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16"
           >
-            {/* LEFT — text */}
-            <div className="w-full max-w-xl text-center md:text-left">
+            {/* Text — second on mobile, left on desktop */}
+            <div className="order-2 w-full max-w-xl text-center md:order-1 md:text-left">
               <h1
                 className={`text-display text-[2rem] font-bold tracking-tight sm:text-[2.75rem] lg:text-[3.15rem] ${titleCls}`}
               >
@@ -200,14 +200,14 @@ export function Hero() {
               )}
             </div>
 
-            {/* RIGHT — large profile */}
+            {/* Profile — first on mobile, right on desktop */}
             <motion.div
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ scale: 1.03 }}
               onClick={handleNextImage}
-              className={`group relative grid size-[160px] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.75rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/45 sm:size-[200px] md:size-[220px] lg:size-[260px] ${
+              className={`order-1 group relative grid size-[160px] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.75rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/45 sm:size-[200px] md:order-2 md:size-[220px] lg:size-[260px] ${
                 light
                   ? "border-[var(--accent)]/40 shadow-[0_0_50px_rgba(109,40,217,0.2)]"
                   : "border-white/30 shadow-[0_0_60px_rgba(167,139,250,0.35)]"
