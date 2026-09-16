@@ -3,9 +3,9 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useTheme } from "@/components/theme-provider";
 
 /**
- * Soft dual-layer cursor inspired by modern SaaS / document-editor UIs.
- * Outer ring lags; inner dot tracks more tightly.
- * White in dark mode, black in light mode.
+ * Fast accent cursor: tight-tracking solid dot.
+ * Expands into a soft ring only when hovering interactive elements.
+ * No laggy outer-ring follower.
  */
 export function TerminalCursor() {
   const { theme } = useTheme();
@@ -18,13 +18,10 @@ export function TerminalCursor() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const ringSpring = { damping: 22, stiffness: 140, mass: 0.55 };
-  const ringX = useSpring(mouseX, ringSpring);
-  const ringY = useSpring(mouseY, ringSpring);
-
-  const dotSpring = { damping: 30, stiffness: 420, mass: 0.25 };
-  const dotX = useSpring(mouseX, dotSpring);
-  const dotY = useSpring(mouseY, dotSpring);
+  // Near 1:1 tracking — feels instant
+  const spring = { damping: 32, stiffness: 700, mass: 0.15 };
+  const x = useSpring(mouseX, spring);
+  const y = useSpring(mouseY, spring);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -74,58 +71,46 @@ export function TerminalCursor() {
 
   if (!enabled) return null;
 
-  const color = dark ? "255, 255, 255" : "15, 15, 15";
-  const ringBorder = `rgba(${color}, ${hovering ? 0.55 : 0.35})`;
-  const ringBg = `rgba(${color}, ${hovering ? 0.08 : 0.04})`;
-  const dotBg = `rgba(${color}, ${hovering ? 0.95 : 0.85})`;
+  // Accent in both themes for a "cool" look
+  const core = dark ? "rgb(167, 139, 250)" : "rgb(109, 40, 217)";
+  const ring = dark ? "rgba(167, 139, 250, 0.35)" : "rgba(109, 40, 217, 0.3)";
 
   return (
-    <>
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed left-0 top-0 z-[10000]"
+      style={{ x, y, opacity: visible ? 1 : 0 }}
+    >
+      {/* Hover ring — only when interactive */}
       <motion.div
-        aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999]"
-        style={{ x: ringX, y: ringY, opacity: visible ? 1 : 0 }}
-      >
-        <motion.div
-          className="rounded-full border"
-          animate={{
-            width: hovering ? 44 : 28,
-            height: hovering ? 44 : 28,
-            marginLeft: hovering ? -22 : -14,
-            marginTop: hovering ? -22 : -14,
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 22 }}
-          style={{
-            borderColor: ringBorder,
-            backgroundColor: ringBg,
-            boxShadow: dark
-              ? "0 0 0 1px rgba(255,255,255,0.06)"
-              : "0 0 0 1px rgba(0,0,0,0.04)",
-          }}
-        />
-      </motion.div>
-
+        className="absolute rounded-full border-2"
+        animate={{
+          width: hovering ? 36 : 0,
+          height: hovering ? 36 : 0,
+          marginLeft: hovering ? -18 : 0,
+          marginTop: hovering ? -18 : 0,
+          opacity: hovering ? 1 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 450, damping: 28 }}
+        style={{ borderColor: ring }}
+      />
+      {/* Core dot — always */}
       <motion.div
-        aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[10000]"
-        style={{ x: dotX, y: dotY, opacity: visible ? 1 : 0 }}
-      >
-        <motion.div
-          className="rounded-full"
-          animate={{
-            width: hovering ? 6 : 5,
-            height: hovering ? 6 : 5,
-            marginLeft: hovering ? -3 : -2.5,
-            marginTop: hovering ? -3 : -2.5,
-          }}
-          style={{
-            backgroundColor: dotBg,
-            boxShadow: dark
-              ? "0 0 12px rgba(255,255,255,0.25)"
-              : "0 0 10px rgba(0,0,0,0.15)",
-          }}
-        />
-      </motion.div>
-    </>
+        className="absolute rounded-full"
+        animate={{
+          width: hovering ? 8 : 6,
+          height: hovering ? 8 : 6,
+          marginLeft: hovering ? -4 : -3,
+          marginTop: hovering ? -4 : -3,
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+        style={{
+          backgroundColor: core,
+          boxShadow: dark
+            ? "0 0 14px rgba(167, 139, 250, 0.55)"
+            : "0 0 12px rgba(109, 40, 217, 0.4)",
+        }}
+      />
+    </motion.div>
   );
 }
