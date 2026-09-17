@@ -1,9 +1,24 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shell, SectionHeader } from "@/components/Layout";
 import { site } from "@/config/site";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check, Copy } from "lucide-react";
+
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`;
 
 export function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // ignore
+    }
+  };
+
   return (
     <div id="contact" className="scroll-mt-28">
       <SectionHeader title="Contact" />
@@ -23,12 +38,35 @@ export function Contact() {
           <div className="mt-8 flex flex-wrap gap-3">
             <motion.a
               whileHover={{ y: -2 }}
-              href={site.socials.email || `mailto:${site.email}`}
-              className="inline-flex items-center gap-1.5 rounded-full bg-[var(--fg)] px-5 py-2.5 text-[13px] font-semibold text-[var(--bg)] shadow-lg shadow-black/20 transition-opacity hover:opacity-90"
+              href={GMAIL_COMPOSE}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={copyEmail}
+              title={`Email ${site.email}`}
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] py-2.5 pl-5 pr-3 text-[13px] font-semibold text-[var(--bg)] shadow-lg shadow-black/20 transition-opacity hover:opacity-90"
             >
-              {site.email}
-              <ArrowUpRight size={14} />
+              <span className="truncate">{site.email}</span>
+
+              <span className="inline-flex items-center gap-0.5">
+                <button
+                  type="button"
+                  aria-label={copied ? "Email copied" : "Copy email"}
+                  title={copied ? "Copied!" : "Copy email"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    copyEmail();
+                  }}
+                  className="grid size-7 place-items-center rounded-full transition-colors hover:bg-black/10 dark:hover:bg-white/15"
+                >
+                  {copied ? <Check size={14} strokeWidth={2.5} /> : <Copy size={14} />}
+                </button>
+                <span className="grid size-7 place-items-center">
+                  <ArrowUpRight size={14} />
+                </span>
+              </span>
             </motion.a>
+
             {[
               { label: "LinkedIn", href: site.socials.linkedin },
               { label: "X", href: site.socials.twitter },
