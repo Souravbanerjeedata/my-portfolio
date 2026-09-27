@@ -193,19 +193,19 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "Point & Shoot Game",
+      title: "Arcade Nexus — Gaming Hub",
       blurb:
-        "Browser-based point-and-shoot game — pick an enemy and a scene, then click or tap flying targets before they escape. Lives, scoring, speed ramp, and explosion effects.",
+        "A modern browser gaming hub that brings multiple arcade games together, with instant play, a dark neon aesthetic, and responsive game cards.",
       story:
-        "Built with vanilla JavaScript and the HTML5 Canvas API. Six selectable enemies and five cartoon backgrounds. Game loop handles spawn timing, collision via click/tap hit-testing, gradual speed increase every 10 kills, and a 5-life system. Explosion sprites and sound feedback on hits. Fully responsive for desktop mouse and mobile touch. No frameworks — pure JS, CSS, and canvas for a lightweight playable experience.",
-      stack: ["JavaScript", "HTML5 Canvas", "CSS"],
+        "Built with vanilla HTML, CSS, and JavaScript, Arcade Nexus organizes browser games in one responsive hub. Players can launch games in a full-screen embedded view, return to the hub with a button or Escape, or open a game in a new tab. The collection currently includes Neon Snake, Point & Shoot, Leap Runner, and Endless Runner.",
+      stack: ["HTML", "CSS", "JavaScript"],
       year: "2026",
       links: {
-        live: "https://souravbanerjeedata.github.io/point-and-shoot-game/",
-        source: "https://github.com/Souravbanerjeedata/point-and-shoot-game",
+        live: "https://souravbanerjeedata.github.io/Arcade-Nexus-Gaming-Hub/",
+        source: "https://github.com/Souravbanerjeedata/Arcade-Nexus-Gaming-Hub",
       },
       featured: false,
-      image: "/project-images/point-and-shoot.png",
+      image: "/project-images/arcade-nexus.svg",
       categories: ["Frontend"],
     },
   ] as Project[],
