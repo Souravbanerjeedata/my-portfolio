@@ -82,14 +82,12 @@ function MainLayout() {
 }
 
 export function App() {
-  const [ready, setReady] = useState(true);
+  const [ready, setReady] = useState(false);
 
   return (
     <ThemeProvider>
       <VisitorProvider>
-        {/* Temporarily disabled; keep this here to restore the intro loader later.
         {!ready && <Loader onDone={() => setReady(true)} />}
-        */}
         <BrowserRouter>
           <Analytics />
           <ScrollToTop />
