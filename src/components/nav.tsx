@@ -38,14 +38,14 @@ export function Nav() {
 
   const headerBg =
     !dark && overCover && location.pathname === "/"
-      ? "bg-white/95 border-[var(--line)] shadow-sm"
-      : "bg-[var(--bg)]/50 border-[var(--line)]/40 backdrop-blur-2xl";
+      ? "bg-white/80 border-black/10"
+      : "bg-[var(--card)]/80 border-[var(--line)]";
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${headerBg}`}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6"
     >
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-8">
+      <div className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl border px-4 shadow-lg shadow-black/5 backdrop-blur-2xl transition-colors duration-300 sm:px-6 lg:rounded-full ${headerBg}`}>
         <Link
           to="/"
           onClick={() => setMobileMenuOpen(false)}
@@ -55,7 +55,7 @@ export function Nav() {
           <span className="text-[var(--accent)]">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 text-[12.5px] lg:flex">
+        <nav className="hidden items-center gap-0.5 text-[12px] xl:flex">
           {navLinks.map(({ label, path }) => {
             const active =
               path === "/#about"
@@ -67,7 +67,7 @@ export function Nav() {
               <Link
                 key={path}
                 to={path}
-                className={`relative rounded-full px-2.5 py-1.5 transition-all xl:px-3.5 ${
+                className={`relative rounded-full px-2.5 py-2 transition-all xl:px-3 ${
                   active
                     ? "bg-[var(--accent-soft)] font-semibold text-[var(--accent)] shadow-[0_0_20px_var(--accent-soft)]"
                     : "text-[var(--muted)] hover:text-[var(--fg)]"
@@ -88,7 +88,7 @@ export function Nav() {
           </button>
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <button
             type="button"
             onClick={toggleTheme}
@@ -114,7 +114,7 @@ export function Nav() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-[var(--line)] bg-[var(--bg)]/95 backdrop-blur-xl lg:hidden"
+            className="absolute inset-x-3 top-[4.5rem] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg)]/95 shadow-xl backdrop-blur-xl xl:hidden sm:inset-x-6"
           >
             <div className="mx-auto flex max-w-5xl flex-col gap-1 px-4 py-4">
               {navLinks.map(({ label, path }) => (

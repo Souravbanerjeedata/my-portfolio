@@ -59,7 +59,7 @@ export function TechStack() {
     <div id="tech" className="scroll-mt-28">
       <SectionHeader title="Tech Stack" />
       <Shell className="px-5 sm:px-8">
-        <div className="flex flex-wrap gap-1.5 rounded-xl border border-[var(--line)] bg-[var(--chip)] p-1.5">
+        <div className="onyx-scroll flex max-w-full gap-1.5 overflow-x-auto rounded-xl border border-[var(--line)] bg-[var(--chip)] p-1.5 sm:flex-wrap sm:overflow-visible">
           {categories.map((cat) => {
             const iconName = CATEGORY_ICONS[cat] || "lucide:layers";
             return (
@@ -67,7 +67,7 @@ export function TechStack() {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition-all duration-200 sm:px-3 sm:text-[12px] ${
+                  className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[10px] font-medium transition-all duration-200 sm:px-3 sm:text-[12px] ${
                   activeCategory === cat
                     ? "bg-[var(--fg)] font-semibold text-[var(--bg)] shadow-sm"
                     : "text-[var(--muted)] hover:bg-[var(--hover)] hover:text-[var(--fg)]"

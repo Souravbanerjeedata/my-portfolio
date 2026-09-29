@@ -24,6 +24,15 @@ export function SectionHeader({
   aside?: React.ReactNode;
   id?: string;
 }) {
+  const sectionIndex: Record<string, string> = {
+    About: "01 / THE BACKGROUND",
+    "Selected work": "02 / PROJECTS",
+    Projects: "02 / PROJECTS",
+    Timeline: "03 / EXPERIENCE",
+    "Tech Stack": "04 / TOOLKIT",
+    "GitHub Activity": "05 / CONSISTENCY",
+    Contact: "06 / NEXT CHAPTER",
+  };
   return (
     <div id={id} className="relative w-full scroll-mt-28">
       <Shell>
@@ -32,10 +41,12 @@ export function SectionHeader({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-full flex-wrap items-end justify-between gap-4 px-5 pb-4 pt-2 sm:px-8"
+          className="flex w-full flex-wrap items-end justify-between gap-5 px-5 pb-5 pt-5 sm:px-8 sm:pb-7 sm:pt-8"
         >
-          <div className="flex items-center gap-3">
-            <span className="hidden h-9 w-1 rounded-full bg-[var(--accent)] shadow-[0_0_16px_var(--accent)] sm:block" />
+          <div>
+            <p className="mb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--accent)] sm:text-[10px]">
+              {sectionIndex[title] || "PORTFOLIO / SOURAV BANERJEE"}
+            </p>
             <h2 className="section-title text-[var(--fg)]">{title}</h2>
           </div>
           {aside}
