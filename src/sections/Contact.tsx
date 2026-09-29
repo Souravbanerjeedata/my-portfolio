@@ -77,7 +77,7 @@ export function Contact() {
               type="button"
               onClick={copyEmail}
               aria-live="polite"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--bg)]/20 bg-[var(--bg)]/5 px-4 py-3 text-[13px] font-medium text-[var(--bg)] transition-colors hover:bg-[var(--bg)]/10"
+              className="inline-flex items-center gap-2 rounded-full border border-black/40 bg-[var(--bg)]/5 px-4 py-3 text-[13px] font-medium text-[var(--bg)] shadow-[0_0_0_1px_rgba(0,0,0,0.12)] transition-all hover:border-black/70 hover:bg-[var(--bg)]/10"
             >
               {copied ? <Check size={14} strokeWidth={2.5} /> : <Copy size={14} />}
               {copied ? "Copied" : "Copy email"}
@@ -97,7 +97,7 @@ export function Contact() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--bg)]/20 bg-[var(--bg)]/5 px-4 py-3 text-[13px] font-medium text-[var(--bg)] transition-colors hover:bg-[var(--bg)]/10"
+                className="inline-flex items-center gap-1.5 rounded-full border border-black/40 bg-[var(--bg)]/5 px-4 py-3 text-[13px] font-medium text-[var(--bg)] shadow-[0_0_0_1px_rgba(0,0,0,0.12)] transition-all hover:border-black/70 hover:bg-[var(--bg)]/10"
               >
                 {l.label}
                 {l.label === "Resume" && <ArrowUpRight size={14} />}

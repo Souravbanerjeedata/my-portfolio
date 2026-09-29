@@ -114,15 +114,12 @@ export function Hero() {
             className="relative flex flex-1 flex-col justify-center gap-5 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16"
           >
             <div className="order-2 w-full max-w-xl text-left md:order-1">
-              <p className={`mb-2 max-w-[calc(100%-6rem)] font-mono text-[8px] font-semibold uppercase tracking-[0.15em] sm:text-[9px] sm:tracking-[0.2em] md:mb-3 md:max-w-none md:text-[10px] md:tracking-[0.24em] ${mutedCls}`}>
-                Independent developer <span className="mx-1.5 text-[var(--accent)]">/</span> {site.location}
-              </p>
               <h1
-                className={`text-display max-w-[calc(100%-5.5rem)] text-[1.8rem] font-bold tracking-tight sm:text-[2.1rem] md:max-w-none md:text-[3.25rem] lg:text-[4.25rem] ${titleCls}`}
+                className={`text-display max-w-[calc(100%-5.5rem)] whitespace-nowrap text-[clamp(1.05rem,5.1vw,2rem)] font-bold leading-[0.94] tracking-[-0.065em] sm:text-[2.5rem] md:max-w-none md:text-[3rem] lg:text-[4rem] ${titleCls}`}
               >
                 {site.name}
               </h1>
-              <div className="mt-1 h-[20px] overflow-hidden md:mt-2 md:h-[24px]">
+              <div className="mt-2 h-[20px] overflow-hidden md:mt-3 md:h-[28px]">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={headlineIndex}
@@ -130,26 +127,14 @@ export function Hero() {
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                     exit={{ y: -18, opacity: 0, filter: "blur(4px)" }}
                     transition={{ duration: 0.35 }}
-                    className="text-[13px] font-semibold text-[var(--accent)] md:text-[16px]"
+                    className="text-[13px] font-semibold tracking-wide text-[var(--muted)] md:text-[17px]"
                   >
                     {HEADLINE_TITLES[headlineIndex]}
                   </motion.p>
                 </AnimatePresence>
               </div>
 
-              <div className="mt-2.5 flex flex-wrap items-center gap-2.5 md:mt-4 md:gap-3">
-                <a
-                  href={site.socials.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium backdrop-blur-md transition-all md:px-3.5 md:py-1.5 md:text-[12px] ${chipCls}`}
-                >
-                  <FileText size={13} />
-                  Resume
-                </a>
-              </div>
-
-              <p className={`mt-3 max-w-lg text-[13px] leading-relaxed md:mt-8 md:text-[15.5px] ${bodyCls}`}>
+              <p className={`mt-3 max-w-lg text-[13px] leading-relaxed md:mt-5 md:text-[15px] ${bodyCls}`}>
                 {site.tagline}
               </p>
 
@@ -165,6 +150,14 @@ export function Hero() {
                   className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[11px] font-semibold backdrop-blur-md transition-all md:px-4 md:py-2.5 md:text-[12px] ${chipCls}`}
                 >
                   Get in touch <Mail size={14} />
+                </a>
+                <a
+                  href={site.socials.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[11px] font-semibold backdrop-blur-md transition-all md:px-4 md:py-2.5 md:text-[12px] ${light ? "text-[var(--muted)] hover:text-[var(--accent)]" : "text-white/75 hover:text-white"}`}
+                >
+                  <FileText size={14} /> Resume
                 </a>
               </div>
 
@@ -237,7 +230,7 @@ export function Hero() {
         </Shell>
 
         <Shell className="mt-auto w-full px-4 pb-3 pt-3 sm:px-8 sm:pb-6 sm:pt-6 md:pb-8 md:pt-8">
-          <div className={`overflow-hidden rounded-2xl border shadow-[var(--glow)] backdrop-blur-md ${light ? "border-[var(--accent-border)] bg-white/60" : "border-white/15 bg-[#090c0b]/55"}`}>
+          <div className={`overflow-hidden rounded-[1.15rem] border shadow-[var(--glow)] backdrop-blur-md sm:rounded-2xl ${light ? "border-[var(--accent-border)] bg-[var(--card)]/75" : "border-white/15 bg-[#090c0b]/55"}`}>
             <div className="flex items-center gap-3 border-b border-[var(--line)] px-3 py-1.5 sm:px-5 sm:py-2.5">
               <span className="size-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
               <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)] sm:text-[10px]">Toolkit / always evolving</span>

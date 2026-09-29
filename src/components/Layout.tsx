@@ -9,7 +9,7 @@ export function Shell({
   className?: string;
 }) {
   return (
-    <div className={`relative mx-auto w-full max-w-5xl ${className}`}>
+    <div className={`relative mx-auto w-full max-w-6xl ${className}`}>
       {children}
     </div>
   );
@@ -59,7 +59,7 @@ export function SectionHeader({
 
 export function SectionDivider() {
   return (
-    <div className="relative mx-auto my-3 max-w-5xl px-5 sm:my-4 sm:px-8" aria-hidden>
+    <div className="relative mx-auto my-3 max-w-6xl px-5 sm:my-4 sm:px-8" aria-hidden>
       <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--accent)]/55 to-transparent" />
       <div className="pointer-events-none absolute inset-x-8 top-1/2 h-6 -translate-y-1/2 bg-[var(--accent)]/15 blur-2xl" />
     </div>

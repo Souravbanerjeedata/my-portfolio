@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { site } from "@/config/site";
 import { useTheme } from "./theme-provider";
@@ -19,27 +19,7 @@ export function Nav() {
   const dark = theme === "dark";
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [overCover, setOverCover] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const threshold = window.innerWidth < 640 ? 320 : 420;
-      setOverCover(window.scrollY < threshold);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (location.pathname !== "/") setOverCover(false);
-    else setOverCover(window.scrollY < 420);
-  }, [location.pathname]);
-
-  const headerBg =
-    !dark && overCover && location.pathname === "/"
-      ? "bg-white/80 border-black/10"
-      : "bg-[var(--card)]/80 border-[var(--line)]";
+  const headerBg = "bg-[var(--card)]/85 border-[var(--line)]";
 
   return (
     <header
