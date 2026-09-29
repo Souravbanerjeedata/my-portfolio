@@ -198,6 +198,23 @@ export function Hero() {
                   {site.status.availableText}
                 </p>
               )}
+
+              <a
+                href="https://destroy.spritefusion.com/?from=badge"
+                target="_blank"
+                rel="noopener"
+                className="mt-5 inline-flex items-center rounded-full transition-transform hover:scale-[1.03] focus-visible:outline-offset-4"
+                aria-label="Play Destroy Any Website on this portfolio"
+                title="Try the site-smashing game"
+              >
+                <img
+                  src={`https://destroy.spritefusion.com/${light ? "badge-light" : "badge"}.svg`}
+                  alt="Destroy this website"
+                  width="180"
+                  height="40"
+                  loading="lazy"
+                />
+              </a>
             </div>
 
             {/* Profile — first on mobile, right on desktop */}
