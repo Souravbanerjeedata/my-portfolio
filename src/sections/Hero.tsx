@@ -192,7 +192,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ scale: 1.03 }}
               onClick={handleNextImage}
-              className={`absolute right-0 top-0 z-10 group grid size-[82px] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.25rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/35 md:relative md:order-2 md:size-[220px] md:rounded-[1.75rem] md:ring-[var(--accent)]/45 lg:size-[260px] ${
+              className={`absolute right-3 top-0 z-10 group grid size-[82px] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.25rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/35 md:relative md:order-2 md:mr-6 md:size-[220px] md:rounded-[1.75rem] md:ring-[var(--accent)]/45 lg:mr-10 lg:size-[260px] ${
                 light
                   ? "border-[var(--accent)]/40 shadow-[0_0_50px_color-mix(in_srgb,var(--accent)_28%,transparent)]"
                   : "border-white/30 shadow-[0_0_60px_color-mix(in_srgb,var(--accent)_32%,transparent)]"
