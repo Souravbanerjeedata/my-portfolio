@@ -35,7 +35,7 @@ export const site = {
     text: "Code is like humor. When you have to explain it, it's bad.",
     author: "Cory House",
   },
-  profileImages: ["/profile.jpg", "/profile2.png"],
+  profileImages: ["/profile.jpg", "/profile2.jpg"],
   bannerImage: "/images/cover-dark.jpg",
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
