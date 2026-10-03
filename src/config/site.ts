@@ -207,7 +207,10 @@ export const site = {
       },
       featured: true,
       image: "/project-images/arcade-nexus.jpg",
+<<<<<<< HEAD
       imageFit: "contain",
+=======
+>>>>>>> dc57731ac0c85c9857077f9222e1f897e3b747a2
       categories: ["Frontend", "Fullstack"],
     },
   ] as Project[],
