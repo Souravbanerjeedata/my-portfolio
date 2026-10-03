@@ -17,9 +17,9 @@ export function ProjectCard({
     <motion.article
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 320, damping: 24 }}
-      className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)] shadow-[0_0_0_1px_transparent] transition-[border-color,box-shadow] duration-300 hover:border-[var(--accent-border)] hover:shadow-[var(--glow)] ${index === 0 ? "lg:grid lg:grid-cols-[1.05fr_.95fr]" : ""}`}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)] shadow-[0_0_0_1px_transparent] transition-[border-color,box-shadow] duration-300 hover:border-[var(--accent-border)] hover:shadow-[0_0_32px_rgba(167,139,250,0.12)]"
     >
-      <div className={`relative aspect-[16/10] w-full overflow-hidden bg-[var(--chip)] ${index === 0 ? "lg:aspect-auto lg:min-h-[360px]" : ""}`}>
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--chip)]">
         {p.image && !imgError ? (
           <img
             src={p.image}
@@ -37,29 +37,29 @@ export function ProjectCard({
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           {p.links.live ? (
-            <span className="inline-flex items-center gap-1 rounded-full border border-[var(--success-border)] bg-[var(--success-soft)] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--success)] backdrop-blur-md">
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur-md">
               <span className="relative flex size-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--success)] opacity-60" />
-                <span className="relative inline-flex size-1.5 rounded-full bg-[var(--success)]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-emerald-400" />
               </span>
               Live
             </span>
           ) : p.status ? (
-            <span className="rounded-full border border-[var(--warning-border)] bg-[var(--warning-soft)] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--warning)] backdrop-blur-md">
+            <span className="rounded-full border border-amber-400/30 bg-amber-500/15 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-amber-200 backdrop-blur-md">
               {p.status}
             </span>
           ) : null}
           {p.featured && (
             <span className="rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--accent)] backdrop-blur-md">
-              {index === 0 ? "Spotlight" : "Featured"}
+              Featured
             </span>
           )}
         </div>
       </div>
 
-      <div className={`flex flex-1 flex-col p-4 sm:p-5 ${index === 0 ? "lg:justify-center lg:p-8" : ""}`}>
+      <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className={`font-semibold tracking-tight text-[var(--fg)] ${index === 0 ? "text-xl sm:text-2xl" : "text-[16px] sm:text-[16.5px]"}`}>
+          <h3 className="text-[16.5px] font-semibold tracking-tight text-[var(--fg)]">
             {p.title}
           </h3>
           <span className="shrink-0 font-mono text-[11px] text-[var(--soft)]">
@@ -67,7 +67,7 @@ export function ProjectCard({
           </span>
         </div>
 
-        <p className={`mt-2 leading-relaxed text-[var(--muted)] ${index === 0 ? "text-sm sm:text-[15px]" : "text-[13.5px]"}`}>
+        <p className="mt-2 text-[13.5px] leading-relaxed text-[var(--muted)]">
           {p.blurb}
         </p>
 
@@ -101,7 +101,7 @@ export function ProjectCard({
           </div>
         )}
 
-        <div className="mt-auto flex flex-col items-start gap-3 border-t border-[var(--line)] pt-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--line)] pt-4">
           <div className="flex flex-wrap gap-1.5">
             {p.stack.slice(0, 4).map((t) => (
               <span key={t} className="chip">
@@ -112,7 +112,7 @@ export function ProjectCard({
               <span className="chip">+{p.stack.length - 4}</span>
             )}
           </div>
-          <div className="flex shrink-0 items-center gap-2.5 self-end text-[var(--soft)] sm:self-auto">
+          <div className="flex shrink-0 items-center gap-2.5 text-[var(--soft)]">
             {p.links.live && (
               <a
                 href={p.links.live}

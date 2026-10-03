@@ -26,19 +26,20 @@ export function Footer() {
 
   return (
     <footer className="mt-auto border-t border-[var(--line)]">
-      <Shell className="flex flex-col gap-5 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-9">
-        <div>
-          <p className="text-[13px] text-[var(--muted)]">
-            Designed &amp; developed by <span className="font-semibold text-[var(--fg)]">{site.name}</span>
-          </p>
-          <p className="mt-1 font-mono text-[10px] text-[var(--soft)]">© {new Date().getFullYear()} · Made with curiosity.</p>
-        </div>
-        <p className="flex items-center gap-2 font-mono text-[11px] text-[var(--soft)]">
+      <Shell className="px-5 py-10 text-center sm:px-8">
+        <p className="text-[14px] text-[var(--muted)]">
+          Designed &amp; Developed by{" "}
+          <span className="font-semibold text-[var(--fg)]">{site.name}</span>
+        </p>
+        <p className="mt-1.5 font-mono text-[12px] text-[var(--soft)]">
+          © {new Date().getFullYear()} All rights reserved.
+        </p>
+        <p className="mt-3 flex items-center justify-center gap-2 font-mono text-[12px] text-[var(--soft)]">
           <span className="relative flex size-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60" />
             <span className="relative inline-flex size-2 rounded-full bg-[var(--accent)]" />
           </span>
-          {site.location} <span className="text-[var(--line)]">/</span> {localTime || "IST"}
+          {site.location} · {localTime || "IST"}
         </p>
       </Shell>
     </footer>

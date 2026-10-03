@@ -40,7 +40,7 @@ export const site = {
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack Developer",
+  role: "Full Stack & React Native Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
@@ -53,7 +53,7 @@ export const site = {
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
   tldr: [
-    "Career switcher from HR → developer",
+    "Career switcher from TCS → developer",
     "Self-taught for 3.5+ years",
     "Building web & mobile apps",
     "Open to internships & junior roles",
@@ -62,7 +62,7 @@ export const site = {
     available: true,
     availableText: "open to opportunities",
     nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack projects",
+    nowBuilding: "Full-stack & React Native projects",
     nowListening: "focus playlists",
   },
   socials: {
@@ -195,18 +195,18 @@ export const site = {
     {
       title: "Arcade Nexus — Gaming Hub",
       blurb:
-        "A modern browser gaming hub that brings multiple arcade games together, with instant play, a dark neon aesthetic, and responsive game cards.",
+        "Responsive browser gaming hub with a multi-game library, CRUD-managed cards, real-time community chat, and a dark neon UI — pure HTML, CSS, JS, and API integration.",
       story:
-        "Built with vanilla HTML, CSS, and JavaScript, Arcade Nexus organizes browser games in one responsive hub. Players can launch games in a full-screen embedded view, return to the hub with a button or Escape, or open a game in a new tab. The collection currently includes Neon Snake, Point & Shoot, Leap Runner, and Endless Runner.",
-      stack: ["HTML", "CSS", "JavaScript"],
+        "Arcade Nexus is a finished personal gaming universe that consolidates nine playable browser games into one dark-theme hub: Neon Snake, Point & Shoot, Leap Runner, Endless Runner, Metroidvania: Escape the Factory, Neon Tetris, Neon Pac-Man, Gorillas, and Tic-Tac-Toe. The game library is data-driven — cards are rendered from a central games array so titles, descriptions, previews, and launch URLs support full CRUD-style add/update/remove without touching layout markup. Each title opens in an embedded full-screen play layer with Escape / Back-to-Hub controls and an optional open-in-new-tab path. A real-time community chat panel sits under the library for live player conversation via API integration. The UI is fully responsive from desktop laptop layouts down to mobile, built with vanilla HTML, CSS, and JavaScript (Orbitron + Inter) — no frameworks or build step — so the hub stays lightweight while still feeling like a polished arcade front door.",
+      stack: ["HTML", "CSS", "JavaScript", "REST APIs"],
       year: "2026",
       links: {
         live: "https://souravbanerjeedata.github.io/Arcade-Nexus-Gaming-Hub/",
         source: "https://github.com/Souravbanerjeedata/Arcade-Nexus-Gaming-Hub",
       },
-      featured: false,
-      image: "/project-images/arcade-nexus.svg",
-      categories: ["Frontend"],
+      featured: true,
+      image: "/project-images/arcade-nexus.jpg",
+      categories: ["Frontend", "Fullstack"],
     },
   ] as Project[],
   skills: [

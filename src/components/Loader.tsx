@@ -50,7 +50,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#090c0b]"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#06060a]"
           aria-live="polite"
           aria-busy="true"
         >
@@ -58,7 +58,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
             className="pointer-events-none absolute inset-0 opacity-[0.12]"
             style={{
               backgroundImage:
-                "linear-gradient(rgba(196,243,107,0.28) 1px, transparent 1px), linear-gradient(90deg, rgba(196,243,107,0.28) 1px, transparent 1px)",
+                "linear-gradient(rgba(167,139,250,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(167,139,250,0.35) 1px, transparent 1px)",
               backgroundSize: "48px 48px",
               maskImage:
                 "radial-gradient(ellipse at center, black 20%, transparent 70%)",
@@ -66,7 +66,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
           />
 
           <div className="relative w-full max-w-md px-6">
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111714] shadow-[0_0_60px_rgba(196,243,107,0.1)]">
+            <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0c0c12] shadow-[0_0_60px_rgba(167,139,250,0.12)]">
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
                 <span className="size-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -85,13 +85,13 @@ export function Loader({ onDone }: { onDone: () => void }) {
                     transition={{ duration: 0.25 }}
                     className={
                       i === visibleLines - 1 && progress < 100
-                        ? "text-[#c4f36b]"
+                        ? "text-[#a78bfa]"
                         : "text-white/65"
                     }
                   >
                     {line.text}
                     {i === visibleLines - 1 && progress < 100 && (
-                      <span className="ml-0.5 inline-block h-[1em] w-[0.55ch] animate-pulse bg-[#c4f36b] align-middle" />
+                      <span className="ml-0.5 inline-block h-[1em] w-[0.55ch] animate-pulse bg-[#a78bfa] align-middle" />
                     )}
                   </motion.p>
                 ))}
@@ -104,9 +104,9 @@ export function Loader({ onDone }: { onDone: () => void }) {
                 </div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                   <div
-                    className="h-full rounded-full bg-[#c4f36b] transition-[width] duration-75"
+                    className="h-full rounded-full bg-[#a78bfa] transition-[width] duration-75"
                     style={{
-                      boxShadow: "0 0 12px rgba(196,243,107,0.5)",
+                      boxShadow: "0 0 12px rgba(167,139,250,0.55)",
                       width: `${progress}%`,
                     }}
                   />
