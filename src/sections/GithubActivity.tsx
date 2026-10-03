@@ -33,16 +33,8 @@ export function GithubActivity() {
         }
       />
       <Shell className="px-6 py-6 sm:px-8">
-        <div className="rounded-2xl border border-[var(--line)] bg-[var(--card)] p-4 shadow-[var(--glow)] sm:p-6">
-          <div className="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-4">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">A year in commits</p>
-              <p className="mt-1 text-[13px] text-[var(--muted)]">Small steps, shipped consistently.</p>
-            </div>
-            <span className="font-mono text-[10px] text-[var(--soft)]">LAST 12 MONTHS</span>
-          </div>
-          <div className="onyx-scroll overflow-x-auto pb-2">
-            <div className="min-w-[640px]">
+        <div className="onyx-scroll overflow-x-auto pb-2">
+          <div className="min-w-[640px]">
             {/* Month labels at the top */}
             <div className="mb-1.5 flex justify-between pr-8 font-mono text-[10px] text-[var(--soft)]">
               {monthLabels.map((m, i) => (
@@ -79,7 +71,6 @@ export function GithubActivity() {
               </span>
             </div>
           </div>
-        </div>
         </div>
       </Shell>
     </div>

@@ -9,7 +9,7 @@ export function Shell({
   className?: string;
 }) {
   return (
-    <div className={`relative mx-auto w-full max-w-6xl ${className}`}>
+    <div className={`relative mx-auto w-full max-w-5xl ${className}`}>
       {children}
     </div>
   );
@@ -24,15 +24,6 @@ export function SectionHeader({
   aside?: React.ReactNode;
   id?: string;
 }) {
-  const sectionIndex: Record<string, string> = {
-    About: "01 / THE BACKGROUND",
-    "Selected work": "02 / PROJECTS",
-    Projects: "02 / PROJECTS",
-    Timeline: "03 / EXPERIENCE",
-    "Tech Stack": "04 / TOOLKIT",
-    "GitHub Activity": "05 / CONSISTENCY",
-    Contact: "06 / NEXT CHAPTER",
-  };
   return (
     <div id={id} className="relative w-full scroll-mt-28">
       <Shell>
@@ -41,12 +32,10 @@ export function SectionHeader({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-full flex-wrap items-end justify-between gap-5 px-5 pb-5 pt-5 sm:px-8 sm:pb-7 sm:pt-8"
+          className="flex w-full flex-wrap items-end justify-between gap-4 px-5 pb-4 pt-2 sm:px-8"
         >
-          <div>
-            <p className="mb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--accent)] sm:text-[10px]">
-              {sectionIndex[title] || "PORTFOLIO / SOURAV BANERJEE"}
-            </p>
+          <div className="flex items-center gap-3">
+            <span className="hidden h-9 w-1 rounded-full bg-[var(--accent)] shadow-[0_0_16px_var(--accent)] sm:block" />
             <h2 className="section-title text-[var(--fg)]">{title}</h2>
           </div>
           {aside}
@@ -59,7 +48,7 @@ export function SectionHeader({
 
 export function SectionDivider() {
   return (
-    <div className="relative mx-auto my-3 max-w-6xl px-5 sm:my-4 sm:px-8" aria-hidden>
+    <div className="relative mx-auto my-3 max-w-5xl px-5 sm:my-4 sm:px-8" aria-hidden>
       <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--accent)]/55 to-transparent" />
       <div className="pointer-events-none absolute inset-x-8 top-1/2 h-6 -translate-y-1/2 bg-[var(--accent)]/15 blur-2xl" />
     </div>

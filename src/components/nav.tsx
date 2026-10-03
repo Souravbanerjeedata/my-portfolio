@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { site } from "@/config/site";
 import { useTheme } from "./theme-provider";
@@ -19,13 +19,33 @@ export function Nav() {
   const dark = theme === "dark";
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const headerBg = "bg-[var(--card)]/85 border-[var(--line)]";
+  const [overCover, setOverCover] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const threshold = window.innerWidth < 640 ? 320 : 420;
+      setOverCover(window.scrollY < threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname !== "/") setOverCover(false);
+    else setOverCover(window.scrollY < 420);
+  }, [location.pathname]);
+
+  const headerBg =
+    !dark && overCover && location.pathname === "/"
+      ? "bg-white/95 border-[var(--line)] shadow-sm"
+      : "bg-[var(--bg)]/50 border-[var(--line)]/40 backdrop-blur-2xl";
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${headerBg}`}
     >
-      <div className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl border px-4 shadow-lg shadow-black/5 backdrop-blur-2xl transition-colors duration-300 sm:px-6 lg:rounded-full ${headerBg}`}>
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-8">
         <Link
           to="/"
           onClick={() => setMobileMenuOpen(false)}
@@ -35,7 +55,7 @@ export function Nav() {
           <span className="text-[var(--accent)]">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 text-[12px] xl:flex">
+        <nav className="hidden items-center gap-0.5 text-[12.5px] lg:flex">
           {navLinks.map(({ label, path }) => {
             const active =
               path === "/#about"
@@ -47,7 +67,7 @@ export function Nav() {
               <Link
                 key={path}
                 to={path}
-                className={`relative rounded-full px-2.5 py-2 transition-all xl:px-3 ${
+                className={`relative rounded-full px-2.5 py-1.5 transition-all xl:px-3.5 ${
                   active
                     ? "bg-[var(--accent-soft)] font-semibold text-[var(--accent)] shadow-[0_0_20px_var(--accent-soft)]"
                     : "text-[var(--muted)] hover:text-[var(--fg)]"
@@ -68,7 +88,7 @@ export function Nav() {
           </button>
         </nav>
 
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             type="button"
             onClick={toggleTheme}
@@ -94,7 +114,7 @@ export function Nav() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="absolute inset-x-3 top-[4.5rem] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg)]/95 shadow-xl backdrop-blur-xl xl:hidden sm:inset-x-6"
+            className="overflow-hidden border-t border-[var(--line)] bg-[var(--bg)]/95 backdrop-blur-xl lg:hidden"
           >
             <div className="mx-auto flex max-w-5xl flex-col gap-1 px-4 py-4">
               {navLinks.map(({ label, path }) => (
