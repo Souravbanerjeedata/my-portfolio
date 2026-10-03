@@ -195,17 +195,17 @@ export const site = {
     {
       title: "Arcade Nexus — Gaming Hub",
       blurb:
-        "A modern browser gaming hub that brings multiple arcade games together, with instant play, a dark neon aesthetic, and responsive game cards.",
+        "Responsive browser gaming hub with a multi-game library, CRUD-managed cards, real-time community chat, and a dark neon UI — pure HTML, CSS, JS.",
       story:
-        "Built with vanilla HTML, CSS, and JavaScript, Arcade Nexus organizes browser games in one responsive hub. Players can launch games in a full-screen embedded view, return to the hub with a button or Escape, or open a game in a new tab. The collection currently includes Neon Snake, Point & Shoot, Leap Runner, and Endless Runner.",
+        "Arcade Nexus is a personal gaming universe that consolidates nine playable browser games into one dark-theme hub: Neon Snake, Point & Shoot, Leap Runner, Endless Runner, Metroidvania: Escape the Factory, Neon Tetris, Neon Pac-Man, Gorillas, and Tic-Tac-Toe. Each title opens in an embedded full-screen play layer with Escape / Back-to-Hub controls and an optional open-in-new-tab path.",
       stack: ["HTML", "CSS", "JavaScript"],
       year: "2026",
       links: {
         live: "https://souravbanerjeedata.github.io/Arcade-Nexus-Gaming-Hub/",
         source: "https://github.com/Souravbanerjeedata/Arcade-Nexus-Gaming-Hub",
       },
-      featured: false,
-      image: "/project-images/arcade-nexus.svg",
+      featured: true,
+      image: "/project-images/arcade-nexus.jpg",
       categories: ["Frontend"],
     },
   ] as Project[],

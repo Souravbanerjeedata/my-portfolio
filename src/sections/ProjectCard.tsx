@@ -19,7 +19,9 @@ export function ProjectCard({
       transition={{ type: "spring", stiffness: 320, damping: 24 }}
       className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--card)] shadow-[0_0_0_1px_transparent] transition-[border-color,box-shadow] duration-300 hover:border-[var(--accent-border)] hover:shadow-[var(--glow)] ${index === 0 ? "lg:grid lg:grid-cols-[1.05fr_.95fr]" : ""}`}
     >
-      <div className={`relative aspect-[16/10] w-full overflow-hidden bg-[var(--chip)] ${index === 0 ? "lg:aspect-auto lg:min-h-[360px]" : ""}`}>
+      <div
+        className={`relative aspect-[16/10] w-full overflow-hidden bg-[var(--chip)] ${index === 0 ? "lg:aspect-auto lg:min-h-[360px]" : ""}`}
+      >
         {p.image && !imgError ? (
           <img
             src={p.image}
@@ -30,7 +32,9 @@ export function ProjectCard({
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-[var(--chip)] to-[var(--bg)] px-6">
-            <span className="text-display text-xl text-[var(--muted)]">{p.title}</span>
+            <span className="text-display text-xl text-[var(--muted)]">
+              {p.title}
+            </span>
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--card)] via-transparent to-transparent opacity-90" />
@@ -57,9 +61,13 @@ export function ProjectCard({
         </div>
       </div>
 
-      <div className={`flex flex-1 flex-col p-4 sm:p-5 ${index === 0 ? "lg:justify-center lg:p-8" : ""}`}>
+      <div
+        className={`flex flex-1 flex-col p-4 sm:p-5 ${index === 0 ? "lg:justify-center lg:p-8" : ""}`}
+      >
         <div className="flex items-start justify-between gap-2">
-          <h3 className={`font-semibold tracking-tight text-[var(--fg)] ${index === 0 ? "text-xl sm:text-2xl" : "text-[16px] sm:text-[16.5px]"}`}>
+          <h3
+            className={`font-semibold tracking-tight text-[var(--fg)] ${index === 0 ? "text-xl sm:text-2xl" : "text-[16px] sm:text-[16.5px]"}`}
+          >
             {p.title}
           </h3>
           <span className="shrink-0 font-mono text-[11px] text-[var(--soft)]">
@@ -67,7 +75,9 @@ export function ProjectCard({
           </span>
         </div>
 
-        <p className={`mt-2 leading-relaxed text-[var(--muted)] ${index === 0 ? "text-sm sm:text-[15px]" : "text-[13.5px]"}`}>
+        <p
+          className={`mt-2 leading-relaxed text-[var(--muted)] ${index === 0 ? "text-sm sm:text-[15px]" : "text-[13.5px]"}`}
+        >
           {p.blurb}
         </p>
 
@@ -78,8 +88,14 @@ export function ProjectCard({
               onClick={() => setShowDetails((s) => !s)}
               className="inline-flex items-center gap-1 text-[12px] font-medium text-[var(--accent)] transition-opacity hover:opacity-80"
             >
-              {showDetails ? "Hide engineering details" : "Show engineering details"}
-              {showDetails ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+              {showDetails
+                ? "Hide engineering details"
+                : "Show engineering details"}
+              {showDetails ? (
+                <ChevronUp size={13} />
+              ) : (
+                <ChevronDown size={13} />
+              )}
             </button>
             <AnimatePresence initial={false}>
               {showDetails && (
