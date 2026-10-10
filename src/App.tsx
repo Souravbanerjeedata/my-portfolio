@@ -16,6 +16,7 @@ import { Konami } from "@/components/konami";
 import { Analytics } from "@vercel/analytics/react";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
+import { AllProjectsPage } from "@/pages/AllProjectsPage";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -81,70 +82,61 @@ function MainLayout() {
   );
 }
 
-export function App() {
+function AppContent() {
   const [ready, setReady] = useState(false);
+  const { pathname } = useLocation();
+  const isAllProjects = pathname === "/all-projects";
 
+  return (
+    <>
+      {!ready && <Loader onDone={() => setReady(true)} />}
+      <Analytics />
+      <ScrollToTop />
+      <Konami />
+      <div
+        className={`relative flex min-h-screen flex-col bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-opacity duration-500 ${
+          ready ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {!isAllProjects && <Nav />}
+        <main className="relative z-10 flex-1">
+          <Routes>
+            <Route path="/" element={<MainLayout />} />
+            <Route path="/all-projects" element={<AllProjectsPage />} />
+            <Route
+              path="/about"
+              element={<PageShell><About /></PageShell>}
+            />
+            <Route
+              path="/projects"
+              element={<PageShell><Projects isSearchable={false} /></PageShell>}
+            />
+            <Route
+              path="/experience"
+              element={<PageShell><Experience /></PageShell>}
+            />
+            <Route
+              path="/tech"
+              element={<PageShell><TechStack /></PageShell>}
+            />
+            <Route
+              path="/contact"
+              element={<PageShell><Contact /></PageShell>}
+            />
+          </Routes>
+        </main>
+        {!isAllProjects && <Footer />}
+      </div>
+    </>
+  );
+}
+
+export function App() {
   return (
     <ThemeProvider>
       <VisitorProvider>
-        {!ready && <Loader onDone={() => setReady(true)} />}
         <BrowserRouter>
-          <Analytics />
-          <ScrollToTop />
-          <Konami />
-          <div
-            className={`relative flex min-h-screen flex-col bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-opacity duration-500 ${
-              ready ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Nav />
-            <main className="relative z-10 flex-1">
-              <Routes>
-                <Route path="/" element={<MainLayout />} />
-                <Route
-                  path="/about"
-                  element={
-                    <PageShell>
-                      <About />
-                    </PageShell>
-                  }
-                />
-                <Route
-                  path="/projects"
-                  element={
-                    <PageShell>
-                      <Projects isSearchable={false} />
-                    </PageShell>
-                  }
-                />
-                <Route
-                  path="/experience"
-                  element={
-                    <PageShell>
-                      <Experience />
-                    </PageShell>
-                  }
-                />
-                <Route
-                  path="/tech"
-                  element={
-                    <PageShell>
-                      <TechStack />
-                    </PageShell>
-                  }
-                />
-                <Route
-                  path="/contact"
-                  element={
-                    <PageShell>
-                      <Contact />
-                    </PageShell>
-                  }
-                />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <AppContent />
         </BrowserRouter>
       </VisitorProvider>
     </ThemeProvider>

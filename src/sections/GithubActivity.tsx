@@ -36,10 +36,10 @@ export function GithubActivity() {
         <div className="rounded-2xl border border-[var(--line)] bg-[var(--card)] p-4 shadow-[var(--glow)] sm:p-6">
           <div className="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-4">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">A year in commits</p>
-              <p className="mt-1 text-[13px] text-[var(--muted)]">Small steps, shipped consistently.</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">A year on GitHub</p>
+              <p className="mt-1 text-[13px] text-[var(--muted)]">Public contributions from GitHub.</p>
             </div>
-            <span className="font-mono text-[10px] text-[var(--soft)]">LAST 12 MONTHS</span>
+            <span className="font-mono text-[10px] text-[var(--soft)]">LAST YEAR · LIVE</span>
           </div>
           <div className="onyx-scroll overflow-x-auto pb-2">
             <div className="min-w-[640px]">
@@ -52,14 +52,16 @@ export function GithubActivity() {
 
             {/* Heatmap Grid */}
             <div className="grid grid-flow-col grid-rows-7 gap-[3px]">
-              {heatmap.cells.map((lvl, i) =>
-                lvl === null ? (
+              {heatmap.cells.map((day, i) =>
+                day === null ? (
                   <span key={i} className="size-[10px]" />
                 ) : (
                   <span
                     key={i}
-                    className="size-[10px] rounded-[2px] bg-[var(--fg)] transition-transform duration-150 hover:scale-125"
-                    style={{ opacity: HEAT_OPACITY[lvl] }}
+                    title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}`}
+                    aria-label={`${day.count} contributions on ${day.date}`}
+                    className="size-[10px] rounded-[2px] bg-[var(--accent-2)] transition-transform duration-150 hover:scale-125"
+                    style={{ opacity: HEAT_OPACITY[day.level] }}
                   />
                 ),
               )}
@@ -68,12 +70,16 @@ export function GithubActivity() {
             {/* Info and stats at the bottom */}
             <div className="mt-2.5 flex items-center justify-between font-mono text-[11px] text-[var(--muted)]">
               <span>
-                {heatmap.live ? `${heatmap.total} contributions in the last year` : "500+ commits in the last year"}
+                {heatmap.status === "loading"
+                  ? "Loading live contribution data…"
+                  : heatmap.status === "live"
+                    ? `${heatmap.total.toLocaleString()} contributions in the last year`
+                    : "Live GitHub activity is unavailable right now."}
               </span>
               <span className="flex items-center gap-1.5">
                 Less
                 {HEAT_OPACITY.map((o) => (
-                  <span key={o} className="size-[10px] rounded-[2px] bg-[var(--fg)]" style={{ opacity: o }} />
+                  <span key={o} className="size-[10px] rounded-[2px] bg-[var(--accent-2)]" style={{ opacity: o }} />
                 ))}
                 More
               </span>

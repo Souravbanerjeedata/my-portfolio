@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shell } from "@/components/Layout";
 import { site } from "@/config/site";
@@ -51,19 +51,41 @@ function TechMarquee({ light }: { light: boolean }) {
 }
 
 function HeroBackdrop({ light }: { light: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPlayback = () => {
+      if (motionPreference.matches) {
+        video?.pause();
+      } else {
+        void video?.play().catch(() => {});
+      }
+    };
+
+    syncPlayback();
+    motionPreference.addEventListener("change", syncPlayback);
+    return () => motionPreference.removeEventListener("change", syncPlayback);
+  }, []);
+
   return (
     <div
       aria-hidden="true"
       className={`hero-backdrop absolute inset-0 overflow-hidden ${light ? "hero-backdrop-light" : ""}`}
     >
-      <div className="hero-orbit hero-orbit-one" />
-      <div className="hero-orbit hero-orbit-two" />
-      <div className="hero-orbit hero-orbit-three" />
-      <div className="hero-glow hero-glow-one" />
-      <div className="hero-glow hero-glow-two" />
-      <div className="hero-crosshair hero-crosshair-one" />
-      <div className="hero-crosshair hero-crosshair-two" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--bg)]/90" />
+      <video
+        ref={videoRef}
+        className="hero-video"
+        src="/hero-flow.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+      <div className="hero-color-wash absolute inset-0" />
     </div>
   );
 }
@@ -244,7 +266,7 @@ export function Hero() {
 
         <Shell className="mt-auto w-full px-4 pb-2 pt-0 sm:px-8 sm:pb-6 sm:pt-3 md:pb-8 md:pt-8">
           <div
-            className={`overflow-hidden rounded-[1.15rem] border shadow-[var(--glow)] backdrop-blur-md sm:rounded-2xl ${light ? "border-[var(--accent-border)] bg-[var(--card)]/75" : "border-white/15 bg-[#090c0b]/55"}`}
+            className={`overflow-hidden rounded-[1.15rem] border shadow-[var(--glow)] backdrop-blur-md sm:rounded-2xl ${light ? "border-[var(--accent-border)] bg-[var(--card)]/75" : "border-white/15 bg-[#08091e]/65"}`}
           >
             <div className="flex items-center gap-3 border-b border-[var(--line)] px-3 py-1.5 sm:px-5 sm:py-2.5">
               <span className="size-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />

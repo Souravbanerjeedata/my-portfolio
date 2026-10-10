@@ -3,12 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Shell, SectionHeader } from "@/components/Layout";
 import { site } from "@/config/site";
 import { ProjectCard } from "./ProjectCard";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 export function Projects({ isSearchable = false }: { isSearchable?: boolean }) {
   const [projectTab, setProjectTab] = useState<string>("All");
 
   const displayedProjects = useMemo(() => {
-    return site.projects.filter((p) => {
+    return site.projects.slice(0, 6).filter((p) => {
       if (projectTab === "Frontend" && !p.categories?.includes("Frontend")) return false;
       if (projectTab === "Backend" && !p.categories?.includes("Backend")) return false;
       if (projectTab === "Fullstack" && !p.categories?.includes("Fullstack")) return false;
@@ -67,6 +69,15 @@ export function Projects({ isSearchable = false }: { isSearchable?: boolean }) {
             No projects in this category.
           </p>
         )}
+        <div className="mt-7 flex justify-center">
+          <Link
+            to="/all-projects"
+            className="group inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-5 py-2.5 font-mono text-xs font-semibold text-[var(--accent)] transition-all hover:shadow-[0_0_24px_var(--accent-soft)]"
+          >
+            See all projects
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </Shell>
     </div>
   );

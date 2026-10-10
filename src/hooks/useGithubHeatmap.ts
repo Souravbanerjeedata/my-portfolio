@@ -1,52 +1,66 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+
+export interface HeatmapDay {
+  date: string;
+  count: number;
+  level: number;
+}
 
 interface HeatmapData {
-  cells: (number | null)[];
+  cells: (HeatmapDay | null)[];
   total: number;
-  live: boolean;
+  status: "loading" | "live" | "error";
 }
 
-/** Deterministic pseudo-random fallback so the section never looks broken. */
-function buildFallbackHeatmap(seedText: string): HeatmapData {
-  let seed = 5381;
-  for (let i = 0; i < seedText.length; i++) {
-    seed = (seed * 33) ^ seedText.charCodeAt(i);
-  }
-  const cells: (number | null)[] = [];
-  let s = seed >>> 0;
-  for (let i = 0; i < 53 * 7; i++) {
-    s = (s * 1664525 + 1013904223) >>> 0;
-    const v = s % 100;
-    cells.push(v < 34 ? 0 : v < 60 ? 1 : v < 80 ? 2 : v < 93 ? 3 : 4);
-  }
-  return { cells, total: cells.reduce((a: number, b) => a + (b || 0) * 2, 0), live: false };
-}
-
-/** Live GitHub contributions for the last year (public API, no auth). */
+/** Fetch public contribution data for the configured GitHub username. */
 export function useGithubHeatmap(user: string): HeatmapData {
-  const fallback = useMemo(() => buildFallbackHeatmap(user), [user]);
-  const [heatmap, setHeatmap] = useState<HeatmapData>(fallback);
+  const [heatmap, setHeatmap] = useState<HeatmapData>({
+    cells: [],
+    total: 0,
+    status: "loading",
+  });
 
   useEffect(() => {
-    let cancelled = false;
-    fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad status"))))
-      .then((d) => {
-        const contribs = d?.contributions ?? [];
-        if (cancelled || contribs.length === 0) return;
-        // pad so the first column starts on the right weekday
-        const firstDow = new Date(contribs[0].date).getDay();
-        const cells: (number | null)[] = Array(firstDow)
-          .fill(null)
-          .concat(contribs.map((c: any) => c.level));
-        const total =
-          d?.total?.lastYear ?? contribs.reduce((a: number, c: any) => a + c.count, 0);
-        setHeatmap({ cells, total, live: true });
+    const controller = new AbortController();
+    setHeatmap({ cells: [], total: 0, status: "loading" });
+
+    fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(user)}?y=last`, {
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("GitHub activity request failed");
+        return response.json();
       })
-      .catch(() => {}); // keep the fallback
-    return () => {
-      cancelled = true;
-    };
+      .then((data) => {
+        const contributions = Array.isArray(data?.contributions) ? data.contributions : [];
+        if (contributions.length === 0) throw new Error("No contribution data returned");
+
+        const firstDayOffset = new Date(`${contributions[0].date}T00:00:00`).getDay();
+        const cells: (HeatmapDay | null)[] = Array(firstDayOffset).fill(null);
+        for (const contribution of contributions) {
+          const level = Number(contribution.level);
+          const count = Number(contribution.count);
+          if (!contribution.date || !Number.isFinite(count)) continue;
+          cells.push({
+            date: contribution.date,
+            count,
+            level: Math.max(0, Math.min(4, Number.isFinite(level) ? level : 0)),
+          });
+        }
+        if (!cells.some(Boolean)) throw new Error("No valid contribution data returned");
+
+        const totalFromApi = Number(data?.total?.lastYear);
+        const total = Number.isFinite(totalFromApi)
+          ? totalFromApi
+          : contributions.reduce((sum: number, day: { count: number }) => sum + Number(day.count || 0), 0);
+        setHeatmap({ cells, total, status: "live" });
+      })
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setHeatmap({ cells: [], total: 0, status: "error" });
+      });
+
+    return () => controller.abort();
   }, [user]);
 
   return heatmap;
