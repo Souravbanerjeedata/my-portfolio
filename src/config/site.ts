@@ -208,6 +208,30 @@ export const site = {
       image: "/project-images/arcade-nexus.jpg",
       categories: ["Frontend"],
     },
+    {
+      title: "E-Shop — Electronics Store",
+      blurb:
+        "Responsive electronics storefront with a product catalog, product details, cart management, checkout flow, and client-side authentication.",
+      story:
+        "Built with React and Vite, the storefront includes dedicated catalog, product detail, cart, checkout, and sign-in/sign-up screens. React Context manages authentication and cart state, while React Hook Form handles form validation. Checkout summarizes items, subtotal, and tax before showing an order confirmation. The experience is fully client-side and adapts across desktop, tablet, and mobile layouts.",
+      stack: [
+        "React 19",
+        "Vite",
+        "React Router",
+        "React Hook Form",
+        "Context API",
+        "CSS",
+      ],
+      year: "2026",
+      links: {
+        live: "https://electronics-ecommerce-react.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/electronics-ecommerce-react",
+      },
+      featured: false,
+      image:
+        "https://raw.githubusercontent.com/Souravbanerjeedata/electronics-ecommerce-react/main/public/preview.jpg",
+      categories: ["Frontend"],
+    },
   ] as Project[],
   skills: [
     "TypeScript",
