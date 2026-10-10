@@ -272,3 +272,21 @@ footer {
     scroll-behavior: auto;
   }
 }
+
+/* Keep the navigation legible over the animated hero in light mode. */
+.light .nav-container {
+  background-color: rgba(251, 250, 255, 0.78);
+  border-color: rgba(66, 59, 143, 0.24);
+  backdrop-filter: blur(26px) saturate(160%);
+  box-shadow: 0 12px 36px rgba(27, 23, 68, 0.2);
+}
+
+.light .nav-container nav a {
+  color: var(--fg);
+}
+
+.light .nav-container nav a:hover {
+  color: var(--accent);
+}
+
+
