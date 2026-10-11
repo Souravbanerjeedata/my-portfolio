@@ -22,46 +22,35 @@
   --warning: #c692ff;
   --warning-soft: rgba(198, 146, 255, 0.14);
   --warning-border: rgba(198, 146, 255, 0.32);
-  --glow: 0 0 0 1px rgba(123, 102, 255, 0.12), 0 20px 50px -20px rgba(0, 0, 0, 0.84);
+  --glow: 0 0 0 1px rgba(123, 102, 255, 0.12), 0 20px 50px -20px rgba(0, 0, 0, 0.88);
   --font-serif: "Syne", system-ui, sans-serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
-.light {
-  --bg: #f1f0ff;
-  --fg: #181638;
-  --muted: #56547b;
-  --soft: #78759c;
-  --line: rgba(66, 59, 143, 0.16);
-  --stripe: rgba(66, 59, 143, 0.045);
-  --hover: rgba(66, 59, 143, 0.07);
-  --card: #fbfaff;
-  --chip: #e8e7fa;
-  --accent: #7842c8;
-  --accent-2: #087eaf;
-  --accent-soft: rgba(120, 66, 200, 0.12);
-  --accent-border: rgba(120, 66, 200, 0.36);
-  --success: #087eaf;
-  --success-soft: rgba(8, 126, 175, 0.11);
-  --success-border: rgba(8, 126, 175, 0.29);
-  --warning: #7842c8;
-  --warning-soft: rgba(120, 66, 200, 0.1);
-  --warning-border: rgba(120, 66, 200, 0.26);
-  --glow: 0 0 0 1px rgba(66, 59, 143, 0.07), 0 24px 60px -32px rgba(27, 23, 68, 0.28);
+.matrix {
+  --bg: #020b05;
+  --fg: #e6ffeb;
+  --muted: #9ac5a5;
+  --soft: #63856c;
+  --line: rgba(62, 255, 120, 0.17);
+  --stripe: rgba(62, 255, 120, 0.045);
+  --hover: rgba(62, 255, 120, 0.08);
+  --card: rgba(4, 17, 8, 0.78);
+  --chip: rgba(5, 25, 11, 0.82);
+  --accent: #39ff78;
+  --accent-2: #00cf65;
+  --accent-soft: rgba(57, 255, 120, 0.14);
+  --accent-border: rgba(57, 255, 120, 0.43);
+  --success: #00cf65;
+  --success-soft: rgba(0, 207, 101, 0.14);
+  --success-border: rgba(0, 207, 101, 0.35);
+  --warning: #c5ff5c;
+  --warning-soft: rgba(197, 255, 92, 0.14);
+  --warning-border: rgba(197, 255, 92, 0.32);
+  --glow: 0 0 0 1px rgba(57, 255, 120, 0.12), 0 20px 50px -20px rgba(0, 0, 0, 0.88);
 }
 
-.light body::before {
-  background:
-    radial-gradient(ellipse 70% 55% at 8% 0%, rgba(125, 94, 235, 0.1), transparent 62%),
-    radial-gradient(ellipse 52% 44% at 100% 10%, rgba(35, 171, 219, 0.09), transparent 60%),
-    radial-gradient(ellipse 45% 35% at 50% 100%, rgba(151, 100, 230, 0.06), transparent 60%);
-}
-.light body::after {
-  opacity: 0.1;
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, #000, transparent 68%);
-}
 
 * {
   border-color: var(--line);
@@ -117,11 +106,41 @@ body::after {
   z-index: 0;
   pointer-events: none;
   opacity: 0.18;
-  background-image: linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 52px 52px;
   mask-image: radial-gradient(ellipse at 50% 16%, #000 0%, transparent 78%);
 }
+
+
+.matrix body::before {
+  background: radial-gradient(ellipse 60% 55% at 50% -10%, rgba(0, 207, 101, 0.12), transparent 70%);
+}
+.matrix body::after {
+  opacity: 0.08;
+  background-image: repeating-linear-gradient(180deg, transparent 0 3px, rgba(57, 255, 120, 0.12) 4px, transparent 5px);
+  background-size: 100% 5px;
+}
+
+.hero-backdrop {
+  isolation: isolate;
+  background: radial-gradient(ellipse 72% 54% at 82% 46%, rgba(107, 57, 193, 0.3), transparent 72%), radial-gradient(ellipse 62% 48% at 8% 62%, rgba(39, 137, 220, 0.23), transparent 70%), #08091e;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.82;
+  filter: saturate(1.2) brightness(0.86);
+}
+.hero-color-wash {
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(6, 7, 26, 0.7) 0%, rgba(7, 8, 29, 0.5) 34%, rgba(7, 8, 29, 0.08) 78%), linear-gradient(180deg, rgba(7, 8, 28, 0.16) 0%, transparent 30%, rgba(8, 9, 30, 0.22) 70%, var(--bg) 100%);
+}
+.matrix .hero-backdrop { background: transparent; }
+.matrix .hero-video, .matrix .hero-color-wash { display: none; }
 
 #root,
 main,
@@ -218,35 +237,8 @@ footer {
   box-shadow: 0 0 14px var(--accent-soft);
 }
 
-.hero-backdrop {
-  background:
-    radial-gradient(ellipse 72% 54% at 82% 46%, rgba(107, 57, 193, 0.3), transparent 72%),
-    radial-gradient(ellipse 62% 48% at 8% 62%, rgba(39, 137, 220, 0.23), transparent 70%),
-    #08091e;
-  isolation: isolate;
-}
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.82;
-  filter: saturate(1.2) brightness(0.86);
-}
-.hero-color-wash {
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(6, 7, 26, 0.7) 0%, rgba(7, 8, 29, 0.5) 34%, rgba(7, 8, 29, 0.08) 78%),
-    linear-gradient(180deg, rgba(7, 8, 28, 0.16) 0%, transparent 30%, rgba(8, 9, 30, 0.22) 70%, var(--bg) 100%);
-}
-.hero-backdrop-light .hero-video { opacity: 0.42; filter: saturate(1.1) brightness(1.3); }
-.hero-backdrop-light .hero-color-wash {
-  background:
-    linear-gradient(90deg, rgba(241, 240, 255, 0.84) 0%, rgba(241, 240, 255, 0.68) 38%, rgba(241, 240, 255, 0.18) 86%),
-    linear-gradient(180deg, rgba(241, 240, 255, 0.06), transparent 48%, rgba(241, 240, 255, 0.68));
-}
+.matrix-rain-canvas { pointer-events: none; opacity: 0.72; }
+.matrix-photo-filter { filter: sepia(1) saturate(2.4) hue-rotate(78deg) contrast(1.08); }
 .profile-switch { opacity: 1; }
 @media (hover: hover) and (min-width: 768px) {
   .profile-switch { opacity: 0; }
@@ -261,32 +253,24 @@ footer {
 .tech-marquee {
   animation: marquee-rtl 40s linear infinite;
 }
-.tech-marquee:hover {
-  animation-play-state: paused;
-}
 @media (prefers-reduced-motion: reduce) {
   .tech-marquee,
-  .hero-video { animation: none; }
+  .matrix-rain-canvas, body::after { animation: none; }
 
   html {
     scroll-behavior: auto;
   }
 }
 
-/* Keep the navigation legible over the animated hero in light mode. */
-.light .nav-container {
-  background-color: rgba(251, 250, 255, 0.78);
-  border-color: rgba(66, 59, 143, 0.24);
-  backdrop-filter: blur(26px) saturate(160%);
-  box-shadow: 0 12px 36px rgba(27, 23, 68, 0.2);
-}
 
-.light .nav-container nav a {
-  color: var(--fg);
-}
 
-.light .nav-container nav a:hover {
-  color: var(--accent);
-}
+
+
+
+
+
+
+
+
 
 

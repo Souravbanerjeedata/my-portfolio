@@ -36,6 +36,7 @@ export const site = {
     author: "Cory House",
   },
   profileImages: ["/profile.jpg", "/profile2.png"],
+  matrixProfileImages: ["/profile-matrix.jpg", "/profile-halftone.jpg"],
   bannerImage: "/images/cover-dark.jpg",
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
@@ -269,3 +270,6 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
+
+

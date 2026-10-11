@@ -8,7 +8,7 @@ import { useTheme } from "@/components/theme-provider";
  * No laggy outer-ring follower.
  */
 export function TerminalCursor() {
-  const { theme } = useTheme();
+  const { theme, mode } = useTheme();
   const dark = theme === "dark";
 
   const [visible, setVisible] = useState(false);
@@ -72,8 +72,9 @@ export function TerminalCursor() {
   if (!enabled) return null;
 
   // Accent in both themes for a "cool" look
-  const core = dark ? "rgb(167, 139, 250)" : "rgb(109, 40, 217)";
-  const ring = dark ? "rgba(167, 139, 250, 0.35)" : "rgba(109, 40, 217, 0.3)";
+  const matrix = mode === "matrix";
+  const core = matrix ? "rgb(57, 255, 120)" : dark ? "rgb(185, 120, 255)" : "rgb(8, 125, 49)";
+  const ring = matrix ? "rgba(57, 255, 120, 0.35)" : dark ? "rgba(185, 120, 255, 0.35)" : "rgba(8, 125, 49, 0.3)";
 
   return (
     <motion.div
@@ -106,11 +107,14 @@ export function TerminalCursor() {
         transition={{ type: "spring", stiffness: 500, damping: 28 }}
         style={{
           backgroundColor: core,
-          boxShadow: dark
-            ? "0 0 14px rgba(167, 139, 250, 0.55)"
-            : "0 0 12px rgba(109, 40, 217, 0.4)",
+          boxShadow: matrix
+            ? "0 0 14px rgba(57, 255, 120, 0.55)"
+            : dark ? "0 0 14px rgba(185, 120, 255, 0.55)"
+            : "0 0 12px rgba(8, 125, 49, 0.4)",
         }}
       />
     </motion.div>
   );
 }
+
+

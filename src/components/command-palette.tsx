@@ -2,16 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { site } from "@/config/site";
-import { useTheme } from "./theme-provider";
 import { 
   Search, 
   Compass, 
   Globe, 
   Terminal, 
   Copy, 
-  Check, 
-  Moon, 
-  Sun, 
+  Check,
   ExternalLink,
   BookOpen,
   Mail
@@ -43,7 +40,6 @@ export function CommandPalette({
     if (onClose) onClose();
     if (setIsOpen) setIsOpen(false);
   };
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -124,17 +120,6 @@ export function CommandPalette({
         handleClose();
       },
     })),
-    {
-      id: "action-theme",
-      category: "actions",
-      title: theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme",
-      subtitle: theme === "dark" ? "Go light mode" : "Go dark mode",
-      icon: theme === "dark" ? <Sun size={16} /> : <Moon size={16} />,
-      action: () => {
-        toggleTheme();
-        handleClose();
-      },
-    },
     {
       id: "action-copy-email",
       category: "actions",
@@ -325,3 +310,6 @@ export function CommandPalette({
     </AnimatePresence>
   );
 }
+
+
+

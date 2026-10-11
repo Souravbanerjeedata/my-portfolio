@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { VisitorProvider } from "@/context/VisitorContext";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -16,6 +16,7 @@ import { Konami } from "@/components/konami";
 import { Analytics } from "@vercel/analytics/react";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
+import { MatrixRain } from "@/components/MatrixRain";
 import { AllProjectsPage } from "@/pages/AllProjectsPage";
 
 function ScrollToTop() {
@@ -85,6 +86,7 @@ function MainLayout() {
 function AppContent() {
   const [ready, setReady] = useState(false);
   const { pathname } = useLocation();
+  const { mode } = useTheme();
   const isAllProjects = pathname === "/all-projects";
 
   return (
@@ -98,6 +100,7 @@ function AppContent() {
           ready ? "opacity-100" : "opacity-0"
         }`}
       >
+        <MatrixRain active={mode === "matrix"} />
         {!isAllProjects && <Nav />}
         <main className="relative z-10 flex-1">
           <Routes>
@@ -144,3 +147,7 @@ export function App() {
 }
 
 export default App;
+
+
+
+

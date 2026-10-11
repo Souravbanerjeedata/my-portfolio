@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@/components/theme-provider";
 
 const BOOT_LINES = [
   { text: "> boot portfolio.runtime", delay: 0 },
@@ -10,6 +11,8 @@ const BOOT_LINES = [
 ];
 
 export function Loader({ onDone }: { onDone: () => void }) {
+  const { mode } = useTheme();
+  const matrix = mode === "matrix";
   const [progress, setProgress] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
   const [exiting, setExiting] = useState(false);
@@ -50,15 +53,16 @@ export function Loader({ onDone }: { onDone: () => void }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#08091e]"
+          className={`fixed inset-0 z-[100] flex items-center justify-center ${matrix ? "bg-[#020b05]/25 backdrop-blur-[1px]" : "bg-[#08091e]"}`}
           aria-live="polite"
           aria-busy="true"
         >
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.12]"
             style={{
-              backgroundImage:
-                "linear-gradient(rgba(85,216,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(185,120,255,0.2) 1px, transparent 1px)",
+              backgroundImage: matrix
+                ? "linear-gradient(rgba(57,255,120,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,207,101,0.2) 1px, transparent 1px)"
+                : "linear-gradient(rgba(85,216,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(185,120,255,0.2) 1px, transparent 1px)",
               backgroundSize: "48px 48px",
               maskImage:
                 "radial-gradient(ellipse at center, black 20%, transparent 70%)",
@@ -66,13 +70,13 @@ export function Loader({ onDone }: { onDone: () => void }) {
           />
 
           <div className="relative w-full max-w-md px-6">
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-[#10112b] shadow-[0_0_60px_rgba(123,102,255,0.14)]">
+            <div className={`overflow-hidden rounded-xl border border-white/10 ${matrix ? "bg-[#06130a]/90 shadow-[0_0_60px_rgba(57,255,120,0.14)]" : "bg-[#10112b] shadow-[0_0_60px_rgba(123,102,255,0.14)]"}`}>
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
                 <span className="size-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="size-2.5 rounded-full bg-[#febc2e]" />
                 <span className="size-2.5 rounded-full bg-[#28c840]" />
                 <span className="ml-3 font-mono text-[11px] text-white/40">
-                  sourav — zsh
+                  {matrix ? "sourav — matrix.shell" : "sourav — zsh"}
                 </span>
               </div>
 
@@ -85,13 +89,13 @@ export function Loader({ onDone }: { onDone: () => void }) {
                     transition={{ duration: 0.25 }}
                     className={
                       i === visibleLines - 1 && progress < 100
-                        ? "text-[#b978ff]"
+                        ? matrix ? "text-[#39ff78]" : "text-[#b978ff]"
                         : "text-white/65"
                     }
                   >
                     {line.text}
                     {i === visibleLines - 1 && progress < 100 && (
-                      <span className="ml-0.5 inline-block h-[1em] w-[0.55ch] animate-pulse bg-[#b978ff] align-middle" />
+                      <span className={`ml-0.5 inline-block h-[1em] w-[0.55ch] animate-pulse align-middle ${matrix ? "bg-[#39ff78]" : "bg-[#b978ff]"}`} />
                     )}
                   </motion.p>
                 ))}
@@ -104,9 +108,9 @@ export function Loader({ onDone }: { onDone: () => void }) {
                 </div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                   <div
-                    className="h-full rounded-full bg-[#55d8ff] transition-[width] duration-75"
+                    className={`h-full rounded-full transition-[width] duration-75 ${matrix ? "bg-[#00cf65]" : "bg-[#55d8ff]"}`}
                     style={{
-                      boxShadow: "0 0 12px rgba(85,216,255,0.55)",
+                      boxShadow: matrix ? "0 0 12px rgba(57,255,120,0.55)" : "0 0 12px rgba(85,216,255,0.55)",
                       width: `${progress}%`,
                     }}
                   />
@@ -123,3 +127,4 @@ export function Loader({ onDone }: { onDone: () => void }) {
     </AnimatePresence>
   );
 }
+

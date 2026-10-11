@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { site } from "@/config/site";
-import { useTheme } from "./theme-provider";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Binary, Menu, X, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@/components/theme-provider";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -15,9 +15,8 @@ const navLinks = [
 ];
 
 export function Nav() {
-  const { theme, toggleTheme } = useTheme();
-  const dark = theme === "dark";
   const location = useLocation();
+  const { mode, toggleMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerBg = "bg-[var(--card)]/85 border-[var(--line)]";
 
@@ -57,25 +56,17 @@ export function Nav() {
               </Link>
             );
           })}
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="ml-1 grid size-8 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)] transition-all hover:border-[var(--accent-border)] hover:text-[var(--fg)]"
-          >
-            {dark ? <Sun size={14} /> : <Moon size={14} />}
-          </button>
         </nav>
 
+        <button type="button" onClick={toggleMode} title={`Switch to ${mode === "matrix" ? "neon" : "Matrix"} theme`} aria-label={`Switch to ${mode === "matrix" ? "neon" : "Matrix"} theme`} className="hidden items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 py-2 font-mono text-[10px] font-semibold tracking-wider text-[var(--accent)] transition hover:shadow-[0_0_18px_var(--accent-soft)] xl:inline-flex">
+          {mode === "matrix" ? <Zap size={14} /> : <Binary size={14} />}
+          {mode === "matrix" ? "NEON" : "MATRIX"}
+        </button>
+
         <div className="flex items-center gap-2 xl:hidden">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="grid size-9 place-items-center rounded-full border border-[var(--line)] text-[var(--muted)]"
-          >
-            {dark ? <Sun size={14} /> : <Moon size={14} />}
+          <button type="button" onClick={toggleMode} title={`Switch to ${mode === "matrix" ? "neon" : "Matrix"} theme`} aria-label={`Switch to ${mode === "matrix" ? "neon" : "Matrix"} theme`} className="inline-flex h-9 items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-2.5 font-mono text-[9px] font-semibold tracking-wide text-[var(--accent)]">
+            {mode === "matrix" ? <Zap size={13} /> : <Binary size={13} />}
+            {mode === "matrix" ? "NEON" : "MATRIX"}
           </button>
           <button
             type="button"
@@ -118,4 +109,7 @@ export function Nav() {
     </header>
   );
 }
+
+
+
 

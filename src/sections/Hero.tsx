@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shell } from "@/components/Layout";
 import { site } from "@/config/site";
 import { RotateCw, FileText, ArrowDownRight, Mail } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
 import { Icon } from "@iconify/react";
+import { useTheme } from "@/components/theme-provider";
 import { getSkillIcon } from "@/lib/skill-icons";
 
 const HEADLINE_TITLES = [
@@ -13,88 +13,34 @@ const HEADLINE_TITLES = [
   "Python Developer",
 ];
 
-function TechMarquee({ light }: { light: boolean }) {
-  const mode = light ? "light" : "dark";
-  const skills = [...site.skills, ...site.skills];
+function TechMarquee() {
+  const skills = site.skills;
 
   return (
-    <div
-      className={`relative w-full overflow-hidden border-y backdrop-blur-sm ${
-        light ? "border-black/10 bg-white/70" : "border-white/10 bg-black/25"
-      }`}
-    >
-      <div className="tech-marquee flex w-max gap-3 py-3">
-        {skills.map((skill, i) => {
-          const { icon, className } = getSkillIcon(skill, mode);
-          return (
-            <span
-              key={`${skill}-${i}`}
-              className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-[12px] ${
-                light
-                  ? "border-black/10 bg-white/90 text-[var(--muted)]"
-                  : "border-white/15 bg-white/5 text-white/85"
-              }`}
-            >
-              <Icon
-                icon={icon}
-                width={16}
-                height={16}
-                className={`size-4 shrink-0 ${className || ""}`}
-              />
-              {skill}
-            </span>
-          );
-        })}
+    <div className="relative w-full overflow-hidden border-y border-white/10 bg-black/25 backdrop-blur-sm">
+      <div className="tech-marquee flex w-max">
+        {[0, 1].map((copy) => (
+          <div key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-3 pr-3">
+            {skills.map((skill, i) => {
+              const { icon, className } = getSkillIcon(skill, "dark");
+              return (
+                <span key={`${skill}-${i}`} className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-mono text-[12px] text-white/85">
+                  <Icon icon={icon} width={16} height={16} className={`size-4 shrink-0 ${className || ""}`} />
+                  {skill}
+                </span>
+              );
+            })}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-
-function HeroBackdrop({ light }: { light: boolean }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncPlayback = () => {
-      if (motionPreference.matches) {
-        video?.pause();
-      } else {
-        void video?.play().catch(() => {});
-      }
-    };
-
-    syncPlayback();
-    motionPreference.addEventListener("change", syncPlayback);
-    return () => motionPreference.removeEventListener("change", syncPlayback);
-  }, []);
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`hero-backdrop absolute inset-0 overflow-hidden ${light ? "hero-backdrop-light" : ""}`}
-    >
-      <video
-        ref={videoRef}
-        className="hero-video"
-        src="/hero-flow.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-      />
-      <div className="hero-color-wash absolute inset-0" />
-    </div>
-  );
-}
-
 export function Hero() {
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [imgIndex, setImgIndex] = useState(0);
-  const { theme } = useTheme();
-  const light = theme === "light";
+  const { mode } = useTheme();
+  const matrix = mode === "matrix";
 
   const handleNextImage = () => {
     const nextIndex = (imgIndex + 1) % site.profileImages.length;
@@ -111,21 +57,21 @@ export function Hero() {
     return () => clearInterval(timer);
   }, []);
 
-  // Text / chip colors: crisp white on dark, deep ink on light (no grey wash)
-  const titleCls = light ? "text-[var(--fg)]" : "text-white drop-shadow-lg";
-  const mutedCls = light ? "text-[var(--muted)]" : "text-white/70";
-  const bodyCls = light ? "text-[var(--muted)]" : "text-white/75";
-  const chipCls = light
-    ? "border-black/15 bg-white/80 text-[var(--fg)] hover:border-[var(--accent-border)] hover:bg-white"
-    : "border-white/25 bg-white/10 text-white hover:border-white/50 hover:bg-white/20";
+  // Keep hero copy readable over either the neon video or Matrix canvas.
+  const titleCls = "text-white drop-shadow-lg";
+  const mutedCls = "text-white/70";
+  const bodyCls = "text-white/75";
+  const chipCls = "border-white/25 bg-black/25 text-white hover:border-[var(--accent-border)] hover:bg-black/40";
 
   return (
     <section
       id="home"
       className="relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden"
     >
-      <HeroBackdrop light={light} />
-
+      <div className="hero-backdrop absolute inset-0" aria-hidden="true">
+        {!matrix && <video className="hero-video" src="/hero-flow.mp4" autoPlay muted loop playsInline preload="metadata" />}
+        {!matrix && <div className="hero-color-wash absolute inset-0" />}
+      </div>
       <div className="relative z-10 flex flex-1 flex-col justify-between pt-[4.25rem] sm:pt-16">
         <Shell className="flex flex-1 flex-col justify-center px-4 pt-3 sm:px-8 sm:pt-8">
           <motion.div
@@ -178,14 +124,14 @@ export function Hero() {
                   href={site.socials.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[11px] font-semibold backdrop-blur-md transition-all md:px-4 md:py-2.5 md:text-[12px] ${light ? "text-[var(--muted)] hover:text-[var(--accent)]" : "text-white/75 hover:text-white"}`}
+                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[11px] font-semibold text-white/75 backdrop-blur-md transition-all hover:text-white md:px-4 md:py-2.5 md:text-[12px]"
                 >
                   <FileText size={14} /> Resume
                 </a>
               </div>
 
               <div
-                className={`mt-7 hidden grid-cols-3 divide-x border-t pt-4 text-left md:grid ${light ? "divide-black/10 border-black/10" : "divide-white/15 border-white/15"}`}
+                className="mt-7 hidden grid-cols-3 divide-x divide-white/15 border-t border-white/15 pt-4 text-left md:grid"
               >
                 {[
                   ["3.5+", "years building"],
@@ -227,23 +173,21 @@ export function Hero() {
               }}
               whileHover={{ scale: 1.03 }}
               onClick={handleNextImage}
-              className={`group relative order-1 mx-auto mb-1 grid size-[min(300px,calc(100vw-2.5rem))] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.5rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/35 md:order-2 md:mb-0 md:mr-6 md:size-[220px] md:rounded-[1.75rem] md:ring-[var(--accent)]/45 lg:mr-10 lg:size-[260px] ${
-                light
-                  ? "border-[var(--accent)]/40 shadow-[0_0_50px_color-mix(in_srgb,var(--accent)_28%,transparent)]"
-                  : "border-white/30 shadow-[0_0_60px_color-mix(in_srgb,var(--accent)_32%,transparent)]"
+              className={`group relative order-1 mx-auto mb-1 grid size-[min(240px,calc(100vw-3.5rem))] shrink-0 cursor-pointer place-items-center overflow-hidden rounded-[1.5rem] border-2 bg-[var(--chip)] select-none ring-2 ring-[var(--accent)]/35 md:order-2 md:mb-0 md:mr-6 md:size-[220px] md:rounded-[1.75rem] md:ring-[var(--accent)]/45 lg:mr-10 lg:size-[260px] ${
+                "border-white/30 shadow-[0_0_60px_color-mix(in_srgb,var(--accent)_32%,transparent)]"
               }`}
               title="Click to change profile image"
             >
               <img
-                src={site.profileImages[imgIndex]}
+                src={matrix ? site.matrixProfileImages[imgIndex] : site.profileImages[imgIndex]}
                 alt={site.name}
                 loading="eager"
                 decoding="async"
-                className="pointer-events-none h-full w-full object-cover"
+                className={`pointer-events-none h-full w-full object-cover ${matrix && imgIndex === 1 ? "matrix-photo-filter" : ""}`}
               />
               <div
                 className={`pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${
-                  light ? "from-black/15" : "from-black/35"
+                  "from-black/35"
                 }`}
               />
               <button
@@ -252,9 +196,7 @@ export function Hero() {
                   handleNextImage();
                 }}
                 className={`profile-switch absolute right-2.5 top-2.5 z-20 cursor-pointer rounded-full border p-1.5 backdrop-blur-sm transition-all hover:scale-110 ${
-                  light
-                    ? "border-black/15 bg-white/80 text-[var(--fg)]"
-                    : "border-white/20 bg-black/55 text-white/80 hover:text-white"
+                  "border-white/20 bg-black/55 text-white/80 hover:text-white"
                 }`}
                 aria-label="Switch profile image"
               >
@@ -266,7 +208,7 @@ export function Hero() {
 
         <Shell className="mt-auto w-full px-4 pb-2 pt-0 sm:px-8 sm:pb-6 sm:pt-3 md:pb-8 md:pt-8">
           <div
-            className={`overflow-hidden rounded-[1.15rem] border shadow-[var(--glow)] backdrop-blur-md sm:rounded-2xl ${light ? "border-[var(--accent-border)] bg-[var(--card)]/75" : "border-white/15 bg-[#08091e]/65"}`}
+            className="overflow-hidden rounded-[1.15rem] border border-white/15 bg-black/35 shadow-[var(--glow)] backdrop-blur-md sm:rounded-2xl"
           >
             <div className="flex items-center gap-3 border-b border-[var(--line)] px-3 py-1.5 sm:px-5 sm:py-2.5">
               <span className="size-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
@@ -277,10 +219,21 @@ export function Hero() {
                 01 — 08
               </span>
             </div>
-            <TechMarquee light={light} />
+            <TechMarquee />
           </div>
         </Shell>
       </div>
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
