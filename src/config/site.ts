@@ -172,6 +172,38 @@ export const site = {
       categories: ["Frontend"],
     },
     {
+      title: "AI Bot",
+      blurb:
+        "A responsive AI companion for multi-turn chat, image understanding, and AI image generation, powered by the Google Gemini API.",
+      story:
+        "The chat flow sends the conversation history with each request so the assistant can keep context across turns. Image understanding accepts an uploaded image alongside a question, while a separate Create mode generates images from text prompts.\n\nReact Context API holds shared chat and feature state. Gemini API helpers handle chat, image understanding, and image generation from the React + Vite client. Generated images are returned as base64 data URLs and can be downloaded directly. The interface is responsive, dark themed, and includes clear error states for missing API keys, oversized uploads, and failed requests.",
+      stack: ["React 19", "Vite 8", "Google Gemini API", "React Context API", "Custom CSS"],
+      year: "2026",
+      links: {
+        live: "https://ai-bot-react.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/ai-bot-react",
+      },
+      featured: true,
+      image: "/project-images/ai-bot-react.png",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Food Order App",
+      blurb:
+        "QuickBite is a responsive food ordering app with searchable, filterable dishes, a shopping cart, and an order summary.",
+      story:
+        "The menu supports category filtering and live search. Cart actions add or remove dishes and adjust quantities; the order summary calculates the subtotal, delivery fee, taxes, and total before the customer places an order. A confirmation modal clears the cart after checkout.\n\nRedux Toolkit manages cart state, while React Context holds shared UI state such as search, filtered dishes, and modal visibility. The app uses React 19, Vite 8, react-icons, and custom CSS, with responsive layouts, keyboard support, ARIA labels, and visible focus states.",
+      stack: ["React 19", "Vite 8", "Redux Toolkit", "React Context", "Custom CSS"],
+      year: "2026",
+      links: {
+        live: "https://food-order-app-react-wheat.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/food-order-app-react",
+      },
+      featured: true,
+      image: "/project-images/food-order-app-react.jpg",
+      categories: ["Frontend"],
+    },
+    {
       title: "Food Recipe App",
       blurb:
         "React Native recipe browser with searchable collections, detail screens for ingredients & steps, and favorites powered by Context.",
