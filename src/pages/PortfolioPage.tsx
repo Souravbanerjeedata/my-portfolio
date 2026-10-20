@@ -9,6 +9,7 @@ import {
   Linkedin,
   MapPin,
   Play,
+  RotateCw,
 } from "lucide-react";
 import { site, type Project } from "@/config/site";
 import { useGithubHeatmap } from "@/hooks/useGithubHeatmap";
@@ -99,6 +100,7 @@ function Activity() {
 
 export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileImageIndex, setProfileImageIndex] = useState(0);
   const projects = archive ? site.projects : site.projects.slice(0, 4);
   const featuredProjects = site.projects.slice(0, 4);
   const moreProjects = site.projects.slice(4);
@@ -139,8 +141,8 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
             </div>
             <div className="folio-portrait-wrap">
               <div className="folio-portrait-note">DEVELOPER<br />BY CURIOSITY</div>
-              <div className="folio-portrait"><img src={site.profileImages[0]} alt={site.name} /></div>
-              <div className="folio-portrait-caption"><span>01 / 06</span><span>Full stack · MERN</span></div>
+              <div className="folio-portrait"><img key={site.profileImages[profileImageIndex]} src={site.profileImages[profileImageIndex]} alt={`${site.name}, profile photo ${profileImageIndex + 1}`} /><button className="folio-portrait-switch" type="button" title="Switch profile image" aria-label="Switch profile image" onClick={() => setProfileImageIndex((index) => (index + 1) % site.profileImages.length)}><RotateCw size={15} /></button></div>
+              <div className="folio-portrait-caption"><span>0{profileImageIndex + 1} / 0{site.profileImages.length}</span><span>Full stack · MERN</span></div>
               <div className="folio-scribble" aria-hidden="true">✳</div>
             </div>
             <div className="folio-hero-bottom"><span>SCROLL TO EXPLORE</span><span className="folio-scroll-line" /><span>22°34′ N · 88°22′ E</span></div>
