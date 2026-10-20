@@ -10,11 +10,10 @@ import { getSkillIcon } from "@/lib/skill-icons";
 const HEADLINE_TITLES = [
   "Full Stack Developer",
   "MERN Stack Developer",
-  "Python Developer",
 ];
 
 function TechMarquee() {
-  const skills = site.skills;
+  const skills = site.coreSkills;
 
   return (
     <div className="relative w-full overflow-hidden border-y border-white/10 bg-black/25 backdrop-blur-sm">
@@ -213,10 +212,10 @@ export function Hero() {
             <div className="flex items-center gap-3 border-b border-[var(--line)] px-3 py-1.5 sm:px-5 sm:py-2.5">
               <span className="size-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
               <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)] sm:text-[10px]">
-                Toolkit / always evolving
+                Core stack
               </span>
               <span className="ml-auto font-mono text-[9px] text-[var(--soft)]">
-                01 — 08
+                01 — 06
               </span>
             </div>
             <TechMarquee />

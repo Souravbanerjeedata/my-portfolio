@@ -55,7 +55,7 @@ export function Contact() {
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] opacity-65">Have a good problem?</p>
             <h3 className="mt-3 max-w-xl font-serif text-[2.5rem] font-bold leading-[0.98] tracking-[-0.06em] sm:mt-4 sm:text-6xl">Let&apos;s make it<br className="hidden sm:block" /> work beautifully.</h3>
             <p className="mt-5 max-w-lg text-[14px] leading-relaxed opacity-75 sm:text-[15px]">
-              Open to internships and junior full-stack / React Native roles. If you have something interesting, say hello.
+              Open to junior web developer and internship roles, onsite in Kolkata or remote. If you have something interesting, say hello.
             </p>
           </div>
 

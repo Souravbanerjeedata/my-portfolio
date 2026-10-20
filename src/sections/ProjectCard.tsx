@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { type Project } from "@/config/site";
-import { Globe, ChevronDown, ChevronUp, Github } from "lucide-react";
+import { Globe, ChevronDown, ChevronUp, Github, Video } from "lucide-react";
 
 export function ProjectCard({
   project: p,
@@ -134,10 +134,23 @@ export function ProjectCard({
                 href={p.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${p.title} live`}
-                className="rounded-full p-1 transition-colors hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+                aria-label={`${p.title} live demo`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--success-border)] bg-[var(--success-soft)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--success)] transition-colors hover:brightness-110"
               >
-                <Globe className="size-4" />
+                <Globe className="size-3.5" />
+                Live demo
+              </a>
+            )}
+            {!p.links.live && p.links.video && (
+              <a
+                href={p.links.video}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${p.title} video preview`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--accent)] transition-colors hover:brightness-110"
+              >
+                <Video className="size-3.5" />
+                Video preview
               </a>
             )}
             {p.links.source && (
