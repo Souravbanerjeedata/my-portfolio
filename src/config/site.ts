@@ -71,7 +71,7 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/sourav-banerjee-code",
     email: "mailto:sourav.banerjeejobs@gmail.com",
     resume:
-      "https://drive.google.com/file/d/1_lJHna9_EGCsCR4g7tU8n7F2irpO5GNl/view",
+      "https://drive.google.com/file/d/1A_MGLn5fEII3NWAIq8PI6qkHO6Q4_FrA/view",
     discord: "",
     medium: "",
   },
