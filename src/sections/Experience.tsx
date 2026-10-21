@@ -26,23 +26,27 @@ export function Experience() {
               </span>
 
               <div className="grid gap-2 md:grid-cols-[150px_1fr] md:gap-8">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--accent)]">{job.period}</p>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--accent)]">
+                  {job.period}
+                </p>
                 <div>
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-lg font-semibold tracking-tight text-[var(--fg)]">
-                    {job.role}
-                    <span className="text-[var(--soft)]"> · </span>
-                    <span className="font-medium text-[var(--muted)]">{job.company}</span>
-                    {job.url && (
-                      <a
-                        href={job.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-2 inline-flex align-middle text-[var(--soft)] transition-colors hover:text-[var(--accent)]"
-                      >
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
+                      {job.role}
+                      <span className="text-[var(--soft)]"> · </span>
+                      <span className="font-medium text-[var(--muted)]">
+                        {job.company}
+                      </span>
+                      {job.url && (
+                        <a
+                          href={job.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-2 inline-flex align-middle text-[var(--soft)] transition-colors hover:text-[var(--accent)]"
+                        >
+                          <ExternalLink size={14} />
+                        </a>
+                      )}
                     </h3>
                   </div>
                   <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-[var(--muted)]">
