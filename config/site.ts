@@ -4,7 +4,7 @@ export type Project = {
   story?: string;
   stack: string[];
   year: string;
-  links: { live?: string; source?: string };
+  links: { live?: string; video?: string; source?: string };
   featured?: boolean;
   status?: string;
   image?: string;
@@ -35,35 +35,35 @@ export const site = {
     text: "Code is like humor. When you have to explain it, it's bad.",
     author: "Cory House",
   },
-  profileImages: ["/profile.jpg", "/profile2.png"],
+  profileImages: ["/profile.jpg", "/profile2.jpg"],
+  matrixProfileImages: ["/profile-matrix.jpg", "/profile-halftone.jpg"],
   bannerImage: "/images/cover-dark.jpg",
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack & React Native Developer",
+  role: "Full Stack Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Self-taught full-stack developer building scalable web and mobile applications. Open to internships and junior roles.",
+    "Full-stack web developer focused on MERN Stack. Open to junior and internship roles, onsite in Kolkata or remote.",
   about: [
     "Hey, I'm Sourav — a self-taught Full Stack developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
     "I focus on clean, practical applications with MERN / PERN stack and modern frontend architecture.",
     "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
   ],
   tldr: [
-    "Career switcher from TCS → developer",
+    "Career switcher from HR → developer",
     "Self-taught for 3.5+ years",
     "Building web & mobile apps",
     "Open to internships & junior roles",
   ],
   status: {
     available: true,
-    availableText: "open to opportunities",
-    nowLearning: "DSA • System Design • MERN / PERN • React Native",
-    nowBuilding: "Full-stack & React Native projects",
-    nowListening: "focus playlists",
+    availableText: "Junior / intern roles · Kolkata onsite or remote",
+    nowLearning: "DSA • System Design • MERN / PERN",
+    nowBuilding: "Full-stack projects",
   },
   socials: {
     github: "https://github.com/Souravbanerjeedata",
@@ -95,6 +95,107 @@ export const site = {
   ] as Job[],
   projects: [
     {
+      title: "Food Order App",
+      blurb:
+        "QuickBite is a responsive food ordering app with searchable, filterable dishes, a shopping cart, and an order summary.",
+      story:
+        "The menu supports category filtering and live search. Cart actions add or remove dishes and adjust quantities; the order summary calculates the subtotal, delivery fee, taxes, and total before the customer places an order. A confirmation modal clears the cart after checkout.\n\nRedux Toolkit manages cart state, while React Context holds shared UI state such as search, filtered dishes, and modal visibility. The app uses React 19, Vite 8, react-icons, and custom CSS, with responsive layouts, keyboard support, ARIA labels, and visible focus states.",
+      stack: [
+        "React 19",
+        "Vite 8",
+        "Redux Toolkit",
+        "React Context",
+        "Custom CSS",
+      ],
+      year: "2026",
+      links: {
+        live: "https://food-order-app-react-wheat.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/food-order-app-react",
+      },
+      featured: true,
+      image: "/project-images/food-order-app-react.jpg",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Electronics Store",
+      blurb:
+        "Responsive electronics storefront with a product catalog, product details, cart management, checkout flow, and client-side authentication.",
+      story:
+        "Built with React and Vite, the storefront includes dedicated catalog, product detail, cart, checkout, and sign-in/sign-up screens. React Context manages authentication and cart state, while React Hook Form handles form validation. Checkout summarizes items, subtotal, and tax before showing an order confirmation. The experience is fully client-side and adapts across desktop, tablet, and mobile layouts.",
+      stack: [
+        "React 19",
+        "Vite",
+        "React Router",
+        "React Hook Form",
+        "Context API",
+        "CSS",
+      ],
+      year: "2026",
+      links: {
+        live: "https://electronics-ecommerce-react.vercel.app/",
+        source:
+          "https://github.com/Souravbanerjeedata/electronics-ecommerce-react",
+      },
+      featured: true,
+      image:
+        "https://raw.githubusercontent.com/Souravbanerjeedata/electronics-ecommerce-react/main/public/preview.jpg",
+      categories: ["Frontend"],
+    },
+    {
+      title: "AI Bot",
+      blurb:
+        "A responsive AI companion for multi-turn chat, image understanding, and AI image generation, powered by the Google Gemini API.",
+      story:
+        "The chat flow sends the conversation history with each request so the assistant can keep context across turns. Image understanding accepts an uploaded image alongside a question, while a separate Create mode generates images from text prompts.\n\nReact Context API holds shared chat and feature state. Gemini API helpers handle chat, image understanding, and image generation from the React + Vite client. Generated images are returned as base64 data URLs and can be downloaded directly. The interface is responsive, dark themed, and includes clear error states for missing API keys, oversized uploads, and failed requests.",
+      stack: [
+        "React 19",
+        "Vite 8",
+        "Google Gemini API",
+        "React Context API",
+        "Custom CSS",
+      ],
+      year: "2026",
+      links: {
+        live: "https://ai-bot-react.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/ai-bot-react",
+      },
+      featured: true,
+      image: "/project-images/ai-bot-react.png",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Gaming Hub",
+      blurb:
+        "Responsive browser gaming hub with a multi-game library, CRUD-managed cards, real-time community chat, and a dark neon UI — pure HTML, CSS, JS.",
+      story:
+        "Arcade Nexus is a personal gaming universe that consolidates nine playable browser games into one dark-theme hub: Neon Snake, Point & Shoot, Leap Runner, Endless Runner, Metroidvania: Escape the Factory, Neon Tetris, Neon Pac-Man, Gorillas, and Tic-Tac-Toe. Each title opens in an embedded full-screen play layer with Escape / Back-to-Hub controls and an optional open-in-new-tab path.",
+      stack: ["HTML", "CSS", "JavaScript"],
+      year: "2026",
+      links: {
+        live: "https://souravbanerjeedata.github.io/Arcade-Nexus-Gaming-Hub/",
+        source: "https://github.com/Souravbanerjeedata/Arcade-Nexus-Gaming-Hub",
+      },
+      featured: true,
+      image: "/project-images/arcade-nexus.jpg",
+      categories: ["Frontend"],
+    },
+    {
+      title: "Cocktail Website",
+      blurb:
+        "Scroll-driven GSAP cocktail landing page with SplitText reveals, parallax, pinned sections, scroll-synced video, and a custom animated carousel.",
+      story:
+        "GSAP ScrollTrigger orchestrates multi-section timelines: pinned hero sequences, SplitText intro reveals, parallax layers, and image-mask transitions. Video playback is locked to scroll progress for a cinematic feel. A custom carousel and responsive Tailwind layout keep the experience polished on every viewport. Vite powers a fast React + Tailwind toolchain optimized for animation-heavy pages.",
+      stack: ["React", "GSAP", "ScrollTrigger", "Tailwind CSS", "Vite"],
+      year: "2025",
+      links: {
+        live: "https://cocktail-website-ivory.vercel.app/",
+        source: "https://github.com/Souravbanerjeedata/cocktail-website",
+      },
+      featured: true,
+      image: "/project-images/cocktail-website.png",
+      categories: ["Frontend"],
+    },
+    {
       title: "To-Do App",
       blurb:
         "A modern cross-platform to-do app with real-time sync, dark/light themes, and clean task management — built with React Native, Expo, and Convex.",
@@ -103,6 +204,7 @@ export const site = {
       stack: ["React Native", "Expo", "TypeScript", "Convex", "Expo Router"],
       year: "2026",
       links: {
+        video: "https://lnkd.in/p/dH69fnpY",
         source: "https://github.com/Souravbanerjeedata/to-do-app",
       },
       featured: true,
@@ -125,6 +227,7 @@ export const site = {
       ],
       year: "2026",
       links: {
+        video: "https://lnkd.in/p/d97vZWVj",
         source: "https://github.com/Souravbanerjeedata/movie-app-rn",
       },
       featured: true,
@@ -147,65 +250,12 @@ export const site = {
       ],
       year: "2026",
       links: {
+        video: "https://lnkd.in/p/diA-XybZ",
         source:
           "https://github.com/Souravbanerjeedata/apple-invites-animation-rn",
       },
       featured: true,
       image: "/project-images/apple-invites.png",
-      categories: ["Frontend"],
-    },
-    {
-      title: "Cocktail Website",
-      blurb:
-        "Scroll-driven GSAP cocktail landing page with SplitText reveals, parallax, pinned sections, scroll-synced video, and a custom animated carousel.",
-      story:
-        "GSAP ScrollTrigger orchestrates multi-section timelines: pinned hero sequences, SplitText intro reveals, parallax layers, and image-mask transitions. Video playback is locked to scroll progress for a cinematic feel. A custom carousel and responsive Tailwind layout keep the experience polished on every viewport. Vite powers a fast React + Tailwind toolchain optimized for animation-heavy pages.",
-      stack: ["React", "GSAP", "ScrollTrigger", "Tailwind CSS", "Vite"],
-      year: "2025",
-      links: {
-        live: "https://cocktail-website-ivory.vercel.app/",
-        source: "https://github.com/Souravbanerjeedata/cocktail-website",
-      },
-      featured: true,
-      image: "/project-images/cocktail-website.png",
-      categories: ["Frontend"],
-    },
-    {
-      title: "Food Recipe App",
-      blurb:
-        "React Native recipe browser with searchable collections, detail screens for ingredients & steps, and favorites powered by Context.",
-      story:
-        "React Navigation (stack) moves between browse, collection, and recipe detail screens. Recipe data is structured in local models; favorites persist via React Context. Screens emphasize photography-first cards and clear ingredient/step layouts. Built as a focused mobile cooking companion with clean StyleSheet UI and reusable list components.",
-      stack: [
-        "React Native",
-        "Expo",
-        "React Navigation",
-        "React Context",
-        "JavaScript",
-      ],
-      year: "2026",
-      links: {
-        source:
-          "https://github.com/Souravbanerjeedata/food-recipe-app-reactnative",
-      },
-      featured: false,
-      image: "/project-images/food-recipe-rn.png",
-      categories: ["Frontend"],
-    },
-    {
-      title: "Point & Shoot Game",
-      blurb:
-        "Browser-based point-and-shoot game — pick an enemy and a scene, then click or tap flying targets before they escape. Lives, scoring, speed ramp, and explosion effects.",
-      story:
-        "Built with vanilla JavaScript and the HTML5 Canvas API. Six selectable enemies and five cartoon backgrounds. Game loop handles spawn timing, collision via click/tap hit-testing, gradual speed increase every 10 kills, and a 5-life system. Explosion sprites and sound feedback on hits. Fully responsive for desktop mouse and mobile touch. No frameworks — pure JS, CSS, and canvas for a lightweight playable experience.",
-      stack: ["JavaScript", "HTML5 Canvas", "CSS"],
-      year: "2026",
-      links: {
-        live: "https://souravbanerjeedata.github.io/point-and-shoot-game/",
-        source: "https://github.com/Souravbanerjeedata/point-and-shoot-game",
-      },
-      featured: false,
-      image: "/project-images/point-and-shoot.png",
       categories: ["Frontend"],
     },
   ] as Project[],
@@ -235,6 +285,14 @@ export const site = {
     "GitHub",
     "Deno",
     "Expo",
+  ],
+  coreSkills: [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "REST APIs",
   ],
   writing: [] as Post[],
   github: {

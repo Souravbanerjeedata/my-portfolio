@@ -382,6 +382,7 @@ body::after { display: none !important; }
 .folio-project-details { margin-top: 15px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .folio-project-details summary { padding: 10px 0; color: var(--forest); cursor: pointer; font-size: 11px; font-weight: 700; list-style-position: inside; }
 .folio-project-details > div { padding: 0 0 12px 15px; color: var(--soft-ink); font-size: 11px; line-height: 1.65; }
+.folio-project-details > div strong { color: var(--forest); font-weight: 700; }
 .folio-project-details p + p { margin-top: 8px; }
 .folio-project-actions { display: flex; gap: 17px; margin-top: 15px; }
 .folio-project-actions a, .folio-text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--forest); font-size: 11px; font-weight: 700; }

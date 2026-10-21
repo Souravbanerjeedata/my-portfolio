@@ -62,7 +62,7 @@ export const site = {
   status: {
     available: true,
     availableText: "Junior / intern roles · Kolkata onsite or remote",
-    nowLearning: "DSA • System Design • MERN / PERN",
+    nowLearning: "DSA • System Design",
     nowBuilding: "Full-stack projects",
   },
   socials: {
@@ -99,7 +99,7 @@ export const site = {
       blurb:
         "QuickBite is a responsive food ordering app with searchable, filterable dishes, a shopping cart, and an order summary.",
       story:
-        "The menu supports category filtering and live search. Cart actions add or remove dishes and adjust quantities; the order summary calculates the subtotal, delivery fee, taxes, and total before the customer places an order. A confirmation modal clears the cart after checkout.\n\nRedux Toolkit manages cart state, while React Context holds shared UI state such as search, filtered dishes, and modal visibility. The app uses React 19, Vite 8, react-icons, and custom CSS, with responsive layouts, keyboard support, ARIA labels, and visible focus states.",
+        "Order flow: The menu narrows as the visitor searches or chooses a category. Adding a dish or changing its quantity updates the cart, and the order summary recalculates the subtotal, delivery fee, taxes, and total. Confirming an order opens a confirmation modal and clears the cart.\n\nState and interface: Redux Toolkit owns cart state and its add, remove, and quantity actions. React Context shares search text, filtered dishes, and modal visibility across the interface. Keyboard support, ARIA labels, and visible focus states make the same flow usable without a mouse.",
       stack: [
         "React 19",
         "Vite 8",
@@ -121,7 +121,7 @@ export const site = {
       blurb:
         "Responsive electronics storefront with a product catalog, product details, cart management, checkout flow, and client-side authentication.",
       story:
-        "Built with React and Vite, the storefront includes dedicated catalog, product detail, cart, checkout, and sign-in/sign-up screens. React Context manages authentication and cart state, while React Hook Form handles form validation. Checkout summarizes items, subtotal, and tax before showing an order confirmation. The experience is fully client-side and adapts across desktop, tablet, and mobile layouts.",
+        "Shopping flow: React Router takes the visitor from the product catalog to a product detail page, cart, and checkout. Cart contents remain available as they move between screens. At checkout, the item list, subtotal, and tax are summarized before the order confirmation is shown.\n\nState and forms: React Context shares cart and authentication state across routes. React Hook Form manages form values and validation for sign-in, sign-up, and checkout screens. The experience runs client-side and reflows for desktop, tablet, and mobile layouts.",
       stack: [
         "React 19",
         "Vite",
@@ -146,7 +146,7 @@ export const site = {
       blurb:
         "A responsive AI companion for multi-turn chat, image understanding, and AI image generation, powered by the Google Gemini API.",
       story:
-        "The chat flow sends the conversation history with each request so the assistant can keep context across turns. Image understanding accepts an uploaded image alongside a question, while a separate Create mode generates images from text prompts.\n\nReact Context API holds shared chat and feature state. Gemini API helpers handle chat, image understanding, and image generation from the React + Vite client. Generated images are returned as base64 data URLs and can be downloaded directly. The interface is responsive, dark themed, and includes clear error states for missing API keys, oversized uploads, and failed requests.",
+        "Request flow: Each chat request sends the current conversation history to Gemini so replies can use earlier turns. In image-understanding mode, an uploaded image and the visitor’s question are sent together. Create mode sends a text prompt for image generation; the returned image can then be downloaded.\n\nClient behavior: React Context holds shared chat and feature state. Separate Gemini helpers handle chat, image understanding, and image generation from the React + Vite client. The interface reports missing API keys, oversized uploads, and failed requests instead of leaving those actions ambiguous.",
       stack: [
         "React 19",
         "Vite 8",
@@ -164,11 +164,11 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "Arcade Nexus — Gaming Hub",
+      title: "Gaming Hub",
       blurb:
         "Responsive browser gaming hub with a multi-game library, CRUD-managed cards, real-time community chat, and a dark neon UI — pure HTML, CSS, JS.",
       story:
-        "Arcade Nexus is a personal gaming universe that consolidates nine playable browser games into one dark-theme hub: Neon Snake, Point & Shoot, Leap Runner, Endless Runner, Metroidvania: Escape the Factory, Neon Tetris, Neon Pac-Man, Gorillas, and Tic-Tac-Toe. Each title opens in an embedded full-screen play layer with Escape / Back-to-Hub controls and an optional open-in-new-tab path.",
+        "Library flow: The hub presents nine browser games as a single library. Its game cards support create, read, update, and delete actions, while the community chat displays messages in real time.\n\nPlaying a game: Choosing a title opens it in an embedded, full-screen play layer. Escape or the Back-to-Hub control closes that layer and returns to the library; a separate option opens the game in a new tab. The hub is built with HTML, CSS, and JavaScript.",
       stack: ["HTML", "CSS", "JavaScript"],
       year: "2026",
       links: {
@@ -184,7 +184,7 @@ export const site = {
       blurb:
         "Scroll-driven GSAP cocktail landing page with SplitText reveals, parallax, pinned sections, scroll-synced video, and a custom animated carousel.",
       story:
-        "GSAP ScrollTrigger orchestrates multi-section timelines: pinned hero sequences, SplitText intro reveals, parallax layers, and image-mask transitions. Video playback is locked to scroll progress for a cinematic feel. A custom carousel and responsive Tailwind layout keep the experience polished on every viewport. Vite powers a fast React + Tailwind toolchain optimized for animation-heavy pages.",
+        "Scroll flow: GSAP ScrollTrigger maps scroll position to animation timelines. As the visitor moves down the page, it pins the hero, reveals SplitText headings, shifts parallax layers, and runs image-mask transitions. The video is synchronized to scroll progress, so its playback follows the visitor’s position.\n\nPage structure: React components organize the sections, while a custom carousel handles its own navigation. Tailwind CSS styles the responsive layouts, and Vite bundles the React app and animation code.",
       stack: ["React", "GSAP", "ScrollTrigger", "Tailwind CSS", "Vite"],
       year: "2025",
       links: {
@@ -200,7 +200,7 @@ export const site = {
       blurb:
         "A modern cross-platform to-do app with real-time sync, dark/light themes, and clean task management — built with React Native, Expo, and Convex.",
       story:
-        "Backend lives entirely on Convex: typed mutations and queries power add, edit, complete, and delete flows with live updates across devices. Expo Router drives tab navigation (Home + Settings). Theme state is managed through a custom hook so light and dark modes stay consistent. UI uses linear gradients and polished micro-interactions while keeping the component tree simple and readable.",
+        "Task flow: Creating, editing, completing, or deleting a task calls a typed Convex mutation. Convex queries provide the task data to the app and keep the list updated across devices as changes arrive.\n\nApp structure: Expo Router separates the Home and Settings tabs. A custom hook manages the light/dark theme state so the chosen theme stays consistent across screens. React Native renders the interface, with gradients and small interaction feedback around task actions.",
       stack: ["React Native", "Expo", "TypeScript", "Convex", "Expo Router"],
       year: "2026",
       links: {
@@ -216,7 +216,7 @@ export const site = {
       blurb:
         "Netflix-style movie & TV discovery app with auth, search, detail pages, continue-watching, and live TMDB data — built in React Native + Expo + TypeScript.",
       story:
-        "File-based routing via Expo Router organizes Home, Movies, Series, Search, and Profile screens. TMDB is integrated through Axios with a custom useFetch hook for loading and error states. Reanimated smooths poster loads and transitions. Auth screens (login/signup) sit in front of the main experience. Detail views surface overview, genres, and similar titles for a full streaming-app feel.",
+        "Browse flow: Expo Router maps the Home, Movies, Series, Search, Profile, and detail screens to file-based routes. Axios requests live movie and TV data from TMDB through a custom useFetch hook, which provides loading and error states while results are fetched.\n\nFrom result to detail: Selecting a title opens its detail screen with an overview, genres, and similar titles. Login and signup screens are included in the app flow, alongside search and continue-watching views. Reanimated handles poster loading transitions and screen motion.",
       stack: [
         "React Native",
         "Expo",
@@ -239,7 +239,7 @@ export const site = {
       blurb:
         "High-fidelity recreation of Apple Invites card animations — gesture-driven reveal, drag-to-dismiss, spring physics, and blur — in React Native.",
       story:
-        "Built with Reanimated 3 and Gesture Handler for buttery 60fps interactions. Invitation cards scale, rotate, and dismiss with spring physics that mirror Apple's design language. Background blur and micro-interactions keep the experience premium. NativeWind (Tailwind) handles styling while Expo Router scaffolds the screen structure. Focus was on matching timing curves and gesture thresholds as closely as possible.",
+        "Gesture flow: Gesture Handler tracks touches on the invitation card. Those gesture values drive Reanimated 3 transitions: revealing the invitation scales and rotates the card, while dragging it away triggers a dismissal. Spring-based motion makes the card settle or exit based on the gesture.\n\nScreen and styling: Expo Router supplies the screen structure; NativeWind styles the React Native components. Background blur and small interaction details support the reveal, and the gesture thresholds and timing curves are tuned to reproduce the reference behavior.",
       stack: [
         "React Native",
         "Expo",
