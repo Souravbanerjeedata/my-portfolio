@@ -151,7 +151,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           <section className="folio-intro-band" id="about">
             <div className="folio-intro-label"><span>01</span><p>A little<br />about me</p></div>
             <div className="folio-intro-copy"><p className="folio-intro-lead">{site.about[0]}</p><div className="folio-intro-sub">{site.about.slice(1).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div><div className="folio-facts">{site.tldr.map((fact) => <span key={fact}><i />{fact}</span>)}</div></div>
-            <aside className="folio-years"><strong>3.5<sup>+</sup></strong><span>years learning<br />by building</span><div className="folio-now"><b>Currently</b><span>Building · {site.status.nowBuilding}</span><span>Learning · {site.status.nowLearning}</span><span>Listening · {site.status.nowListening}</span></div></aside>
+            <aside className="folio-years"><strong>3.5<sup>+</sup></strong><span>years learning<br />by building</span><div className="folio-now"><b>Currently</b><span>Building · {site.status.nowBuilding}</span><span>Learning · {site.status.nowLearning}</span></div></aside>
           </section>
 
           <section className="folio-section folio-work" id="work">

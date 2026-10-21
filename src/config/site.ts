@@ -35,7 +35,7 @@ export const site = {
     text: "Code is like humor. When you have to explain it, it's bad.",
     author: "Cory House",
   },
-  profileImages: ["/profile.jpg", "/profile2.png"],
+  profileImages: ["/profile.jpg", "/profile2.jpg"],
   matrixProfileImages: ["/profile-matrix.jpg", "/profile-halftone.jpg"],
   bannerImage: "/images/cover-dark.jpg",
   bannerImageLight: "/images/cover-light.jpg",
@@ -47,7 +47,7 @@ export const site = {
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Full-stack web developer focused on React, Node.js, and MongoDB. Open to junior and internship roles, onsite in Kolkata or remote.",
+    "Full-stack web developer focused on MERN Stack. Open to junior and internship roles, onsite in Kolkata or remote.",
   about: [
     "Hey, I'm Sourav — a self-taught Full Stack developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
     "I focus on clean, practical applications with MERN / PERN stack and modern frontend architecture.",
@@ -62,9 +62,8 @@ export const site = {
   status: {
     available: true,
     availableText: "Junior / intern roles · Kolkata onsite or remote",
-    nowLearning: "DSA • System Design • MERN / PERN • React Native",
+    nowLearning: "DSA • System Design • MERN / PERN",
     nowBuilding: "Full-stack projects",
-    nowListening: "focus playlists",
   },
   socials: {
     github: "https://github.com/Souravbanerjeedata",
@@ -101,7 +100,13 @@ export const site = {
         "QuickBite is a responsive food ordering app with searchable, filterable dishes, a shopping cart, and an order summary.",
       story:
         "The menu supports category filtering and live search. Cart actions add or remove dishes and adjust quantities; the order summary calculates the subtotal, delivery fee, taxes, and total before the customer places an order. A confirmation modal clears the cart after checkout.\n\nRedux Toolkit manages cart state, while React Context holds shared UI state such as search, filtered dishes, and modal visibility. The app uses React 19, Vite 8, react-icons, and custom CSS, with responsive layouts, keyboard support, ARIA labels, and visible focus states.",
-      stack: ["React 19", "Vite 8", "Redux Toolkit", "React Context", "Custom CSS"],
+      stack: [
+        "React 19",
+        "Vite 8",
+        "Redux Toolkit",
+        "React Context",
+        "Custom CSS",
+      ],
       year: "2026",
       links: {
         live: "https://food-order-app-react-wheat.vercel.app/",
@@ -112,19 +117,28 @@ export const site = {
       categories: ["Frontend"],
     },
     {
-      title: "E-Shop — Electronics Store",
+      title: "Electronics Store",
       blurb:
         "Responsive electronics storefront with a product catalog, product details, cart management, checkout flow, and client-side authentication.",
       story:
         "Built with React and Vite, the storefront includes dedicated catalog, product detail, cart, checkout, and sign-in/sign-up screens. React Context manages authentication and cart state, while React Hook Form handles form validation. Checkout summarizes items, subtotal, and tax before showing an order confirmation. The experience is fully client-side and adapts across desktop, tablet, and mobile layouts.",
-      stack: ["React 19", "Vite", "React Router", "React Hook Form", "Context API", "CSS"],
+      stack: [
+        "React 19",
+        "Vite",
+        "React Router",
+        "React Hook Form",
+        "Context API",
+        "CSS",
+      ],
       year: "2026",
       links: {
         live: "https://electronics-ecommerce-react.vercel.app/",
-        source: "https://github.com/Souravbanerjeedata/electronics-ecommerce-react",
+        source:
+          "https://github.com/Souravbanerjeedata/electronics-ecommerce-react",
       },
       featured: true,
-      image: "https://raw.githubusercontent.com/Souravbanerjeedata/electronics-ecommerce-react/main/public/preview.jpg",
+      image:
+        "https://raw.githubusercontent.com/Souravbanerjeedata/electronics-ecommerce-react/main/public/preview.jpg",
       categories: ["Frontend"],
     },
     {
@@ -133,7 +147,13 @@ export const site = {
         "A responsive AI companion for multi-turn chat, image understanding, and AI image generation, powered by the Google Gemini API.",
       story:
         "The chat flow sends the conversation history with each request so the assistant can keep context across turns. Image understanding accepts an uploaded image alongside a question, while a separate Create mode generates images from text prompts.\n\nReact Context API holds shared chat and feature state. Gemini API helpers handle chat, image understanding, and image generation from the React + Vite client. Generated images are returned as base64 data URLs and can be downloaded directly. The interface is responsive, dark themed, and includes clear error states for missing API keys, oversized uploads, and failed requests.",
-      stack: ["React 19", "Vite 8", "Google Gemini API", "React Context API", "Custom CSS"],
+      stack: [
+        "React 19",
+        "Vite 8",
+        "Google Gemini API",
+        "React Context API",
+        "Custom CSS",
+      ],
       year: "2026",
       links: {
         live: "https://ai-bot-react.vercel.app/",
@@ -283,6 +303,3 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
-
-
-
