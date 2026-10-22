@@ -71,7 +71,7 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/sourav-banerjee-code",
     email: "mailto:sourav.banerjeejobs@gmail.com",
     resume:
-      "/Sourav_Banerjee_Resume.pdf",
+      "https://drive.google.com/file/d/1A_MGLn5fEII3NWAIq8PI6qkHO6Q4_FrA/view?usp=sharing",
     discord: "",
     medium: "",
   },
@@ -303,4 +303,5 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
 
