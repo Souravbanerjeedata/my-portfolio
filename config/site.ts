@@ -297,7 +297,6 @@ export const site = {
   writing: [] as Post[],
   github: {
     username: "Souravbanerjeedata",
-    contributionsLastYear: "100+",
   },
   footerNote: "Built with ❤️ while learning and shipping",
 } as const;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowDown,
@@ -9,10 +9,11 @@ import {
   Linkedin,
   MapPin,
   Play,
-  RotateCw,
 } from "lucide-react";
 import { site, type Project } from "@/config/site";
-import { useGithubHeatmap } from "@/hooks/useGithubHeatmap";
+import { GitHubGraph } from "@/components/github-graph";
+import { Icon } from "@iconify/react";
+import { getSkillIcon } from "@/lib/skill-icons";
 
 function ProjectActions({ project }: { project: Project }) {
   return (
@@ -58,7 +59,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         ) : (
           <div className="folio-project-placeholder">{project.title}</div>
         )}
-        <span className="folio-project-number">0{index + 1}</span>
         <span className="folio-project-open">
           <ArrowUpRight size={18} />
         </span>
@@ -98,12 +98,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 function Activity() {
-  const heatmap = useGithubHeatmap(site.github.username);
   return (
     <section className="folio-section folio-activity" id="activity">
       <div className="folio-section-head">
         <div>
-          <p className="folio-eyebrow">05 / Open source &amp; practice</p>
+          <p className="folio-eyebrow">Open source &amp; practice</p>
           <h2>Made in public.</h2>
         </div>
         <a
@@ -115,110 +114,171 @@ function Activity() {
           GitHub profile <ArrowUpRight size={15} />
         </a>
       </div>
-      <div className="folio-activity-card">
-        <div className="folio-activity-stat">
-          <strong>
-            {heatmap.status === "live" ? heatmap.total.toLocaleString() : "—"}
-          </strong>
-          <span>contributions this year</span>
-        </div>
-        <div
-          className="folio-heatmap-wrap"
-          aria-label="GitHub contribution activity"
-        >
-          <div className="folio-heatmap">
-            {heatmap.cells.map((day, i) =>
-              day ? (
-                <span
-                  key={day.date}
-                  title={`${day.count} contributions on ${day.date}`}
-                  className={`folio-heat-${day.level}`}
-                />
-              ) : (
-                <i key={`empty-${i}`} />
-              ),
-            )}
-          </div>
-          <p>
-            {heatmap.status === "loading"
-              ? "Loading public activity…"
-              : heatmap.status === "error"
-                ? "Contribution data is temporarily unavailable."
-                : "A year of learning, shipping and improving."}
-          </p>
-        </div>
-      </div>
+      <GitHubGraph />
     </section>
+  );
+}
+
+function highlightCode(code: string) {
+  const tokenPattern = /(\"[^\"]*\"|'[^']*'|\b(?:async|await|const|return|function)\b|\b(?:name|role|focus|location|stack|response|contents|text|prompt|history)\b(?=\s*:))/g;
+  return code.split(tokenPattern).map((part, index) => {
+    if (/^(\"[^\"]*\"|'[^']*')$/.test(part)) return <span className="folio-code-string" key={index}>{part}</span>;
+    if (/^(async|await|const|return|function)$/.test(part)) return <span className="folio-code-keyword" key={index}>{part}</span>;
+    if (/^(name|role|focus|location|stack|response|contents|text|prompt|history)$/.test(part)) return <span className="folio-code-property" key={index}>{part}</span>;
+    return part;
+  });
+}
+
+function CodeTerminal() {
+  const projects = site.projects.map((project) => project.title);
+  const snippets = [
+    {
+      file: "~/sourav/src/config/site.ts",
+      code: `const sourav = {
+  name: "Sourav",
+  role: "Full Stack Developer",
+  focus: "MERN Stack",
+  location: "Kolkata onsite / remote",
+  stack: ["React", "Node.js", "MongoDB"]
+};
+
+export default sourav;`,
+    },
+    {
+      file: "~/sourav/src/config/site.ts",
+      code: `const projects = [\n${projects.map((title) => `  "${title}",`).join("\n")}\n];`,
+    },
+  ];
+  const [visible, setVisible] = useState(0);
+  const [snippetIndex, setSnippetIndex] = useState(0);
+  const snippet = snippets[snippetIndex];
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(snippet.code.length);
+      return;
+    }
+    let position = 0;
+    let timer = 0;
+    const typeNext = () => {
+      if (position >= snippet.code.length) {
+        timer = window.setTimeout(() => {
+          position = 0;
+          setVisible(0);
+          setSnippetIndex((index) => (index + 1) % snippets.length);
+          timer = window.setTimeout(typeNext, 500);
+        }, 1500);
+        return;
+      }
+      position += 1;
+      setVisible(position);
+      timer = window.setTimeout(typeNext, 35);
+    };
+    timer = window.setTimeout(typeNext, 500);
+    return () => window.clearTimeout(timer);
+  }, [snippetIndex]);
+
+  return (
+    <div className="folio-code-window" aria-label="Animated code preview">
+      <div className="folio-code-topbar">
+        <span className="folio-code-dots"><i /><i /><i /></span>
+        <span>{snippet.file}</span>
+        <span className="folio-code-live"><i /> LIVE</span>
+      </div>
+      <pre aria-hidden="true"><code className="folio-code-syntax">{highlightCode(snippet.code.slice(0, visible))}<span className="folio-code-cursor" /></code></pre>
+      <div className="folio-code-status"><span>UTF-8</span><span>TypeScript</span><span>⌘ + ENTER</span></div>
+      <span className="folio-code-orbit" aria-hidden="true" />
+    </div>
   );
 }
 
 export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profileImageIndex, setProfileImageIndex] = useState(0);
+  const [menuHovered, setMenuHovered] = useState(false);
+  const [menuFocused, setMenuFocused] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuVisible = menuOpen || menuHovered || menuFocused;
   const projects = archive ? site.projects : site.projects.slice(0, 4);
   const featuredProjects = site.projects.slice(0, 4);
   const moreProjects = site.projects.slice(4);
 
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setScrolled(!entry.isIntersecting);
+    });
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="portfolio-v2">
-      <header className="folio-header">
+      <header className="folio-header" ref={headerRef}>
         <div className="folio-header-inner">
           <a
             className="folio-wordmark"
             href={archive ? "/" : "#top"}
-            aria-label="Sourav Banerjee home"
+            aria-label="Sourav home"
           >
-            <span>SB</span>
-            <b>Sourav Banerjee</b>
-            <i>®</i>
+            <b>Sourav</b>
           </a>
-          <button
-            className="folio-menu-toggle"
-            type="button"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? "Close" : "Menu"}
-          </button>
-          <nav
-            className={menuOpen ? "is-open" : ""}
-            aria-label="Main navigation"
-          >
-            <a
-              href={archive ? "/#about" : "#about"}
-              onClick={() => setMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href={archive ? "/#work" : "#work"}
-              onClick={() => setMenuOpen(false)}
-            >
-              Work
-            </a>
-            <a
-              href={archive ? "/#experience" : "#experience"}
-              onClick={() => setMenuOpen(false)}
-            >
-              Experience
-            </a>
-            <a
-              href={archive ? "/#contact" : "#contact"}
-              onClick={() => setMenuOpen(false)}
-            >
-              Contact
-            </a>
+          <nav className="folio-top-nav" aria-label="Main navigation">
+            {[
+              ["About", "#about"],
+              ["Projects", "#work"],
+              ["Timeline", "#experience"],
+              ["Tech Stack", "#skills"],
+              ["Contact", "#contact"],
+            ].map(([label, target]) => (
+              <a key={target} href={archive ? `/${target}` : target}>{label}</a>
+            ))}
           </nav>
-          <a
-            className="folio-resume"
-            href={site.socials.resume}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a className="folio-resume" href={site.socials.resume} target="_blank" rel="noreferrer">
             Resume <ArrowUpRight size={14} />
           </a>
         </div>
       </header>
+
+      {scrolled && (
+        <div
+          className={`folio-floating-menu${menuVisible ? " is-open" : ""}`}
+          onMouseEnter={() => setMenuHovered(true)}
+          onMouseLeave={() => setMenuHovered(false)}
+          onFocus={() => setMenuFocused(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setMenuFocused(false);
+          }}
+        >
+          <button
+            className="folio-menu-toggle"
+            type="button"
+            aria-label={menuVisible ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuVisible}
+            onClick={() => {
+              setMenuOpen((open) => !open);
+              setMenuHovered(false);
+              setMenuFocused(false);
+            }}
+          >
+            <span /><span /><span />
+          </button>
+          <nav aria-label="Quick navigation">
+            {[
+              ["About", "#about"],
+              ["Projects", "#work"],
+              ["Timeline", "#experience"],
+              ["Tech Stack", "#skills"],
+              ["Contact", "#contact"],
+            ].map(([label, target]) => (
+              <a key={target} href={archive ? `/${target}` : target} onClick={() => setMenuOpen(false)}>
+                {label}<ArrowUpRight size={15} />
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
 
       {archive ? (
         <main className="folio-archive" id="top">
@@ -227,7 +287,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <ArrowDownRight size={15} className="folio-back-arrow" /> Back to
               home
             </Link>
-            <p className="folio-eyebrow">Selected work / 2025—26</p>
+            <p className="folio-eyebrow">Selected work · 2025—26</p>
           </div>
           <div className="folio-section-head folio-archive-title">
             <div>
@@ -279,42 +339,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 Kolkata or remote
               </div>
             </div>
-            <div className="folio-portrait-wrap">
-              <div className="folio-portrait-note">
-                DEVELOPER
-                <br />
-                BY CURIOSITY
-              </div>
-              <div className="folio-portrait">
-                <img
-                  key={site.profileImages[profileImageIndex]}
-                  src={site.profileImages[profileImageIndex]}
-                  alt={`${site.name}, profile photo ${profileImageIndex + 1}`}
-                />
-                <button
-                  className="folio-portrait-switch"
-                  type="button"
-                  title="Switch profile image"
-                  aria-label="Switch profile image"
-                  onClick={() =>
-                    setProfileImageIndex(
-                      (index) => (index + 1) % site.profileImages.length,
-                    )
-                  }
-                >
-                  <RotateCw size={15} />
-                </button>
-              </div>
-              <div className="folio-portrait-caption">
-                <span>
-                  0{profileImageIndex + 1} / 0{site.profileImages.length}
-                </span>
-                <span>Full stack · MERN</span>
-              </div>
-              <div className="folio-scribble" aria-hidden="true">
-                ✳
-              </div>
-            </div>
+            <CodeTerminal />
             <div className="folio-hero-bottom">
               <span>SCROLL TO EXPLORE</span>
               <span className="folio-scroll-line" />
@@ -324,7 +349,6 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
 
           <section className="folio-intro-band" id="about">
             <div className="folio-intro-label">
-              <span>01</span>
               <p>
                 A little
                 <br />
@@ -367,7 +391,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           <section className="folio-section folio-work" id="work">
             <div className="folio-section-head">
               <div>
-                <p className="folio-eyebrow">02 / Selected work</p>
+                <p className="folio-eyebrow">Selected work</p>
                 <h2>
                   Things I’ve
                   <br className="folio-mobile-break" /> put into the world
@@ -391,13 +415,12 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
             </div>
             <div className="folio-more-work">
               <div>
-                <p className="folio-eyebrow">More experiments / 04</p>
+                <p className="folio-eyebrow">More experiments</p>
                 <h3>There’s more where that came from.</h3>
               </div>
               <div className="folio-more-list">
                 {moreProjects.map((project, i) => (
                   <div className="folio-more-row" key={project.title}>
-                    <span>0{i + 5}</span>
                     <Link to={`/all-projects#project-${i + 5}`}>
                       {project.title}
                       <ArrowUpRight size={16} />
@@ -415,7 +438,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           <section className="folio-experience" id="experience">
             <div className="folio-experience-inner">
               <div className="folio-experience-intro">
-                <p className="folio-eyebrow">03 / The journey</p>
+                <p className="folio-eyebrow">The journey</p>
                 <h2>
                   Different path.
                   <br />
@@ -430,7 +453,6 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 {site.experience.map((job, index) => (
                   <article className="folio-timeline-item" key={job.company}>
                     <div className="folio-timeline-meta">
-                      <span>0{index + 1}</span>
                       <time>{job.period}</time>
                     </div>
                     <div>
@@ -461,7 +483,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
 
           <section className="folio-skills" id="skills">
             <div className="folio-skills-head">
-              <p className="folio-eyebrow">04 / Tools I reach for</p>
+              <p className="folio-eyebrow">Tools I reach for</p>
               <h2>
                 A growing
                 <br />
@@ -473,12 +495,15 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               </p>
             </div>
             <div className="folio-skills-list">
-              {site.skills.map((skill, index) => (
-                <span key={skill}>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                  {skill}
-                </span>
-              ))}
+              {site.skills.map((skill) => {
+                const { icon, className } = getSkillIcon(skill, "dark");
+                return (
+                  <span key={skill}>
+                    <Icon icon={icon} width={19} height={19} className={`folio-skill-icon ${className || ""}`} aria-hidden="true" />
+                    {skill}
+                  </span>
+                );
+              })}
             </div>
           </section>
 
@@ -493,7 +518,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <span>MATTER.</span>
             </div>
             <div className="folio-contact-copy">
-              <p className="folio-eyebrow">06 / Your next teammate?</p>
+              <p className="folio-eyebrow">Your next teammate?</p>
               <h2>
                 Have a good
                 <br />
@@ -528,15 +553,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         </main>
       )}
 
-      <footer className="folio-footer">
-        <a className="folio-wordmark" href="#top">
-          <span>SB</span>
-          <b>Sourav Banerjee</b>
-        </a>
-        <p>Designed and built with curiosity · Kolkata, India</p>
-        <a href="#top">Back to top ↑</a>
-        <span>© {new Date().getFullYear()}</span>
-      </footer>
     </div>
   );
 }
+
