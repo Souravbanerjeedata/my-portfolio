@@ -42,6 +42,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <article
       id={`project-${index + 1}`}
       className={`folio-project-card folio-project-${index + 1}`}
+      data-reveal="rise"
     >
       <a
         className="folio-project-image"
@@ -100,7 +101,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 function Activity() {
   return (
     <section className="folio-section folio-activity" id="activity">
-      <div className="folio-section-head">
+      <div className="folio-section-head" data-reveal="rise">
         <div>
           <p className="folio-eyebrow">Open source &amp; practice</p>
           <h2>Made in public.</h2>
@@ -212,6 +213,22 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
     observer.observe(header);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    const targets = document.querySelectorAll<HTMLElement>(".portfolio-v2 [data-reveal]");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((target) => target.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [archive]);
 
   return (
     <div className="portfolio-v2">
@@ -314,7 +331,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
       ) : (
         <main id="top">
           <section className="folio-hero">
-            <div className="folio-hero-copy">
+            <div className="folio-hero-copy" data-reveal="left">
               <p className="folio-kicker">
                 <span /> OPEN TO JUNIOR & INTERNSHIP ROLES
               </p>
@@ -339,15 +356,12 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 Kolkata or remote
               </div>
             </div>
-            <CodeTerminal />
-            <div className="folio-hero-bottom">
-              <span>SCROLL TO EXPLORE</span>
-              <span className="folio-scroll-line" />
-              <span>22°34′ N · 88°22′ E</span>
-            </div>
+            <div data-reveal="right" className="folio-hero-terminal"><CodeTerminal /></div>
+
+
           </section>
 
-          <section className="folio-intro-band" id="about">
+          <section className="folio-intro-band" id="about" data-reveal="rise">
             <div className="folio-intro-label">
               <p>
                 A little
@@ -389,7 +403,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           </section>
 
           <section className="folio-section folio-work" id="work">
-            <div className="folio-section-head">
+            <div className="folio-section-head" data-reveal="rise">
               <div>
                 <p className="folio-eyebrow">Selected work</p>
                 <h2>
@@ -435,7 +449,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
             </div>
           </section>
 
-          <section className="folio-experience" id="experience">
+          <section className="folio-experience" id="experience" data-reveal="rise">
             <div className="folio-experience-inner">
               <div className="folio-experience-intro">
                 <p className="folio-eyebrow">The journey</p>
@@ -482,7 +496,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           </section>
 
           <section className="folio-skills" id="skills">
-            <div className="folio-skills-head">
+            <div className="folio-skills-head" data-reveal="left">
               <p className="folio-eyebrow">Tools I reach for</p>
               <h2>
                 A growing
@@ -494,7 +508,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 projects and learning how the web fits together.
               </p>
             </div>
-            <div className="folio-skills-list">
+            <div className="folio-skills-list" data-reveal="right">
               {site.skills.map((skill) => {
                 const { icon, className } = getSkillIcon(skill, "dark");
                 return (
@@ -510,14 +524,19 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
           <Activity />
 
           <section className="folio-contact" id="contact">
-            <div className="folio-contact-stamp">
-              LET’S MAKE
-              <br />
-              SOMETHING
-              <br />
-              <span>MATTER.</span>
-            </div>
-            <div className="folio-contact-copy">
+            <figure className="folio-contact-portrait" data-reveal="left">
+              <div className="folio-contact-image-frame">
+                <img src="/contact-portrait.png" alt={site.name} loading="lazy" />
+              </div>
+              <figcaption>
+                <div>
+                  <strong>{site.name}</strong>
+                  <span>Full Stack Developer · Kolkata</span>
+                </div>
+                <i><span /> Available</i>
+              </figcaption>
+            </figure>
+            <div className="folio-contact-copy" data-reveal="right">
               <p className="folio-eyebrow">Your next teammate?</p>
               <h2>
                 Have a good
