@@ -6,6 +6,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Github,
+  Home,
   Linkedin,
   MapPin,
   Play,
@@ -43,6 +44,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       id={`project-${index + 1}`}
       className={`folio-project-card folio-project-${index + 1}`}
       data-reveal="rise"
+      onPointerMove={(event) => {
+        const bounds = event.currentTarget.getBoundingClientRect();
+        event.currentTarget.style.setProperty("--spot-x", `${event.clientX - bounds.left}px`);
+        event.currentTarget.style.setProperty("--spot-y", `${event.clientY - bounds.top}px`);
+      }}
     >
       <a
         className="folio-project-image"
@@ -199,6 +205,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const [menuFocused, setMenuFocused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const hoverArmedRef = useRef(false);
   const menuVisible = menuOpen || menuHovered || menuFocused;
   const projects = archive ? site.projects : site.projects.slice(0, 4);
   const featuredProjects = site.projects.slice(0, 4);
@@ -213,6 +220,9 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
     observer.observe(header);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    hoverArmedRef.current = false;
+  }, [scrolled]);
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>(".portfolio-v2 [data-reveal]");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -261,26 +271,46 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
       {scrolled && (
         <div
           className={`folio-floating-menu${menuVisible ? " is-open" : ""}`}
-          onMouseEnter={() => setMenuHovered(true)}
-          onMouseLeave={() => setMenuHovered(false)}
+          onMouseEnter={() => {
+            if (hoverArmedRef.current) setMenuHovered(true);
+          }}
+          onMouseMove={() => {
+            hoverArmedRef.current = true;
+            setMenuHovered(true);
+          }}
+          onMouseLeave={() => {
+            hoverArmedRef.current = false;
+            setMenuHovered(false);
+          }}
           onFocus={() => setMenuFocused(true)}
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setMenuFocused(false);
           }}
         >
-          <button
-            className="folio-menu-toggle"
-            type="button"
-            aria-label={menuVisible ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={menuVisible}
-            onClick={() => {
-              setMenuOpen((open) => !open);
-              setMenuHovered(false);
-              setMenuFocused(false);
-            }}
-          >
-            <span /><span /><span />
-          </button>
+          <div className="folio-menu-top">
+            <a
+              className="folio-menu-home"
+              href={archive ? "/" : "#top"}
+              aria-label="Home"
+              title="Home"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Home size={19} strokeWidth={1.8} />
+            </a>
+            <button
+              className="folio-menu-toggle"
+              type="button"
+              aria-label={menuVisible ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuVisible}
+              onClick={() => {
+                setMenuOpen((open) => !open);
+                setMenuHovered(false);
+                setMenuFocused(false);
+              }}
+            >
+              <span /><span /><span />
+            </button>
+          </div>
           <nav aria-label="Quick navigation">
             {[
               ["About", "#about"],
