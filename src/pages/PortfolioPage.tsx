@@ -5,6 +5,7 @@ import {
   ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
+  ArrowUp,
   Github,
   Home,
   Linkedin,
@@ -204,6 +205,10 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const [menuHovered, setMenuHovered] = useState(false);
   const [menuFocused, setMenuFocused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [kolkataTime, setKolkataTime] = useState("");
+  const [touchDevice, setTouchDevice] = useState(false);
+  const [mobileLayout, setMobileLayout] = useState(false);
+  const touchMenuRef = useRef(false);
   const headerRef = useRef<HTMLElement>(null);
   const hoverArmedRef = useRef(false);
   const menuVisible = menuOpen || menuHovered || menuFocused;
@@ -222,7 +227,36 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   }, []);
   useEffect(() => {
     hoverArmedRef.current = false;
+    if (!scrolled) setMenuOpen(false);
   }, [scrolled]);
+  useEffect(() => {
+    const query = window.matchMedia("(hover: none), (pointer: coarse)");
+    const mobileQuery = window.matchMedia("(max-width: 700px)");
+    const update = () => { touchMenuRef.current = query.matches; setTouchDevice(query.matches); setMobileLayout(mobileQuery.matches); };
+    update();
+    query.addEventListener("change", update);
+    mobileQuery.addEventListener("change", update);
+    return () => { query.removeEventListener("change", update); mobileQuery.removeEventListener("change", update); };
+  }, []);
+  useEffect(() => {
+    const updateTime = () => setKolkataTime(new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true }).format(new Date()));
+    updateTime();
+    const timer = window.setInterval(updateTime, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  useEffect(() => {
+    if (!touchMenuRef.current || !menuOpen) return;
+    const closeOnScroll = () => setMenuOpen(false);
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (!(event.target instanceof Element) || !event.target.closest(".folio-floating-menu")) setMenuOpen(false);
+    };
+    window.addEventListener("scroll", closeOnScroll, { passive: true });
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    return () => {
+      window.removeEventListener("scroll", closeOnScroll);
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+    };
+  }, [menuOpen]);
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>(".portfolio-v2 [data-reveal]");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -268,19 +302,21 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         </div>
       </header>
 
-      {scrolled && (
+      {(scrolled || mobileLayout) && (
         <div
           className={`folio-floating-menu${menuVisible ? " is-open" : ""}`}
           onMouseEnter={() => {
-            if (hoverArmedRef.current) setMenuHovered(true);
+            if (!touchMenuRef.current && hoverArmedRef.current) setMenuHovered(true);
           }}
           onMouseMove={() => {
-            hoverArmedRef.current = true;
-            setMenuHovered(true);
+            if (!touchMenuRef.current) {
+              hoverArmedRef.current = true;
+              setMenuHovered(true);
+            }
           }}
           onMouseLeave={() => {
             hoverArmedRef.current = false;
-            setMenuHovered(false);
+            if (!touchMenuRef.current) setMenuHovered(false);
           }}
           onFocus={() => setMenuFocused(true)}
           onBlur={(event) => {
@@ -377,9 +413,14 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                   Full-stack web developer building thoughtful products with
                   MERN & PERN Stack
                 </p>
-                <a className="folio-hero-cta" href="#work">
-                  Explore my work <ArrowDown size={15} />
-                </a>
+                <div className="folio-hero-actions">
+                  <a className="folio-hero-cta" href="#work">
+                    Explore my work <ArrowDown size={15} />
+                  </a>
+                  <a className="folio-hero-resume" href={site.socials.resume} target="_blank" rel="noreferrer">
+                    Resume <ArrowUpRight size={14} />
+                  </a>
+                </div>
               </div>
               <div className="folio-location">
                 <MapPin size={14} /> Kolkata, India <span>·</span> Onsite in
@@ -395,7 +436,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
             <div className="folio-intro-label">
               <p>
                 A little
-                <br />
+                <br />{" "}
                 about me
               </p>
             </div>
@@ -561,7 +602,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <figcaption>
                 <div>
                   <strong>{site.name}</strong>
-                  <span>Full Stack Developer · Kolkata</span>
+                  <span>Full Stack Developer</span>
                 </div>
                 <i><span /> Available</i>
               </figcaption>
@@ -602,6 +643,11 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         </main>
       )}
 
+      <footer className="folio-site-footer">
+        <a className="folio-footer-brand" href={archive ? "/#top" : "#top"} aria-label="Back to home">Sourav<span>© {new Date().getFullYear()}</span></a>
+        <div className="folio-footer-local"><span><MapPin size={14} /> Kolkata, India</span><span><i /> {kolkataTime || "Kolkata time"} IST</span></div>
+        <a className="folio-back-top" href={archive ? "/#top" : "#top"} title="Back on top" aria-label="Back on top"><ArrowUp size={17} /></a>
+      </footer>
     </div>
   );
 }

@@ -1060,3 +1060,76 @@ body::after { display: none !important; }
   .folio-project-card { border-radius:21px; }
 }
 @media (prefers-reduced-motion:reduce) { .folio-hero::before { animation:none; } }
+
+
+/* Responsive navigation and footer refinements. */
+.folio-site-footer { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:92px; padding:20px max(24px,calc((100% - 1380px)/2)); border-top:1px solid rgba(111,204,248,.17); background:linear-gradient(100deg,#050d1b,#081a2f 50%,#050d1b); color:#d7efff; }
+.folio-footer-brand { display:flex; align-items:baseline; gap:12px; color:#e8f8ff; font:600 25px "Caveat",cursive; }
+.folio-footer-brand span { color:#7796ad; font:500 9px "IBM Plex Mono",monospace; }
+.folio-footer-local { display:flex; align-items:center; gap:24px; color:#99b5c9; font:500 10px "IBM Plex Mono",monospace; }
+.folio-footer-local span { display:inline-flex; align-items:center; gap:7px; }
+.folio-footer-local svg { color:#69ddff; }
+.folio-footer-local i { width:6px; height:6px; border-radius:50%; background:#65e5b1; box-shadow:0 0 10px rgba(101,229,177,.75); }
+.folio-back-top { display:inline-flex; align-items:center; gap:9px; padding:10px 14px; border:1px solid rgba(101,215,255,.25); border-radius:999px; background:rgba(19,75,112,.22); color:#c8edff; font-size:11px; font-weight:600; transition:transform .2s,border-color .2s,background .2s; }
+.folio-back-top:hover { transform:translateY(-2px); border-color:rgba(110,233,255,.65); background:rgba(21,119,169,.28); }
+@media (max-width:900px) {
+ .folio-header-inner { flex-wrap:wrap; height:auto; min-height:65px; padding:9px 0 8px; row-gap:5px; }
+ .folio-top-nav { order:3; flex:1 1 100%; min-width:0; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; }
+ .folio-top-nav::-webkit-scrollbar { display:none; }
+ .folio-resume { margin-left:auto; }
+}
+@media (max-width:700px) {
+ .folio-header-inner { width:calc(100% - 24px); column-gap:6px; }
+ .folio-wordmark b { font-size:29px; }
+ .folio-resume { padding:8px 10px; font-size:10px; }
+ .folio-top-nav { display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%!important; max-width:100%; overflow:visible; }
+ .folio-top-nav a { justify-content:center; min-width:0; min-height:36px; padding:8px 5px!important; font-size:10px!important; }
+ .folio-intro-label p br { display:initial!important; }
+ .folio-site-footer { display:grid; grid-template-columns:1fr auto; gap:16px; padding:22px 20px; }
+ .folio-footer-brand { font-size:24px; }
+ .folio-footer-local { grid-column:1/-1; grid-row:2; flex-wrap:wrap; gap:10px 20px; }
+ .folio-back-top { grid-column:2; grid-row:1; }
+}
+@media (max-width:370px) {
+ .folio-top-nav { grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px!important; padding:4px!important; }
+ .folio-top-nav a { padding-inline:4px!important; font-size:9px!important; }
+ .folio-footer-local { font-size:9px; }
+}
+
+
+/* On phones, trade the tall link strip for the always-available floating menu. */
+@media (max-width:700px) {
+  .folio-header-inner { flex-wrap:nowrap; height:62px; min-height:62px; padding:0; }
+  .folio-top-nav { display:none!important; }
+  .folio-resume { display:none!important; }
+  .folio-header { min-height:62px; }
+  .folio-floating-menu { position:fixed; top:9px; right:12px; z-index:100; }
+  .folio-floating-menu.is-open { width:min(264px,calc(100vw - 24px)); }
+  .folio-hero { min-height:calc(100svh - 62px); margin-top:8px; }
+}
+
+
+/* Final mobile header composition: wordmark removed, menu retained, CTA keeps Resume close by. */
+.folio-hero-actions { display:flex; align-items:center; gap:11px; }
+.folio-hero-resume { display:none; align-items:center; justify-content:center; gap:9px; min-height:46px; padding:0 16px; border:1px solid rgba(112,221,255,.32); border-radius:13px; background:rgba(16,77,117,.24); color:#d7f4ff; font-size:12px; font-weight:700; transition:transform .2s,border-color .2s,background .2s; }
+.folio-hero-resume:hover { transform:translateY(-2px); border-color:rgba(112,235,255,.7); background:rgba(16,112,161,.35); }
+.folio-back-top { width:42px; height:42px; justify-content:center; padding:0; }
+@media (max-width:700px) {
+ .folio-header { display:none!important; }
+ .folio-wordmark { display:none!important; }
+ .folio-resume { display:none!important; }
+ .folio-top-nav { display:none!important; }
+ .folio-floating-menu { position:fixed; top:12px; right:12px; }
+ .folio-hero { min-height:100svh; margin-top:0; padding-top:clamp(46px,9vh,78px); }
+ .folio-hero-actions { justify-content:center; flex-wrap:wrap; }
+ .folio-hero-resume { display:inline-flex; }
+ .folio-hero-foot { gap:17px; }
+ .folio-footer-brand { display:none!important; }
+ .folio-site-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:18px 16px; }
+ .folio-footer-local { display:flex; flex:1 1 220px; flex-wrap:wrap; gap:8px 14px; font-size:9px; }
+ .folio-back-top { flex:0 0 40px; width:40px; height:40px; }
+}
+@media (max-width:360px) {
+ .folio-site-footer { align-items:flex-start; }
+ .folio-footer-local { flex-basis:calc(100% - 54px); flex-direction:column; align-items:flex-start; }
+}
