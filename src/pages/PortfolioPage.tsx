@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowDown,
@@ -40,11 +41,17 @@ function ProjectActions({ project }: { project: Project }) {
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const reduceMotion = useReducedMotion();
   return (
-    <article
+    <motion.article
       id={`project-${index + 1}`}
       className={`folio-project-card folio-project-${index + 1}`}
-      data-reveal="rise"
+      initial={reduceMotion ? false : { opacity: 0, y: 34, rotateX: 3, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.16 }}
+      transition={{ duration: 0.72, delay: Math.min(index * 0.1, 0.3), ease: [0.16, 1, 0.3, 1] }}
+      whileHover={reduceMotion ? undefined : { y: -7, scale: 1.012, transition: { duration: 0.24, ease: "easeOut" } }}
+      style={{ transformPerspective: 1100, transformOrigin: "center bottom" }}
       onPointerMove={(event) => {
         const bounds = event.currentTarget.getBoundingClientRect();
         event.currentTarget.style.setProperty("--spot-x", `${event.clientX - bounds.left}px`);
@@ -101,7 +108,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
         <ProjectActions project={project} />
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -211,6 +218,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const touchMenuRef = useRef(false);
   const headerRef = useRef<HTMLElement>(null);
   const hoverArmedRef = useRef(false);
+  const reduceMotion = useReducedMotion();
   const menuVisible = menuOpen || menuHovered || menuFocused;
   const projects = archive ? site.projects : site.projects.slice(0, 4);
   const featuredProjects = site.projects.slice(0, 4);
@@ -397,6 +405,16 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
       ) : (
         <main id="top">
           <section className="folio-hero">
+            <motion.div
+              className="folio-hero-orbit"
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { x: [0, 24, -12, 0], y: [0, -18, 12, 0], scale: [1, 1.08, 0.96, 1] }}
+              transition={reduceMotion ? undefined : { duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="folio-orbit-ring folio-orbit-ring-a" />
+              <span className="folio-orbit-ring folio-orbit-ring-b" />
+              <span className="folio-orbit-core" />
+            </motion.div>
             <div className="folio-hero-copy" data-reveal="left">
               <p className="folio-hero-identity">Sourav Banerjee · Frontend Developer</p>
               <p className="folio-kicker">
@@ -484,9 +502,9 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 </h2>
               </div>
               <p>
-                From useful everyday apps to playful interactive experiences.
-                Each project starts with a real problem or a question worth
-                exploring.
+                A selection of web and mobile builds. Open the implementation
+                notes to see the user flows, state choices, and integrations
+                behind each project.
               </p>
             </div>
             <div className="folio-project-grid">
@@ -536,7 +554,15 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               </div>
               <div className="folio-timeline">
                 {site.experience.map((job, index) => (
-                  <article className="folio-timeline-item" key={job.company}>
+                  <motion.article
+                    className="folio-timeline-item"
+                    key={job.company}
+                    initial={reduceMotion ? false : { opacity: 0, x: 32 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.65, delay: index * 0.14, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={reduceMotion ? undefined : { x: 6, transition: { duration: 0.2 } }}
+                  >
                     <div className="folio-timeline-meta">
                       <time>{job.period}</time>
                     </div>
@@ -560,7 +586,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                       </p>
                       <p className="folio-timeline-description">{job.blurb}</p>
                     </div>
-                  </article>
+                  </motion.article>
                 ))}
               </div>
             </div>
@@ -586,7 +612,14 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 { title: "Databases · learning", skills: ["MongoDB", "PostgreSQL", "MySQL"] },
                 { title: "Tools", skills: ["Git", "GitHub", "Deno", "Expo"] },
               ].map((group) => (
-                <div className="folio-skill-group" key={group.title}>
+                <motion.div
+                  className="folio-skill-group"
+                  key={group.title}
+                  initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.55, delay: Math.min(group.skills.length * 0.018, 0.12), ease: [0.16, 1, 0.3, 1] }}
+                >
                   <h3>{group.title}</h3>
                   <div className="folio-skill-items">
                     {group.skills.map((skill) => {
@@ -599,7 +632,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                       );
                     })}
                   </div>
-                </div>
+                </motion.div>
               ))}
               <p className="folio-learning-note">Currently learning: backend fundamentals and data structures &amp; algorithms.</p>
             </div>
