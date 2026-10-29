@@ -75,7 +75,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div className="folio-project-heading">
           <div>
             <p className="folio-eyebrow">
-              {project.year} <span>·</span>{" "}
+              PROJECT <span>·</span> {project.year} <span>·</span>{" "}
               {project.stack.slice(0, 2).join(" / ")}
             </p>
             <h3>{project.title}</h3>
@@ -91,7 +91,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
         {project.story && (
           <details className="folio-project-details">
-            <summary>How it works</summary>
+            <summary>Implementation notes</summary>
             <div>
               {project.story.split("\n\n").map((paragraph) => (
                 <p key={paragraph}><strong>{paragraph.slice(0, paragraph.indexOf(":"))}:</strong>{paragraph.slice(paragraph.indexOf(":") + 1)}</p>
@@ -144,10 +144,10 @@ function CodeTerminal() {
       file: "~/sourav/src/config/site.ts",
       code: `const sourav = {
   name: "Sourav",
-  role: "Full Stack Developer",
-  focus: "MERN Stack",
+  role: "Frontend Developer",
+  focus: "Backend development + DSA",
   location: "Kolkata onsite / remote",
-  stack: ["React", "Node.js", "MongoDB"]
+  stack: ["React", "TypeScript", "React Native"]
 };
 
 export default sourav;`,
@@ -398,6 +398,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         <main id="top">
           <section className="folio-hero">
             <div className="folio-hero-copy" data-reveal="left">
+              <p className="folio-hero-identity">Sourav Banerjee · Frontend Developer</p>
               <p className="folio-kicker">
                 <span /> OPEN TO JUNIOR & INTERNSHIP ROLES
               </p>
@@ -410,8 +411,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               </h1>
               <div className="folio-hero-foot">
                 <p>
-                  Full-stack web developer building thoughtful products with
-                  MERN & PERN Stack
+                  Frontend developer building thoughtful web and mobile experiences. Currently learning backend development and DSA.
                 </p>
                 <div className="folio-hero-actions">
                   <a className="folio-hero-cta" href="#work">
@@ -575,20 +575,33 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
                 <em>toolbox.</em>
               </h2>
               <p>
-                Curious by default. These are the tools I’ve used while making
-                projects and learning how the web fits together.
+                Frontend tools used in projects, alongside backend technologies currently in progress.
               </p>
             </div>
             <div className="folio-skills-list" data-reveal="right">
-              {site.skills.map((skill) => {
-                const { icon, className } = getSkillIcon(skill, "dark");
-                return (
-                  <span key={skill}>
-                    <Icon icon={icon} width={19} height={19} className={`folio-skill-icon ${className || ""}`} aria-hidden="true" />
-                    {skill}
-                  </span>
-                );
-              })}
+              {[
+                { title: "Frontend", skills: ["React", "React Native", "Next.js", "Redux", "Tailwind CSS", "Bootstrap", "JQuery", "Vite"] },
+                { title: "Languages", skills: ["TypeScript", "JavaScript", "Python", "HTML", "CSS", "SCSS"] },
+                { title: "Backend · learning", skills: ["Node.js", "Express.js", "REST APIs", "GraphQL"] },
+                { title: "Databases · learning", skills: ["MongoDB", "PostgreSQL", "MySQL"] },
+                { title: "Tools", skills: ["Git", "GitHub", "Deno", "Expo"] },
+              ].map((group) => (
+                <div className="folio-skill-group" key={group.title}>
+                  <h3>{group.title}</h3>
+                  <div className="folio-skill-items">
+                    {group.skills.map((skill) => {
+                      const { icon, className } = getSkillIcon(skill, "dark");
+                      return (
+                        <span key={skill}>
+                          <Icon icon={icon} width={19} height={19} className={`folio-skill-icon ${className || ""}`} aria-hidden="true" />
+                          {skill}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+              <p className="folio-learning-note">Currently learning: backend fundamentals and data structures &amp; algorithms.</p>
             </div>
           </section>
 
@@ -602,7 +615,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <figcaption>
                 <div>
                   <strong>{site.name}</strong>
-                  <span>Full Stack Developer</span>
+                  <span>Frontend Developer · learning backend</span>
                 </div>
                 <i><span /> Available</i>
               </figcaption>

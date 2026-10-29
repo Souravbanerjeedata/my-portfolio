@@ -41,29 +41,29 @@ export const site = {
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Full Stack Developer",
+  role: "Frontend Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Full-stack web developer focused on MERN Stack. Open to junior and internship roles, onsite in Kolkata or remote.",
+    "Frontend developer building thoughtful web and mobile experiences. Currently learning backend development and DSA. Open to junior and internship roles in Kolkata or remote.",
   about: [
-    "Hey, I'm Sourav — a self-taught Full Stack developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have been building real projects for the last 3.5+ years.",
-    "I focus on clean, practical applications with MERN / PERN stack and modern frontend architecture.",
-    "Currently deepening DSA knowledge and solving problems on LeetCode while looking for an internship or junior developer role where I can contribute and grow.",
+    "Hey, I'm Sourav — a self-taught frontend developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have spent the last 3.5+ years learning by building web and mobile projects.",
+    "I focus on clean, practical interfaces with React, TypeScript, and modern frontend architecture.",
+    "I'm currently learning backend development and strengthening my DSA fundamentals while looking for a junior or internship role where I can contribute and grow.",
   ],
   tldr: [
     "Career switcher from HR → developer",
-    "Self-taught for 3.5+ years",
+    "Learning by building for 3.5+ years",
     "Building web & mobile apps",
     "Open to internships & junior roles",
   ],
   status: {
     available: true,
     availableText: "Junior / intern roles · Kolkata onsite or remote",
-    nowLearning: "DSA • System Design",
-    nowBuilding: "Full-stack projects",
+    nowLearning: "Backend development • DSA",
+    nowBuilding: "Web & mobile projects",
   },
   socials: {
     github: "https://github.com/Souravbanerjeedata",
@@ -78,10 +78,10 @@ export const site = {
   experience: [
     {
       company: "Independent / Self-taught",
-      role: "Full Stack Developer",
+      role: "Frontend Developer · Independent",
       period: "2023 – Present",
       blurb:
-        "Transitioned into software development through consistent self-learning and project building. Developed multiple frontend and full-stack applications using MERN/PERN stack and modern tooling. Currently focused on production-ready patterns, DSA.",
+        "Transitioned into software development through consistent self-learning and project building. Built frontend web and mobile applications with React, React Native, TypeScript, and modern tooling. Currently learning backend development and strengthening DSA fundamentals.",
       url: "https://github.com/Souravbanerjeedata",
     },
     {
@@ -289,10 +289,10 @@ export const site = {
   coreSkills: [
     "React",
     "TypeScript",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
-    "REST APIs",
+    "React Native",
+    "Redux",
+    "Tailwind CSS",
+    "Vite",
   ],
   writing: [] as Post[],
   github: {
