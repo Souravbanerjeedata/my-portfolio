@@ -151,7 +151,7 @@ function CodeTerminal() {
       file: "~/sourav/src/config/site.ts",
       code: `const sourav = {
   name: "Sourav",
-  role: "Frontend Developer",
+  role: "Full Stack Developer",
   focus: "Backend development + DSA",
   location: "Kolkata onsite / remote",
   stack: ["React", "TypeScript", "React Native"]
@@ -284,6 +284,11 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
 
   return (
     <div className="portfolio-v2">
+      <div className="folio-ambient" aria-hidden="true">
+        <span className="folio-ambient-glow folio-ambient-glow-a" />
+        <span className="folio-ambient-glow folio-ambient-glow-b" />
+        <span className="folio-ambient-glow folio-ambient-glow-c" />
+      </div>
       <header className="folio-header" ref={headerRef}>
         <div className="folio-header-inner">
           <a
@@ -416,7 +421,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <span className="folio-orbit-core" />
             </motion.div>
             <div className="folio-hero-copy" data-reveal="left">
-              <p className="folio-hero-identity">Sourav Banerjee · Frontend Developer</p>
+              <p className="folio-hero-identity">Sourav Banerjee · Full Stack Developer</p>
               <p className="folio-kicker">
                 <span /> OPEN TO JUNIOR & INTERNSHIP ROLES
               </p>
@@ -429,7 +434,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               </h1>
               <div className="folio-hero-foot">
                 <p>
-                  Frontend developer building thoughtful web and mobile experiences. Currently learning backend development and DSA.
+                  MERN stack developer building thoughtful web and mobile experiences. Currently deepening backend fundamentals and DSA.
                 </p>
                 <div className="folio-hero-actions">
                   <a className="folio-hero-cta" href="#work">
@@ -446,17 +451,12 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               </div>
             </div>
             <div data-reveal="right" className="folio-hero-terminal"><CodeTerminal /></div>
-
-
           </section>
 
           <section className="folio-intro-band" id="about" data-reveal="rise">
             <div className="folio-intro-label">
-              <p>
-                A little
-                <br />{" "}
-                about me
-              </p>
+              <p>A LITTLE ABOUT ME</p>
+              <h2>From people<br />to <em>products.</em></h2>
             </div>
             <div className="folio-intro-copy">
               <p className="folio-intro-lead">{site.about[0]}</p>
@@ -648,7 +648,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
               <figcaption>
                 <div>
                   <strong>{site.name}</strong>
-                  <span>Frontend Developer · learning backend</span>
+                  <span>Full Stack Developer · MERN</span>
                 </div>
                 <i><span /> Available</i>
               </figcaption>

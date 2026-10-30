@@ -41,16 +41,16 @@ export const site = {
   bannerImageLight: "/images/cover-light.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SB",
-  role: "Frontend Developer",
+  role: "Full Stack Developer",
   location: "Kolkata, India",
   timezone: "Asia/Kolkata",
   email: "sourav.banerjeejobs@gmail.com",
   greeting: "Hey, I'm Sourav",
   tagline:
-    "Frontend developer building thoughtful web and mobile experiences. Currently learning backend development and DSA. Open to junior and internship roles in Kolkata or remote.",
+    "Full Stack Developer focused on the MERN stack, building thoughtful web and mobile experiences. Currently deepening backend fundamentals and DSA. Open to junior and internship roles in Kolkata or remote.",
   about: [
-    "Hey, I'm Sourav — a self-taught frontend developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have spent the last 3.5+ years learning by building web and mobile projects.",
-    "I focus on clean, practical interfaces with React, TypeScript, and modern frontend architecture.",
+    "Hey, I'm Sourav — a self-taught developer based in Kolkata. After working in analytical and process roles at TCS, I made the deliberate switch into software development and have spent the last 3.5+ years learning by building web and mobile projects.",
+    "I enjoy building clean, practical web and mobile experiences with React and TypeScript, while growing my backend skills across the MERN stack.",
     "I'm currently learning backend development and strengthening my DSA fundamentals while looking for a junior or internship role where I can contribute and grow.",
   ],
   tldr: [
@@ -78,10 +78,10 @@ export const site = {
   experience: [
     {
       company: "Independent / Self-taught",
-      role: "Frontend Developer · Independent",
+      role: "Full Stack Developer · Independent",
       period: "2023 – Present",
       blurb:
-        "Transitioned into software development through consistent self-learning and project building. Built frontend web and mobile applications with React, React Native, TypeScript, and modern tooling. Currently learning backend development and strengthening DSA fundamentals.",
+        "Transitioned into software development through consistent self-learning and project building. Built web and mobile applications with React, React Native, TypeScript, and modern tooling. Currently deepening backend fundamentals and strengthening DSA.",
       url: "https://github.com/Souravbanerjeedata",
     },
     {
