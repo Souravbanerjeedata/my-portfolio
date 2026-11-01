@@ -1,11 +1,17 @@
+import { useCallback, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { PortfolioPage } from "@/pages/PortfolioPage";
+import { Loader } from "@/components/Loader";
 
 export function App() {
+  const [loading, setLoading] = useState(true);
+  const finishLoading = useCallback(() => setLoading(false), []);
+
   return (
     <BrowserRouter>
       <Analytics />
+      {loading && <Loader onDone={finishLoading} />}
       <Routes>
         <Route path="/" element={<PortfolioPage />} />
         <Route path="/all-projects" element={<PortfolioPage archive />} />

@@ -1,130 +1,132 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/components/theme-provider";
-
-const BOOT_LINES = [
-  { text: "> boot portfolio.runtime", delay: 0 },
-  { text: "> resolve modules …………………… ok", delay: 280 },
-  { text: "> hydrate react tree ……………… ok", delay: 520 },
-  { text: "> load assets ……………………………… ok", delay: 760 },
-  { text: "> ready.", delay: 980 },
-];
+  import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export function Loader({ onDone }: { onDone: () => void }) {
-  const { mode } = useTheme();
-  const matrix = mode === "matrix";
+  const reduceMotion = useReducedMotion();
   const [progress, setProgress] = useState(0);
-  const [visibleLines, setVisibleLines] = useState(0);
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
+    // Keep the intro visible long enough to read, even when reduced motion is on.
+    const duration = 3400;
     const start = performance.now();
-    const duration = 1600;
-    let raf = 0;
+    let frame = 0;
+    let exitTimer = 0;
+    let doneTimer = 0;
 
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - t, 3);
       setProgress(Math.round(eased * 100));
+
       if (t < 1) {
-        raf = requestAnimationFrame(tick);
+        frame = requestAnimationFrame(tick);
       } else {
-        setExiting(true);
-        setTimeout(onDone, 420);
+        // Let the completed state land before revealing the page beneath it.
+        exitTimer = window.setTimeout(() => {
+          setExiting(true);
+          doneTimer = window.setTimeout(onDone, 650);
+        }, 800);
       }
     };
-    raf = requestAnimationFrame(tick);
 
-    const timers = BOOT_LINES.map((line, i) =>
-      setTimeout(() => setVisibleLines(i + 1), line.delay)
-    );
-
+    frame = requestAnimationFrame(tick);
     return () => {
-      cancelAnimationFrame(raf);
-      timers.forEach(clearTimeout);
+      cancelAnimationFrame(frame);
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(doneTimer);
     };
-  }, [onDone]);
+  }, [onDone, reduceMotion]);
 
   return (
     <AnimatePresence>
-      {!exiting ? (
+      {!exiting && (
         <motion.div
-          key="loader"
+          key="portfolio-loader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className={`fixed inset-0 z-[100] flex items-center justify-center ${matrix ? "bg-[#020b05]/25 backdrop-blur-[1px]" : "bg-[#08091e]"}`}
+          exit={{ opacity: 0, scale: 1.025, filter: "blur(8px)" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[100] flex min-h-[100svh] flex-col justify-between overflow-hidden bg-[#0b1113] px-6 py-7 text-[#e8efeb] sm:px-10 sm:py-9"
           aria-live="polite"
           aria-busy="true"
+          aria-label="Loading portfolio"
         >
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.12]"
+            className="pointer-events-none absolute inset-0"
             style={{
-              backgroundImage: matrix
-                ? "linear-gradient(rgba(57,255,120,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,207,101,0.2) 1px, transparent 1px)"
-                : "linear-gradient(rgba(85,216,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(185,120,255,0.2) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-              maskImage:
-                "radial-gradient(ellipse at center, black 20%, transparent 70%)",
+              background:
+                "radial-gradient(ellipse 48% 44% at 50% 48%, rgba(86,150,135,.13), transparent 75%), radial-gradient(ellipse 35% 35% at 82% 18%, rgba(135,122,190,.09), transparent 75%)",
             }}
           />
+          <div className="pointer-events-none absolute inset-0 opacity-[.16]" style={{ backgroundImage: "linear-gradient(rgba(207,230,224,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(207,230,224,.045) 1px,transparent 1px)", backgroundSize: "64px 64px", maskImage: "radial-gradient(ellipse at center,black,transparent 78%)" }} />
 
-          <div className="relative w-full max-w-md px-6">
-            <div className={`overflow-hidden rounded-xl border border-white/10 ${matrix ? "bg-[#06130a]/90 shadow-[0_0_60px_rgba(57,255,120,0.14)]" : "bg-[#10112b] shadow-[0_0_60px_rgba(123,102,255,0.14)]"}`}>
-              <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
-                <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="size-2.5 rounded-full bg-[#febc2e]" />
-                <span className="size-2.5 rounded-full bg-[#28c840]" />
-                <span className="ml-3 font-mono text-[11px] text-white/40">
-                  {matrix ? "sourav — matrix.shell" : "sourav — zsh"}
-                </span>
-              </div>
+          <header className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="grid size-9 place-items-center rounded-full border border-[#a6dfcb]/25 bg-[#a6dfcb]/[.06] font-serif text-sm italic text-[#bcebd8]">S</span>
+              <span className="font-mono text-[10px] uppercase tracking-[.2em] text-[#b5c4bf] sm:text-[11px]">Sourav Banerjee</span>
+            </div>
+            <span className="font-mono text-[10px] tracking-[.16em] text-[#84928e]">PORTFOLIO <span className="text-[#a6dfcb]">/ 2026</span></span>
+          </header>
 
-              <div className="min-h-[132px] space-y-1.5 px-4 py-4 font-mono text-[12.5px] leading-relaxed sm:text-[13px]">
-                {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
-                  <motion.p
-                    key={line.text}
-                    initial={{ opacity: 0, x: -6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className={
-                      i === visibleLines - 1 && progress < 100
-                        ? matrix ? "text-[#39ff78]" : "text-[#b978ff]"
-                        : "text-white/65"
-                    }
-                  >
-                    {line.text}
-                    {i === visibleLines - 1 && progress < 100 && (
-                      <span className={`ml-0.5 inline-block h-[1em] w-[0.55ch] animate-pulse align-middle ${matrix ? "bg-[#39ff78]" : "bg-[#b978ff]"}`} />
-                    )}
-                  </motion.p>
-                ))}
-              </div>
-
-              <div className="border-t border-white/10 px-4 py-3">
-                <div className="mb-1.5 flex items-center justify-between font-mono text-[11px] text-white/45">
-                  <span>loading</span>
-                  <span>{progress}%</span>
-                </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-                  <div
-                    className={`h-full rounded-full transition-[width] duration-75 ${matrix ? "bg-[#00cf65]" : "bg-[#55d8ff]"}`}
-                    style={{
-                      boxShadow: matrix ? "0 0 12px rgba(57,255,120,0.55)" : "0 0 12px rgba(85,216,255,0.55)",
-                      width: `${progress}%`,
-                    }}
-                  />
-                </div>
-              </div>
+          <main className="relative z-10 flex flex-1 flex-col items-center justify-center py-12">
+            <div className="relative grid size-48 place-items-center sm:size-56" aria-hidden="true">
+              <motion.div
+                className="absolute inset-[7%] rounded-full border border-[#a6dfcb]/15"
+                animate={reduceMotion ? undefined : { rotate: 360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              >
+                <span className="absolute left-[12%] top-[17%] size-2 rounded-full bg-[#bcebd8] shadow-[0_0_18px_rgba(166,223,203,.9)]" />
+              </motion.div>
+              <motion.div
+                className="absolute inset-[20%] rounded-full border border-dashed border-[#b8b6ed]/25"
+                animate={reduceMotion ? undefined : { rotate: -360 }}
+                transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+              >
+                <span className="absolute -right-1 top-1/2 size-1.5 -translate-y-1/2 rounded-full bg-[#b8b6ed] shadow-[0_0_14px_rgba(184,182,237,.85)]" />
+              </motion.div>
+              <motion.div
+                className="absolute inset-[31%] rounded-full border border-[#a6dfcb]/10 bg-[#12201e]/70 shadow-[0_0_60px_rgba(100,180,155,.12),inset_0_0_30px_rgba(100,180,155,.08)]"
+                animate={reduceMotion ? undefined : { scale: [0.96, 1.04, 0.96] }}
+                transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.span
+                className="relative z-10 font-serif text-5xl italic tracking-[-.1em] text-[#e4f1eb] sm:text-6xl"
+                initial={reduceMotion ? false : { opacity: 0, y: 10, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                SB<span className="text-[#a6dfcb]">.</span>
+              </motion.span>
             </div>
 
-            <p className="mt-4 text-center font-mono text-[11px] tracking-wide text-white/30">
-              initializing workspace
-            </p>
-          </div>
+            <motion.p
+              className="mt-7 font-mono text-[10px] uppercase tracking-[.28em] text-[#a6b7b1] sm:text-[11px]"
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+            >
+              Building thoughtful things
+            </motion.p>
+          </main>
+
+          <footer className="relative z-10 mx-auto flex w-full max-w-4xl items-end justify-between gap-5">
+            <div className="w-full max-w-[240px] sm:max-w-xs">
+              <div className="mb-2 flex items-center justify-between font-mono text-[9px] uppercase tracking-[.16em] text-[#84928e]">
+                <span>Entering the portfolio</span>
+                <span className="tabular-nums text-[#bcebd8]">{String(progress).padStart(2, "0")}%</span>
+              </div>
+              <div className="h-px overflow-hidden bg-white/10">
+                <motion.div
+                  className="h-full origin-left bg-[#a6dfcb] shadow-[0_0_12px_rgba(166,223,203,.65)]"
+                  animate={{ scaleX: progress / 100 }}
+                  transition={{ duration: 0.12, ease: "linear" }}
+                />
+              </div>
+            </div>
+            <span className="font-mono text-[9px] tracking-[.12em] text-[#667570]">DESIGN <span className="text-[#a6dfcb]/60">×</span> CODE</span>
+          </footer>
         </motion.div>
-      ) : null}
+      )}
     </AnimatePresence>
   );
 }
-

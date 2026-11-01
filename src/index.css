@@ -262,11 +262,12 @@ footer {
   }
 }
 
-/* Portfolio redesign: editorial layout, warm paper, forest ink, and a sharp citrus accent. */
+/* Keep the document canvas aligned with the current dark portfolio theme. */
 html,
 body {
-  background: #f2f0e8 !important;
-  color: #1d332d !important;
+  background: #0b1113 !important;
+  color: #e8efeb !important;
+  color-scheme: dark;
   font-family: "DM Sans", sans-serif;
   scroll-padding-top: 5rem;
 }
