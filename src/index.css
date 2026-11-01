@@ -1834,7 +1834,7 @@ body::after { display: none !important; }
   .folio-archive { width:calc(100% - 52px); }
 }
 @media(max-width:700px) {
-  .folio-hero { width:calc(100% - 32px); min-height:auto; margin:24px auto 40px; padding:56px 10px 36px; grid-template-columns:minmax(0,1fr); gap:30px; }
+  .folio-hero { width:calc(100% - 32px); min-height:auto; margin:0 auto 28px; padding:24px 10px 32px; grid-template-columns:minmax(0,1fr); gap:30px; }
   .folio-hero-copy, .folio-hero-terminal { width:100%; min-width:0; }
   .folio-hero-copy { text-align:left; }
   .portfolio-v2 .folio-hero-identity, .folio-kicker { justify-content:flex-start; }
