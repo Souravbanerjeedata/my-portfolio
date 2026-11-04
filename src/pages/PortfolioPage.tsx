@@ -213,10 +213,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const [menuFocused, setMenuFocused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [kolkataTime, setKolkataTime] = useState("");
-  const [touchDevice, setTouchDevice] = useState(false);
-  const [mobileLayout, setMobileLayout] = useState(false);
   const touchMenuRef = useRef(false);
-  const headerRef = useRef<HTMLElement>(null);
   const hoverArmedRef = useRef(false);
   const reduceMotion = useReducedMotion();
   const menuVisible = menuOpen || menuHovered || menuFocused;
@@ -225,13 +222,18 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   const moreProjects = site.projects.slice(4);
 
   useEffect(() => {
-    const header = headerRef.current;
-    if (!header) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setScrolled(!entry.isIntersecting);
-    });
-    observer.observe(header);
-    return () => observer.disconnect();
+    const updateScrollState = () => {
+      const mobile = window.matchMedia("(max-width: 700px)").matches;
+      setScrolled(window.scrollY > (mobile ? 96 : 0));
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
   }, []);
   useEffect(() => {
     hoverArmedRef.current = false;
@@ -239,12 +241,10 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
   }, [scrolled]);
   useEffect(() => {
     const query = window.matchMedia("(hover: none), (pointer: coarse)");
-    const mobileQuery = window.matchMedia("(max-width: 700px)");
-    const update = () => { touchMenuRef.current = query.matches; setTouchDevice(query.matches); setMobileLayout(mobileQuery.matches); };
+    const update = () => { touchMenuRef.current = query.matches; };
     update();
     query.addEventListener("change", update);
-    mobileQuery.addEventListener("change", update);
-    return () => { query.removeEventListener("change", update); mobileQuery.removeEventListener("change", update); };
+    return () => query.removeEventListener("change", update);
   }, []);
   useEffect(() => {
     const updateTime = () => setKolkataTime(new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true }).format(new Date()));
@@ -289,7 +289,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         <span className="folio-ambient-glow folio-ambient-glow-b" />
         <span className="folio-ambient-glow folio-ambient-glow-c" />
       </div>
-      <header className="folio-header" ref={headerRef}>
+      <header className="folio-header">
         <div className="folio-header-inner">
           <a
             className="folio-wordmark"
@@ -315,7 +315,7 @@ export function PortfolioPage({ archive = false }: { archive?: boolean }) {
         </div>
       </header>
 
-      {(scrolled || mobileLayout) && (
+      {scrolled && (
         <div
           className={`folio-floating-menu${menuVisible ? " is-open" : ""}`}
           onMouseEnter={() => {
