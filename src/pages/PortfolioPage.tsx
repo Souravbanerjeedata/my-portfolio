@@ -166,15 +166,44 @@ export default sourav;`,
   ];
   const [visible, setVisible] = useState(0);
   const [snippetIndex, setSnippetIndex] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const terminalRef = useRef<HTMLDivElement>(null);
   const snippet = snippets[snippetIndex];
 
   useEffect(() => {
+    const terminal = terminalRef.current;
+    if (!terminal) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting && !document.hidden),
+      { rootMargin: "120px" },
+    );
+    const updateVisibility = () => {
+      if (document.hidden) {
+        setIsInView(false);
+        return;
+      }
+      const bounds = terminal.getBoundingClientRect();
+      setIsInView(bounds.bottom > 0 && bounds.top < window.innerHeight);
+    };
+
+    observer.observe(terminal);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(snippet.code.length);
       return;
     }
     let position = 0;
     let timer = 0;
+    setVisible(0);
     const typeNext = () => {
       if (position >= snippet.code.length) {
         timer = window.setTimeout(() => {
@@ -185,16 +214,16 @@ export default sourav;`,
         }, 1500);
         return;
       }
-      position += 1;
+      position = Math.min(position + 2, snippet.code.length);
       setVisible(position);
-      timer = window.setTimeout(typeNext, 35);
+      timer = window.setTimeout(typeNext, 70);
     };
     timer = window.setTimeout(typeNext, 500);
     return () => window.clearTimeout(timer);
-  }, [snippetIndex]);
+  }, [isInView, snippet.code.length, snippetIndex]);
 
   return (
-    <div className="folio-code-window" aria-label="Animated code preview">
+    <div ref={terminalRef} className="folio-code-window" aria-label="Animated code preview">
       <div className="folio-code-topbar">
         <span className="folio-code-dots"><i /><i /><i /></span>
         <span>{snippet.file}</span>

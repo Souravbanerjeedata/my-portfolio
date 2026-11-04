@@ -1732,10 +1732,11 @@ body::after { display: none !important; }
 @keyframes folio-aurora-drift-c { 0% { transform:translate3d(-5%,0,0) scale(.9); } 50% { transform:translate3d(5%,-10%,0) scale(1.08); } 100% { transform:translate3d(12%,2%,0) scale(.98); } }
 @keyframes folio-hero-aurora { 0% { opacity:.52; transform:translate3d(-2%,1%,0) scale(.93); } 100% { opacity:.95; transform:translate3d(12%,-5%,0) scale(1.13); } }
 @media(max-width:700px) {
-  .folio-ambient-glow { filter:blur(44px); }
-  .folio-ambient-glow-a { top:-15%; left:-52%; width:125vw; height:58vh; opacity:.82; }
-  .folio-ambient-glow-b { top:27%; right:-65%; width:130vw; height:60vh; opacity:.78; }
-  .folio-ambient-glow-c { bottom:-33%; left:-12%; width:122vw; height:52vh; opacity:.68; }
+  .folio-ambient-glow { filter:blur(28px); mix-blend-mode:normal; will-change:auto; animation:none; }
+  .folio-ambient-glow-a { top:-15%; left:-52%; width:125vw; height:58vh; opacity:.62; }
+  .folio-ambient-glow-b { top:27%; right:-65%; width:130vw; height:60vh; opacity:.58; }
+  .folio-ambient-glow-c { bottom:-33%; left:-12%; width:122vw; height:52vh; opacity:.48; }
+  .folio-hero::before { filter:blur(8px); animation:none; }
 }
 @media(prefers-reduced-motion:reduce) {
   .folio-ambient-glow-a, .folio-ambient-glow-b, .folio-ambient-glow-c, .folio-hero::before { animation:none; }
@@ -1870,4 +1871,11 @@ body::after { display: none !important; }
   .folio-experience-inner, .folio-skills { grid-template-columns:1fr; }
   .folio-experience-intro h2 { font-size:clamp(54px,13vw,74px); }
   .folio-contact { grid-template-columns:1fr; }
+}
+
+/* Keep the ambient color field lighter for the GPU to composite. */
+.folio-ambient-glow { filter:blur(36px); mix-blend-mode:normal; }
+@media(max-width:700px) {
+  .folio-ambient-glow { filter:blur(28px); animation:none; will-change:auto; }
+  .folio-hero::before { filter:blur(8px); animation:none; }
 }
